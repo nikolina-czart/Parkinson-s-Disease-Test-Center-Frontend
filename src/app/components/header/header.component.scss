@@ -1,0 +1,44 @@
+@import "src/assets/styles/styles";
+
+.mat-toolbar {
+  padding: 0;
+  height: 80px;
+}
+
+.header {
+  width: 100%;
+  top: 0;
+  background-color: $white;
+  @include default-shadow();
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding-left: $padding-m;
+  padding-right: $padding-m;
+
+  .main-nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    position: relative;
+    display: block;
+  }
+
+  .mat-icon {
+    font-size: 20px;
+    color: $blue;
+    margin-right: $margin-s;
+  }
+}
+
+button.mat-mdc-raised-button {
+  width: 200px;
+  margin-left: $margin-m;
+}
+
+img{
+  height: 64px;
+}

@@ -1,0 +1,49 @@
+<div class="mat-card-default">
+  <h2 class="title-form">Stwórz konto</h2>
+  <p class="info-form">Podaj dane potrzene do rejestracji:</p>
+  <div class="container-form-group">
+
+    <form [formGroup]="registerFormGroup">
+      <div class="form-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" required>
+          <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="imię" required>
+          <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Nazwisko" required>
+          <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Powtórz hasło</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <!--          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        </mat-form-field>
+
+      </div>
+    </form>
+  </div>
+
+  <button mat-raised-button>Zarejestruj się</button>
+</div>

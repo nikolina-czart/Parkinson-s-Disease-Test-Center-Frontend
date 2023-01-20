@@ -1,0 +1,63 @@
+@import "colors";
+@import "media";
+@import "utils";
+@import "typography";
+@import "variables";
+
+button.mat-mdc-raised-button {
+  background-color: $blue;
+  color: $alabaster;
+  border-radius: 10px;
+  font-size: $font-size-m;
+
+  @include rubik-medium();
+  @include default-shadow();
+}
+
+button.mat-mdc-button {
+  color: $blue;
+  border-radius: 10px;
+  font-size: $font-size-m;
+
+  @include rubik-medium();
+}
+
+.mat-card-default {
+  margin-top: $margin-xl;
+  width: 500px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: $padding-xl;
+  border-radius: 20px;
+  justify-content: center;
+  @include default-shadow();
+}
+
+.title-form {
+  font-size: $font-size-h2;
+  color: $blue;
+  margin: 0;
+  margin-bottom: $margin-xl;
+  @include roboto-bold
+}
+
+.info-form {
+  font-size: $font-size-m;
+  color: $blue;
+}
+
+form {
+  width: 100%;
+}
+
+.container-form-group {
+  display: flex;
+  width: 100%;
+}
+
+.container-form-group mat-form-field {
+  width: 100%;
+}
+

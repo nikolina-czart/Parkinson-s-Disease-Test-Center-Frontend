@@ -1,5 +1,5 @@
 import {TestType} from "../tests/test-type";
-import {Side} from "../Side";
+import {Side} from "../side";
 import {MedicineSupply} from "../medicine-supply";
 
 export interface TestAnalysisFilter {

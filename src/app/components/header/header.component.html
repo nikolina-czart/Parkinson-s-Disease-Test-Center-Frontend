@@ -1,0 +1,17 @@
+<mat-toolbar class="header">
+    <a class="logo">
+      <img alt="ParkinsonTestCenter" class="smaller" src="assets/images/logo.svg">
+    </a>
+    <div class="main-nav">
+      <div *ngIf="loggedUser">
+        <button mat-button inline=true (click)="logout()">
+          Wyloguj
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="!loggedUser">
+        <button mat-button (click)="login()">Logowanie</button>
+        <button mat-raised-button (click)="register()">Rejestracja</button>
+      </div>
+    </div>
+</mat-toolbar>
