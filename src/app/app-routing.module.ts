@@ -2,6 +2,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {BlankPageComponent} from "./blank-page/blank-page.component";
 import {LoginPageComponent} from "./modules/shared/pages/login-page/login-page.component";
+import {RegisterPageComponent} from "./modules/shared/pages/register-page/register-page.component";
 
 const routes: Routes = [
   {
@@ -13,16 +14,14 @@ const routes: Routes = [
     path: "testowa",
     component: LoginPageComponent,
   },
-  // {
-  //   path: "signin",
-  //   component: SignInPageComponent,
-  //   canActivate: [AuthGuard],
-  // },
-  // {
-  //   path: "register",
-  //   component: RegisterPageComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: "login",
+    component: LoginPageComponent,
+  },
+  {
+    path: "register",
+    component: RegisterPageComponent,
+  },
   {
     path: "404",
     component: BlankPageComponent,

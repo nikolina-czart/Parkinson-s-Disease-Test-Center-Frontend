@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  loggedUser: boolean = true
+  loggedUser: boolean;
+
+  constructor(private readonly router: Router) {
+    this.loggedUser = true;
+  }
+
+  logout() {
+    this.loggedUser = false;
+  }
+
+  login() {
+    this.router.navigate(['/login'])
+  }
+
+  register() {
+    this.router.navigate(['/register'])
+  }
 }
