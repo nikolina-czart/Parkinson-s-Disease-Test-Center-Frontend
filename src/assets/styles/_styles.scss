@@ -1,0 +1,14 @@
+@import "colors";
+@import "media";
+@import "utils";
+@import "typography";
+@import "variables";
+
+button.mat-mdc-raised-button {
+  background-color: $blue;
+  color: $alabaster;
+  border: none;
+  border-radius: 10px;
+
+  @include default-shadow();
+}

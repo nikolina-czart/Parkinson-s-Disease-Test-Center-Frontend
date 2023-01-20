@@ -1,0 +1,37 @@
+@import "src/assets/styles/styles";
+
+.mat-toolbar {
+  padding: 0;
+  height: 80px;
+}
+
+.header {
+  width: 100%;
+  top: 0;
+  background-color: $white;
+  @include default-shadow();
+  display: flex;
+  padding: 15px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  .main-nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    position: relative;
+    display: block;
+  }
+}
+
+button.mat-mdc-raised-button {
+  width: 200px;
+  margin-left: $margin-m;
+}
+
+img{
+  height: 64px;
+}
