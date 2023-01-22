@@ -10,10 +10,11 @@ import {SharedModule} from "./modules/shared/shared.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {MatButtonModule} from "@angular/material/button";
 import {DoctorModule} from "./modules/doctor/doctor.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
+import {JwtTokenInterceptor} from "./core/interceptors/jwt-token.interceptor";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {environment} from "../environments/environment";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true
+  }],
   exports: [
   ],
   bootstrap: [AppComponent]

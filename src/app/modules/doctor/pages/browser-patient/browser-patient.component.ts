@@ -6,6 +6,9 @@ import {ToeTapping} from "../../../../models/tests/toe-tapping";
 import {Voice} from "../../../../models/tests/voice";
 import {Static} from "../../../../models/tests/static";
 import {NavigationExtras, Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {AddNewPatientComponent} from "../add-new-patient/add-new-patient.component";
+import {take} from "rxjs";
 
 const ELEMENT_DATA: Patient[] = [
   {position: 1, uid: "1", fullName: 'Nikolina Czart', email: "nikola.czart@gmail.com", patientTests: [new Gyroscope(), new FingerTapping(), new ToeTapping()]},
@@ -23,11 +26,20 @@ export class BrowserPatientComponent {
   dataSource = ELEMENT_DATA;
   selectedPatient?: Patient
 
-  constructor(private readonly router: Router) {
+  constructor(private readonly router: Router,
+              private readonly dialog: MatDialog) {
   }
 
   showPatientDetails(patient: Patient) {
     this.router.navigate(['/browser-patient', patient.uid], {state: {patient: patient}})
     console.log(this.selectedPatient)
+  }
+
+  addNewPatient() {
+    const dialogRef = this.dialog.open(AddNewPatientComponent);
+
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

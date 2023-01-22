@@ -7,10 +7,12 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent {
+
+  name = "John Smith"
+
   constructor(private route: ActivatedRoute) {
 
   }
-
   ngOnInit() {
     const heroId = this.route.snapshot.paramMap.get('id');
     console.log(heroId)

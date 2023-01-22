@@ -6,6 +6,7 @@ import {RegisterPageComponent} from "./modules/shared/pages/register-page/regist
 import {BrowserPatientComponent} from "./modules/doctor/pages/browser-patient/browser-patient.component";
 import {PatientResultsComponent} from "./modules/doctor/pages/patient-results/patient-results.component";
 import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details/patient-details.component";
+import {AuthGuard} from "./core/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -16,18 +17,22 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "register",
     component: RegisterPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "browser-patient",
     component: BrowserPatientComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "browser-patient/:id",
     component: PatientDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "404",

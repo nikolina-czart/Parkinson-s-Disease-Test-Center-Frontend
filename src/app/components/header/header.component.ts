@@ -1,20 +1,26 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../../core/services/authentication.service";
+import {Observable, tap} from "rxjs";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  loggedUser: boolean;
+export class HeaderComponent implements OnInit{
+  token$!: Observable<string>;
 
-  constructor(private readonly router: Router) {
-    this.loggedUser = true;
+  constructor(private readonly router: Router,
+              private readonly authService: AuthenticationService) {
+  }
+
+  ngOnInit(): void {
+    this.token$ = this.authService.getToken$();
   }
 
   logout() {
-    this.loggedUser = false;
+    this.authService.logout();
   }
 
   login() {
@@ -24,4 +30,6 @@ export class HeaderComponent {
   register() {
     this.router.navigate(['/register'])
   }
+
+
 }

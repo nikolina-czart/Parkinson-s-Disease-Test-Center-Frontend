@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormService} from "../../../../core/services/form.service";
 import {passwordMatchValidator} from "../../../../core/validators/password-match.validator";
-import {AuthService} from "../../../../core/services/auth.service";
 import {UserRegisterForm} from "../../../../models/user/user-register-form";
 import {take} from "rxjs";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
+import {Role} from "../../../../models/user/user-role";
 
 @Component({
   selector: 'app-register-page',
@@ -25,7 +25,6 @@ export class RegisterPageComponent {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
-              private readonly authService: AuthService,
               private readonly authenticationService: AuthenticationService) {
 
   }
@@ -41,11 +40,9 @@ export class RegisterPageComponent {
   submitForm() {
     if(this.registerFormGroup.valid){
       console.log(this.registerFormGroup.controls)
-      // this.authService.registerUser(this.mapRegisterForm()).pipe(take(1)).subscribe()
-      this.authenticationService.register(this.mapRegisterForm())
+      this.authenticationService.register(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
     }else {
       console.log("nie działa")
-
     }
   }
 
@@ -54,7 +51,10 @@ export class RegisterPageComponent {
       email: this.registerFormGroup.get('email')?.value || '',
       name: this.registerFormGroup.get('name')?.value || '',
       surname: this.registerFormGroup.get('surname')?.value || '',
-      password: this.registerFormGroup.get('password')?.value || ''
+      password: this.registerFormGroup.get('password')?.value || '',
+      uid : "",
+      role: Role.DOCTOR,
+      doctorID: ""
     }
   }
 }
