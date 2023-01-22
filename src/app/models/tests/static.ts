@@ -5,7 +5,7 @@ import {TestName} from "./test-name";
 import {TestIcon} from "./test-icon";
 
 export class Static implements Test{
-  type = TestType.STATIC;
+  uid = TestType.STATIC;
   name = TestName.STATIC
   icon = TestIcon.STATIC;
   chartTypes = [ChartType.CHART_X, ChartType.CHART_Y, ChartType.CHART_Z, ChartType.CHART_3D]

@@ -19,6 +19,8 @@ import { AddNewPatientComponent } from './pages/add-new-patient/add-new-patient.
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { PatientAnalysisComponent } from './pages/patient-analysis/patient-analysis.component';
+import {PatientEditComponent} from "./pages/patient-edit/patient-edit.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     PatientResultsComponent,
     PatientDetailsComponent,
     AddNewPatientComponent,
+    PatientAnalysisComponent,
+    PatientEditComponent
   ],
   imports: [
     CommonModule,

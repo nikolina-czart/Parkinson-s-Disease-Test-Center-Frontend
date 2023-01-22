@@ -7,6 +7,8 @@ import {BrowserPatientComponent} from "./modules/doctor/pages/browser-patient/br
 import {PatientResultsComponent} from "./modules/doctor/pages/patient-results/patient-results.component";
 import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details/patient-details.component";
 import {AuthGuard} from "./core/guards/auth.guard";
+import {PatientEditComponent} from "./modules/doctor/pages/patient-edit/patient-edit.component";
+import {PatientAnalysisComponent} from "./modules/doctor/pages/patient-analysis/patient-analysis.component";
 
 const routes: Routes = [
   {
@@ -32,7 +34,21 @@ const routes: Routes = [
   {
     path: "browser-patient/:id",
     component: PatientDetailsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: "edit",
+        component: PatientEditComponent,
+      },
+      {
+        path: "result",
+        component: PatientResultsComponent,
+      },
+      {
+        path: "analysis",
+        component: PatientAnalysisComponent,
+      }
+    ]
   },
   {
     path: "404",

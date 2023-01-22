@@ -9,12 +9,14 @@ import {Router} from "@angular/router";
 import {UserLoginForm} from "../../models/user/user-login";
 import {UserDetails} from "../../models/user/user-model";
 import {TokenService} from "./token.service";
+import {DecodedToken} from "../../models/token.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
+  private _decodedToken!: DecodedToken;
   private _jwtToken!: string;
 
   private _userCredential!: UserCredential;
@@ -100,10 +102,18 @@ export class AuthenticationService {
     console.log(token)
     this.tokenService.saveTokenToLocalStorage(token);
     this._jwtToken = token;
-    this._jwtTokenSubj$.next(this._jwtToken);
+    this.setDecodedToken(token);
+    this._jwtTokenSubj$.next(token);
   }
   get token(): string {
     return this._jwtToken;
+  }
+  get decodedToken(): DecodedToken {
+    return this._decodedToken;
+  }
+
+  public setDecodedToken(token: string): void {
+    this._decodedToken = this.tokenService.decodeToken(token);
   }
 
 }

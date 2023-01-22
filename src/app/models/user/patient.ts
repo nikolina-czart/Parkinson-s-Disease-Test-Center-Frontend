@@ -1,9 +1,8 @@
 import {Test} from "../tests/test";
 
 export interface Patient {
-  position: number;
   uid: string;
-  fullName: string;
-  email: string;
+  name: string;
+  surname: string;
   patientTests: Array<Test>
 }

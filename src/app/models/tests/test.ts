@@ -4,7 +4,7 @@ import {TestIcon} from "./test-icon";
 import {ChartType} from "../chart/chart-type";
 
 export interface Test{
-  type: TestType,
+  uid: TestType,
   name: TestName,
   icon: TestIcon,
   chartTypes: Array<ChartType>

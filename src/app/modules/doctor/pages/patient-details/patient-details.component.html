@@ -1,21 +1,21 @@
 <div class="patient-details-container">
   <div class="patient-details-sidenav mat-elevation-z8">
-    <h4 class="name">{{name}}</h4>
-    <button mat-button class="menu-button">
+    <h4 class="name">{{selectedPatient.name + " " + selectedPatient.surname}}</h4>
+    <button mat-button class="menu-button" (click)="navigateToEdit()">
       <mat-icon>person</mat-icon>
       <span class="button-span">Edycja pacjenta</span>
     </button>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="navigateToResult()">
       <mat-icon>home</mat-icon>
       <span>Wyniki testów</span>
     </button>
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="navigateToAnalysis()">
       <mat-icon>info</mat-icon>
       <span>Analiza testów</span>
     </button>
@@ -24,11 +24,12 @@
   </div>
   <div class="patient-details-main-window">
     <div class="content mat-elevation-z8">
-      <button class="back-button">
-        <mat-icon class="back-icon">arrow_back_ios</mat-icon>
-        <span>Powrót</span>
-      </button>
-      Main content here!
+<!--      <button class="back-button">-->
+<!--        <mat-icon class="back-icon">arrow_back_ios</mat-icon>-->
+<!--        <span>Powrót</span>-->
+<!--      </button>-->
+      <router-outlet></router-outlet>
+<!--      Main content here!-->
     </div>
   </div>
 </div>
