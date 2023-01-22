@@ -9,6 +9,11 @@ import {RouterModule, RouterOutlet} from "@angular/router";
 import {SharedModule} from "./modules/shared/shared.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {MatButtonModule} from "@angular/material/button";
+import {DoctorModule} from "./modules/doctor/doctor.module";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -20,6 +25,10 @@ import {MatButtonModule} from "@angular/material/button";
     RouterModule,
     SharedModule,
     AppRoutingModule,
+    DoctorModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
   providers: [],
   exports: [

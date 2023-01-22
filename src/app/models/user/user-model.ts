@@ -7,7 +7,6 @@ export interface User {
   name: string;
   surname: string;
   role: Role;
-  assignedTest: Array<TestType>[];
 
   //rozdzielić użytkowników na pacjenta i lekarza?
 }

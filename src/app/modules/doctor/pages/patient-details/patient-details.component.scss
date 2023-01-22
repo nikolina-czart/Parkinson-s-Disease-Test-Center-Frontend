@@ -1,0 +1,16 @@
+.patient-details-container {
+  width: 100%;
+  height: 500px;
+  background: #9fadc9;
+  display: flex;
+  flex-direction: row;
+}
+
+.patient-details-sidenav {
+  width: 20%;
+  background: #2B255A;
+}
+
+.patient-details-main-window {
+  width: 80%;
+}
