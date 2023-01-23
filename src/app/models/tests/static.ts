@@ -3,10 +3,11 @@ import {ChartType} from "../chart/chart-type";
 import {Test} from "./test";
 import {TestName} from "./test-name";
 import {TestIcon} from "./test-icon";
+import {TestNameEng} from "./test-name-en";
 
-export class Static implements Test{
-  uid = TestType.STATIC;
-  name = TestName.STATIC
-  icon = TestIcon.STATIC;
-  chartTypes = [ChartType.CHART_X, ChartType.CHART_Y, ChartType.CHART_Z, ChartType.CHART_3D]
+export class Static extends Test{
+  override uid = TestType.STATIC;
+  override name_pl = TestName.STATIC;
+  override name = TestNameEng.STATIC
+  override icon = TestIcon.STATIC;
 }

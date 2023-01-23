@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../../../../core/validators/password-match.validator";
 import {FormService} from "../../../../core/services/form.service";
@@ -11,22 +11,31 @@ import {FingerTapping} from "../../../../models/tests/finger-tapping";
 import {Static} from "../../../../models/tests/static";
 import {ToeTapping} from "../../../../models/tests/toe-tapping";
 import {Voice} from "../../../../models/tests/voice";
+import {take} from "rxjs";
+import {DoctorService} from "../../services/doctor.service";
+import {TestRequest} from "@angular/common/http/testing";
+import {TestType} from "../../../../models/tests/test-type";
+import {TestName} from "../../../../models/tests/test-name";
+import {MatDialogRef} from "@angular/material/dialog";
+import {TestNameEng} from "../../../../models/tests/test-name-en";
 
 @Component({
   selector: 'app-add-new-patient',
   templateUrl: './add-new-patient.component.html',
   styleUrls: ['./add-new-patient.component.scss']
 })
-export class AddNewPatientComponent {
+export class AddNewPatientComponent implements OnInit{
   hidePassword = true;
   hidePasswordConfirmation= true;
-  registerPatientFormGroup = this._formBuilder.group({
+  newPatientFormGroup = this._formBuilder.group({
     email: ['', [Validators.email, Validators.required]],
     name: ['', Validators.required],
     surname: ['', Validators.required],
     password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
     passwordConfirmation: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('password')]]
   });
+
+  selectedTests: Test[] = []
 
   allTest = [
     {
@@ -50,53 +59,59 @@ export class AddNewPatientComponent {
       completed: false
     },
   ];
+  private userID!: string;
 
   constructor(private readonly _formBuilder: FormBuilder,
-              private readonly formService: FormService) {
-
+              private readonly formService: FormService,
+              private readonly authService: AuthenticationService,
+              private readonly doctorService: DoctorService,
+              private dialogRef: MatDialogRef<AddNewPatientComponent>) {
   }
 
+  ngOnInit(): void {
+    this.userID = this.authService.decodedToken.userId;
+  }
   getErrorMessage(formControlName: string): string {
-    return this.formService.mapErrorMessages(this.registerPatientFormGroup, formControlName)
+    return this.formService.mapErrorMessages(this.newPatientFormGroup, formControlName)
   }
 
   isControlValid(formControlName: string): boolean {
-    return this.formService.isControlValid(this.registerPatientFormGroup, formControlName)
+    return this.formService.isControlValid(this.newPatientFormGroup, formControlName)
   }
   submitForm() {
-    console.log("Dodaj nowego użytkownika")
+    if(!this.newPatientFormGroup.valid){
+      console.log("Niepoprawnie")
+    }else if(!this.selectedTests.length){
+     console.log("Puste")
+    }else {
+      this.authService.addNewPatient(this.mapAddNewPatientForm(), this.mapSelectedTestToRequest()).pipe(take(1)).subscribe()
+      this.closeDialog()
+    }
   }
 
-  private mapRegisterForm(): UserRegisterForm {
+  private mapAddNewPatientForm(): UserRegisterForm {
     return {
-      email: this.registerPatientFormGroup.get('email')?.value || '',
-      name: this.registerPatientFormGroup.get('name')?.value || '',
-      surname: this.registerPatientFormGroup.get('surname')?.value || '',
-      password: this.registerPatientFormGroup.get('password')?.value || '',
+      email: this.newPatientFormGroup.get('email')?.value || '',
+      name: this.newPatientFormGroup.get('name')?.value || '',
+      surname: this.newPatientFormGroup.get('surname')?.value || '',
+      password: this.newPatientFormGroup.get('password')?.value || '',
       uid: "",
-      role: Role.DOCTOR,
-      doctorID: ""
+      role: Role.PATIENT,
+      doctorID: this.userID
     }
   }
 
-  allComplete: boolean = false;
-
-  updateAllComplete() {
-    this.allComplete = this.allTest != null && this.allTest.every(t => t.completed);
+  private mapSelectedTestToRequest(): { uid: TestType; name: TestNameEng }[] {
+    return this.selectedTests.map(test => ({name: test.name, uid: test.uid}));
   }
 
-  someComplete(): boolean {
-    if (this.allTest == null) {
-      return false;
-    }
-    return this.allTest.filter(t => t.completed).length > 0 && !this.allComplete;
+  changeCheckbox(test: { test: Gyroscope; completed: boolean } | { test: FingerTapping; completed: boolean } | { test: Static; completed: boolean } | { test: ToeTapping; completed: boolean } | { test: Voice; completed: boolean }) {
+    test.completed = !test.completed
+    this.selectedTests = this.allTest.filter(test => test.completed).map(element => element.test)
   }
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.allTest == null) {
-      return;
-    }
-    this.allTest.forEach(t => (t.completed = completed));
+  closeDialog() {
+    //Write your stuff here
+    this.dialogRef.close(); // <- Closes the dialog
   }
 }

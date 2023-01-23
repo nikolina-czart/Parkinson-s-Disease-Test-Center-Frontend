@@ -7,4 +7,6 @@ export enum TestName {
   ACCELEROMETER = "Stukanie nogą",
   VOICE = "Badanie głosu",
 
+  DEFAULT = ""
+
 }

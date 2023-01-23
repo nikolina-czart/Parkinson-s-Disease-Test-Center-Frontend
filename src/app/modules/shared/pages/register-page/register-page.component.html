@@ -1,51 +1,53 @@
-<div class="mat-card-default">
-  <h2 class="title-form">Stwórz konto</h2>
-  <p class="info-form">Podaj dane potrzene do rejestracji:</p>
-  <div class="container-form-group">
+<div class="card-position">
+  <div class="mat-card-default">
+    <h2 class="title-form">Stwórz konto</h2>
+    <p class="info-form">Podaj dane potrzene do rejestracji:</p>
+    <div class="container-form-group">
 
-    <form [formGroup]="registerFormGroup" (ngSubmit)="submitForm()">
-      <div class="form-fields">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email" required>
-          <mat-error *ngIf="!isControlValid('email')">{{getErrorMessage('email')}}</mat-error>
-        </mat-form-field>
+      <form [formGroup]="registerFormGroup" (ngSubmit)="submitForm()">
+        <div class="form-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="!isControlValid('email')">{{getErrorMessage('email')}}</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Imię</mat-label>
-          <input matInput placeholder="imię" formControlName="name" required>
-          <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput placeholder="imię" formControlName="name" required>
+            <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Nazwisko</mat-label>
-          <input matInput placeholder="Nazwisko" formControlName="surname" required>
-          <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Nazwisko" formControlName="surname" required>
+            <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Hasło</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!isControlValid('password')">{{getErrorMessage('password')}}</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="!isControlValid('password')">{{getErrorMessage('password')}}</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Powtórz hasło</mat-label>
-          <input matInput [type]="hidePasswordConfirmation ? 'password' : 'text'"  formControlName="passwordConfirmation" required>
-          <button mat-icon-button matSuffix (click)="hidePasswordConfirmation = !hidePasswordConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordConfirmation">
-            <mat-icon>{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!isControlValid('passwordConfirmation')">{{getErrorMessage('passwordConfirmation')}}</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Powtórz hasło</mat-label>
+            <input matInput [type]="hidePasswordConfirmation ? 'password' : 'text'"  formControlName="passwordConfirmation" required>
+            <button mat-icon-button matSuffix (click)="hidePasswordConfirmation = !hidePasswordConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordConfirmation">
+              <mat-icon>{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="!isControlValid('passwordConfirmation')">{{getErrorMessage('passwordConfirmation')}}</mat-error>
+          </mat-form-field>
 
-      </div>
-
-      <button mat-raised-button type="submit">Zarejestruj się</button>
-    </form>
+        </div>
+        <div class="button-position">
+          <button mat-raised-button type="submit">Zarejestruj się</button>
+        </div>
+      </form>
+    </div>
   </div>
-
 
 </div>

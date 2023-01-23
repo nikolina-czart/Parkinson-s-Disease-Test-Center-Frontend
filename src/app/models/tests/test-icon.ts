@@ -5,5 +5,6 @@ export enum TestIcon {
   GYROSCOPE = "watch",
   STATIC = "accessibility",
   ACCELEROMETER = "airline_seat_legroom_reduced",
-  VOICE = "mic"
+  VOICE = "mic",
+  DEFAULT = ""
 }

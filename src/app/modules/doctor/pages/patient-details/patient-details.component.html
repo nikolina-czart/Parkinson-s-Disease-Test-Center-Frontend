@@ -24,10 +24,10 @@
   </div>
   <div class="patient-details-main-window">
     <div class="content mat-elevation-z8">
-<!--      <button class="back-button">-->
-<!--        <mat-icon class="back-icon">arrow_back_ios</mat-icon>-->
-<!--        <span>Powrót</span>-->
-<!--      </button>-->
+      <button class="back-button" (click)=navigateToBrowserPatient()>
+        <mat-icon class="back-icon">arrow_back_ios</mat-icon>
+        <span>Powrót</span>
+      </button>
       <router-outlet></router-outlet>
 <!--      Main content here!-->
     </div>

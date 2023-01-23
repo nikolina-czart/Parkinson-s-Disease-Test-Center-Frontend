@@ -21,6 +21,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { PatientAnalysisComponent } from './pages/patient-analysis/patient-analysis.component';
 import {PatientEditComponent} from "./pages/patient-edit/patient-edit.component";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {PlotlySharedModule} from "angular-plotly.js";
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import {PatientEditComponent} from "./pages/patient-edit/patient-edit.component"
     MatInputModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PlotlySharedModule
   ],
   exports: [
   ]

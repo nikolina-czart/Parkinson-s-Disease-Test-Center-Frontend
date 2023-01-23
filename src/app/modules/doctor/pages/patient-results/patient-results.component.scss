@@ -1,0 +1,135 @@
+@import "src/assets/styles/styles";
+
+.result-container{
+  width: 100%;
+  height: 100%;
+  //display: flex;
+}
+
+.filter-container{
+  margin-top: $margin-s;
+  width: 100%;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mat-fields {
+  display: flex;
+}
+
+.results-info{
+  color: $blue;
+  font-size: $font-size-m;
+  @include rubik-medium();
+}
+
+.mat-mdc-form-field {
+  color: $blue;
+  font-size: $font-size-m;
+  margin-right: $margin-l;
+
+  @include rubik-medium();
+}
+
+button.mat-mdc-raised-button {
+  width: 300px;
+  height: 56px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+.chart-button {
+  width: 100px;
+}
+
+mat-table{
+  box-shadow: none;
+  border-radius: 20px;
+  color: $blue;
+  font-size: $font-size-m;
+  margin-right: $margin-l;
+  @include default-shadow();
+  @include rubik-medium();
+}
+
+.table {
+  width: 100%;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-column-name {
+  height: 100px;
+}
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-mdc-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.mat-mdc-raised-button[disabled][disabled] {
+  background: $gray-dark;
+  color: $gray-light;
+}
+
+.show-results {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-show-group{
+  margin-top: $margin-xl;
+}
+
+.button-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: $margin-l;
+  width: 100%;
+}
+
+.mat-mdc-button {
+  background: #9fadc9;
+  height: 30px;
+  width: 200px;
+  color: $blue;
+  font-size: $font-size-m;
+  margin-right: $margin-l;
+  @include rubik-medium();
+  &:last-of-type{
+    margin-right: 0;
+  }
+}
+
+.chart-show{
+  margin-top: 10px;
+  width: 100%;
+}

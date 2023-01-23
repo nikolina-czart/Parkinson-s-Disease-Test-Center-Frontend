@@ -38,9 +38,6 @@ export class LoginPageComponent {
   submitForm() {
     if(this.loginFormGroup.valid){
       this.authenticationService.login(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
-    }else {
-      console.log("nie działa")
-
     }
   }
 

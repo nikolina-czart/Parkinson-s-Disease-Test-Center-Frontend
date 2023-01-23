@@ -15,6 +15,10 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {JwtTokenInterceptor} from "./core/interceptors/jwt-token.interceptor";
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import {JwtTokenInterceptor} from "./core/interceptors/jwt-token.interceptor";
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    PlotlyModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true

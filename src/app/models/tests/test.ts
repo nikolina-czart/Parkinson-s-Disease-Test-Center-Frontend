@@ -1,11 +1,11 @@
 import {TestType} from "./test-type";
 import {TestName} from "./test-name";
 import {TestIcon} from "./test-icon";
-import {ChartType} from "../chart/chart-type";
+import {TestNameEng} from "./test-name-en";
 
-export interface Test{
-  uid: TestType,
-  name: TestName,
-  icon: TestIcon,
-  chartTypes: Array<ChartType>
+export class Test{
+  uid: TestType = TestType.DEFAULT
+  name: TestNameEng = TestNameEng.DEFAULT
+  name_pl: TestName = TestName.DEFAULT
+  icon: TestIcon = TestIcon.DEFAULT
 }

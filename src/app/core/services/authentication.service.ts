@@ -10,6 +10,10 @@ import {UserLoginForm} from "../../models/user/user-login";
 import {UserDetails} from "../../models/user/user-model";
 import {TokenService} from "./token.service";
 import {DecodedToken} from "../../models/token.model";
+import {Test} from "../../models/tests/test";
+import {TestType} from "../../models/tests/test-type";
+import {TestName} from "../../models/tests/test-name";
+import {TestNameEng} from "../../models/tests/test-name-en";
 
 @Injectable({
   providedIn: 'root'
@@ -116,4 +120,29 @@ export class AuthenticationService {
     this._decodedToken = this.tokenService.decodeToken(token);
   }
 
+  addNewPatient(userRegisterForm: UserRegisterForm, selectedTests: { uid: TestType; name: TestNameEng }[]): Observable<string>  {
+    return from(this.firebaseAuth
+      .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
+      tap(userCredential => {
+        this._userCredential = userCredential;
+      }),
+      map(() => this._userCredential),
+      switchMap(userCredential => this.createUserInDatabase(userRegisterForm, userCredential.user?.uid)),
+      map(() => this._userCredential),
+      switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
+      tap(() => {
+        this.router.navigateByUrl('/browser-patient')
+      }),
+      catchError((err: Error) => {
+        console.error("[Auth error]", err.message)
+        this.router.navigateByUrl('/error')
+        return of(err.message)
+      })
+      // switchMap(token => )
+    )
+  }
+
+  private addTestToPatient(selectedTests: { uid: TestType; name: TestNameEng }[], uid?: string): Observable<string> {
+    return this.httpClient.post(`/api/tests/save/${uid}`, selectedTests, {responseType: 'text'})
+  }
 }

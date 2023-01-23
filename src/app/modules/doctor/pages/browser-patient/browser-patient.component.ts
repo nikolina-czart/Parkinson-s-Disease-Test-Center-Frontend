@@ -12,22 +12,15 @@ import {take} from "rxjs";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {DoctorService} from "../../services/doctor.service";
 
-// const ELEMENT_DATA: Patient[] = [
-//   {position: 1, uid: "1", fullName: 'Nikolina Czart', email: "nikola.czart@gmail.com", patientTests: [new Gyroscope(), new FingerTapping(), new ToeTapping()]},
-//   {position: 2, uid: "2", fullName: 'Szymon Wiśniewski', email: "nikola.czart@gmail.com", patientTests: [new Voice(), new FingerTapping()]},
-//   {position: 3, uid: "3", fullName: 'Grzegorz Tomsia', email: "nikola.czart@gmail.com", patientTests: [new Static()]},
-//
-// ];
 @Component({
   selector: 'app-browser-patient',
   templateUrl: './browser-patient.component.html',
   styleUrls: ['./browser-patient.component.scss']
 })
 export class BrowserPatientComponent implements OnInit {
-  // displayedColumns: string[] = ['fullName', 'email', 'patientTests', 'details'];
-  displayedColumns: string[] = ['fullName', 'patientTests', 'details'];
+  displayedColumns: string[] = ['fullName', 'email', 'patientTests', 'details'];
   patients!: Patient[];
-  selectedPatient?: Patient
+  showTable: boolean = false
 
   constructor(private readonly router: Router,
               private readonly dialog: MatDialog,
@@ -37,13 +30,13 @@ export class BrowserPatientComponent implements OnInit {
   ngOnInit() {
      this.doctorService.getPatients().pipe(take(1)).subscribe(patients => {
        this.patients = patients;
+       this.showTable = !!this.patients.length
      })
   }
 
   showPatientDetails(patient: Patient) {
     this.doctorService.setSelectedPatient(patient);
-    this.router.navigate(['/browser-patient', patient.uid], {state: {patient: patient}})
-  }
+    this.router.navigateByUrl(`browser-patient/${patient.uid}/edit`)  }
 
   addNewPatient() {
     const dialogRef = this.dialog.open(AddNewPatientComponent);

@@ -30,4 +30,9 @@ export class PatientDetailsComponent implements OnInit{
   navigateToAnalysis() {
     this.router.navigateByUrl(`browser-patient/${this.selectedPatient.uid}/analysis`)
   }
+
+  navigateToBrowserPatient() {
+    this.router.navigateByUrl(`browser-patient`)
+
+  }
 }

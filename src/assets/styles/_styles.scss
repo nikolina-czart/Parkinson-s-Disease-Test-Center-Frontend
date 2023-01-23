@@ -62,3 +62,15 @@ form {
   margin-top: $margin-s;
 }
 
+.card-position {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-position {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

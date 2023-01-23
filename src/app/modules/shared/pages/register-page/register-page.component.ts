@@ -39,10 +39,7 @@ export class RegisterPageComponent {
 
   submitForm() {
     if(this.registerFormGroup.valid){
-      console.log(this.registerFormGroup.controls)
       this.authenticationService.register(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
-    }else {
-      console.log("nie działa")
     }
   }
 

@@ -3,10 +3,12 @@ import {ChartType} from "../chart/chart-type";
 import {Test} from "./test";
 import {TestIcon} from "./test-icon";
 import {TestName} from "./test-name";
+import {TestNameEng} from "./test-name-en";
 
-export class FingerTapping implements Test{
-  uid = TestType.FINGER;
-  name = TestName.FINGER_TAPPING;
-  icon = TestIcon.FINGER_TAPPING;
-  chartTypes = [ChartType.CHART_STATE, ChartType.CHART_X, ChartType.CHART_Y, ChartType.CHART_Z, ChartType.CHART_3D];
+export class FingerTapping extends Test{
+  override uid = TestType.FINGER;
+  override name_pl = TestName.FINGER_TAPPING;
+  override name = TestNameEng.FINGER_TAPPING;
+  override icon = TestIcon.FINGER_TAPPING;
+
 }

@@ -3,7 +3,7 @@
   <p class="info-form">Podaj dane potrzene do rejestracji swojego pacjenta.</p>
   <div class="container-form-group">
 
-    <form [formGroup]="registerPatientFormGroup" (ngSubmit)="submitForm()">
+    <form [formGroup]="newPatientFormGroup" (ngSubmit)="submitForm()">
       <div class="form-fields">
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -47,16 +47,17 @@
         <span class="example-list-section">
           <ul>
             <li *ngFor="let test of allTest">
-              <mat-checkbox>
-                {{test.test.name}}
+              <mat-checkbox (change)="changeCheckbox(test)">
+                {{test.test.name_pl}}
               </mat-checkbox>
             </li>
           </ul>
         </span>
       </section>
 
-      <button mat-raised-button type="submit">Zarejestruj się</button>
-
+      <div class="button-position">
+        <button mat-raised-button type="submit">Zarejestruj się</button>
+      </div>
     </form>
   </div>
 
