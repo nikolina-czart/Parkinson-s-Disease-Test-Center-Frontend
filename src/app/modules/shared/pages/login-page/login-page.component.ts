@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {FloatLabelType} from "@angular/material/form-field";
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../../../../core/validators/password-match.validator";
 import {FormService} from "../../../../core/services/form.service";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {take} from "rxjs";
-import {UserRegisterForm} from "../../../../models/user/user-register-form";
-import {Role} from "../../../../models/user/user-role";
 import {UserLoginForm} from "../../../../models/user/user-login";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +21,8 @@ export class LoginPageComponent {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
-              private readonly authenticationService: AuthenticationService) {
+              private readonly authenticationService: AuthenticationService,
+              private _snackBar: MatSnackBar) {
 
   }
 
@@ -37,7 +36,7 @@ export class LoginPageComponent {
 
   submitForm() {
     if(this.loginFormGroup.valid){
-      this.authenticationService.login(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
+      this.authenticationService.login(this.mapRegisterForm()).pipe(take(1)).subscribe()
     }
   }
 

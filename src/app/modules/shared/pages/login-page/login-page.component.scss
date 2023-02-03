@@ -11,3 +11,7 @@ button.mat-mdc-raised-button {
 
   @include rubik-medium()
 }
+
+.mat-mdc-icon-button {
+  color: $blue;
+}

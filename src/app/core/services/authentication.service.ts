@@ -14,6 +14,9 @@ import {Test} from "../../models/tests/test";
 import {TestType} from "../../models/tests/test-type";
 import {TestName} from "../../models/tests/test-name";
 import {TestNameEng} from "../../models/tests/test-name-en";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {FirebaseErrorService} from "../../services/firebase-error.service";
+import {ErrorService} from "../../services/error.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +25,7 @@ export class AuthenticationService {
 
   private _decodedToken!: DecodedToken;
   private _jwtToken!: string;
-
   private _userCredential!: UserCredential;
-
   private _jwtTokenSubj$ = new BehaviorSubject<string>("")
   private _jwtToken$ = this._jwtTokenSubj$.asObservable()
 
@@ -32,7 +33,9 @@ export class AuthenticationService {
   constructor(private readonly firebaseAuth: AngularFireAuth,
               private readonly httpClient: HttpClient,
               private readonly router: Router,
-              private readonly tokenService: TokenService) {
+              private readonly tokenService: TokenService,
+              private _snackBar: MatSnackBar,
+              private readonly errorService: ErrorService) {
   }
 
   register(userRegisterForm: UserRegisterForm): Observable<string> {
@@ -51,11 +54,10 @@ export class AuthenticationService {
           this.router.navigateByUrl('/browser-patient')
         }),
         catchError((err: Error) => {
-          console.error("[Auth error]", err.message)
+          this._snackBar.open(this.errorService.getErrorMessage(err));
           this.router.navigateByUrl('/register')
           return of(err.message)
         })
-        // switchMap(token => )
       )
   }
 
@@ -70,13 +72,11 @@ export class AuthenticationService {
         tap(token => {
           this.setToken(token)
         }),
-        // map(() => this._userCredential),
-        // switchMap(userCredential => this.getUserDetails(userCredential.user?.uid)),
         tap(() => {
           this.router.navigateByUrl('/browser-patient')
         }),
-        catchError((err: Error) => {
-          console.error("[Auth error]", err.message)
+        catchError((err) => {
+          this._snackBar.open(this.errorService.getErrorMessage(err));
           this.router.navigateByUrl('/login')
           return of(err.message)
         })
@@ -85,7 +85,8 @@ export class AuthenticationService {
 
   logout(){
     this.tokenService.removeTokenFromLocalStorage();
-    this.setToken("");
+    this._jwtToken = null as any;
+    this._jwtTokenSubj$.next(null as any);
     this.router.navigateByUrl("/login");
   }
 
@@ -98,9 +99,9 @@ export class AuthenticationService {
     return this.httpClient.post(`/api/user/save/${uid}`, userRegisterForm, {responseType: 'text'})
   }
 
-  // private getUserDetails(uid: any): Observable<UserDetails> {
-  //   return this.httpClient.get(`/api/user/${uid}`)
-  // }
+  getUserDetails(uid: any): Observable<UserDetails> {
+    return this.httpClient.get<UserDetails>(`/api/user/${uid}`);
+  }
 
   public setToken(token: string): void {
     console.log(token)
