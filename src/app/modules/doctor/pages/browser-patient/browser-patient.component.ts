@@ -36,13 +36,19 @@ export class BrowserPatientComponent implements OnInit {
 
   showPatientDetails(patient: Patient) {
     this.doctorService.setSelectedPatient(patient);
-    this.router.navigateByUrl(`browser-patient/${patient.uid}/edit`)  }
+    this.router.navigateByUrl(`browser-patient/${patient.uid}/edit`)
+  }
 
   addNewPatient() {
     const dialogRef = this.dialog.open(AddNewPatientComponent);
 
     dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.doctorService.getPatients().pipe(take(1)).subscribe(patients => {
+        console.log(patients)
+        this.patients = patients;
+        this.showTable = !!this.patients.length
+      })
     });
   }
 }

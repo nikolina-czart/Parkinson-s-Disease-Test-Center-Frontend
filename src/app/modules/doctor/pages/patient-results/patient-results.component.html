@@ -65,13 +65,18 @@
       </div>
 
       <div class="chart-show-group" *ngIf="isSelectedResult">
-        <p class="results-info">Wyniki testów:</p>
-        <div class="button-group">
+        <div class="button-group" *ngIf="isFingerTapping">
           <button mat-button (click)="chart3D()">Wykres 3D</button>
           <button mat-button (click)="chartX()">Wykres X</button>
           <button mat-button (click)="chartY()">Wykres Y</button>
           <button mat-button (click)="chartZ()">Wykres Z</button>
           <button mat-button (click)="chartUpDown()">Wykres UpDown</button>
+        </div>
+        <div class="button-group"  *ngIf="!isFingerTapping">
+          <button mat-button (click)="chart3D()">Wykres 3D</button>
+          <button mat-button (click)="chartX()">Wykres X</button>
+          <button mat-button (click)="chartY()">Wykres Y</button>
+          <button mat-button (click)="chartZ()">Wykres Z</button>
         </div>
       </div>
 

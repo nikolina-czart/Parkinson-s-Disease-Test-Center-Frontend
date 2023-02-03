@@ -1,0 +1,93 @@
+@import "src/assets/styles/styles";
+
+.add-new-patient-dialog{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding-xl;
+  justify-content: center;
+}
+
+.info-patient-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.patient-info{
+  color: $blue;
+  font-size: $font-size-l;
+  @include rubik-medium();
+}
+
+.patient-detils{
+  color: $blue;
+  font-size: $font-size-xl;
+  margin-left: $margin-l;
+  @include rubik-medium();
+}
+
+.tests{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.container-form-group{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: $font-size-l;
+  margin-left: $margin-m;
+  margin-top: $margin-l;
+
+  @include rubik-medium()
+}
+
+.title-patient-form {
+  font-size: $font-size-xl;
+  color: $blue;
+  margin: 0;
+  margin-bottom: $margin-l;
+  @include roboto-bold
+}
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+button.mat-mdc-button {
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}

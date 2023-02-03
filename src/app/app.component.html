@@ -1,4 +1,5 @@
 <app-header></app-header>
+<mat-spinner [mode]="'indeterminate'" class="spinner" *ngIf="isLoading$ | async"></mat-spinner>
 <div class="container">
   <div>
     <router-outlet></router-outlet>

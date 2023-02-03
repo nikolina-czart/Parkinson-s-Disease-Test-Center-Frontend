@@ -52,7 +52,7 @@ export class AuthenticationService {
         }),
         catchError((err: Error) => {
           console.error("[Auth error]", err.message)
-          this.router.navigateByUrl('/error')
+          this.router.navigateByUrl('/register')
           return of(err.message)
         })
         // switchMap(token => )
@@ -77,7 +77,7 @@ export class AuthenticationService {
         }),
         catchError((err: Error) => {
           console.error("[Auth error]", err.message)
-          this.router.navigateByUrl('/error')
+          this.router.navigateByUrl('/login')
           return of(err.message)
         })
       )
@@ -135,7 +135,7 @@ export class AuthenticationService {
       }),
       catchError((err: Error) => {
         console.error("[Auth error]", err.message)
-        this.router.navigateByUrl('/error')
+        this.router.navigateByUrl('/browser-patient')
         return of(err.message)
       })
       // switchMap(token => )

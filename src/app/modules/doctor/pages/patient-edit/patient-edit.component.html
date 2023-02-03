@@ -1,1 +1,44 @@
-<p>patient-edit works!</p>
+<div class="add-new-patient-dialog">
+  <h3 class="title-patient-form">Dane wybranego pacjenta</h3>
+  <div class="container-form-group">
+    <div class="info-patient-row">
+      <p class="patient-info">Imię: </p>
+      <p class="patient-detils">{{selectedPatient.name}}</p>
+    </div>
+    <div class="info-patient-row">
+      <p class="patient-info">Nazwisko: </p>
+      <p class="patient-detils">{{selectedPatient.surname}}</p>
+    </div>
+    <div class="info-patient-row">
+      <p class="patient-info">Email: </p>
+      <p class="patient-detils">{{selectedPatient.email}}</p>
+    </div>
+
+    <div>
+      <p class="patient-info">Dostępne test pacjenta:</p>
+      <div class="tests" *ngFor="let test of selectedPatient.patientTests">
+        <p class="patient-detils">{{test.name_pl}}</p>
+        <mat-icon [matTooltip]="test.name_pl" [matTooltipPosition]="'above'">{{test.icon}}</mat-icon>
+      </div>
+    </div>
+
+
+<!--      <p class="info-form">Wybierz testy, do których pacjent będzie miał dostęp:</p>-->
+<!--      <section class="example-section">-->
+<!--        <span class="example-list-section">-->
+<!--          <ul>-->
+<!--            <li *ngFor="let test of allTest">-->
+<!--              <mat-checkbox (change)="changeCheckbox(test)">-->
+<!--                {{test.test.name_pl}}-->
+<!--              </mat-checkbox>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </span>-->
+<!--      </section>-->
+
+  </div>
+
+
+</div>
+
+

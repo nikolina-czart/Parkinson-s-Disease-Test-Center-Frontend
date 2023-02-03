@@ -8,6 +8,7 @@ import {Result} from "../../../../models/results/result";
 import {Test} from "../../../../models/tests/test";
 import {take} from "rxjs";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
+import {TestType} from "../../../../models/tests/test-type";
 
 @Component({
   selector: 'app-patient-results',
@@ -32,6 +33,7 @@ export class PatientResultsComponent implements OnInit{
     layout: {}
   };
   isSelectedResult: boolean = false;
+  isFingerTapping: boolean = false;
 
   constructor(private router: Router,
               private doctorService: DoctorService) {
@@ -56,10 +58,7 @@ export class PatientResultsComponent implements OnInit{
     this.doctorService.getTest(filters).pipe(take(1)).subscribe(results => {
       this.testResults = results;
       this.showTable = !!this.testResults.length;
-      console.log(this.testResults)
-      console.log(this.showTable)
     })
-    this.isSend = true;
   }
 
   resetFilters() {
@@ -74,6 +73,13 @@ export class PatientResultsComponent implements OnInit{
     console.log(resulTest)
     this.selectedResult = resulTest;
     this.isSelectedResult = true;
+    this.isSend = true;
+    if(this.selectedTest === TestType.FINGER) {
+      this.isFingerTapping = true;
+    }else {
+      this.isFingerTapping = false;
+    }
+    this.chartX();
   }
 
   chart3D() {

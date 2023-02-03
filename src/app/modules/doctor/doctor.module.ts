@@ -48,7 +48,6 @@ import {PlotlySharedModule} from "angular-plotly.js";
     MatDividerModule,
     RouterOutlet,
     MatToolbarModule,
-    NoopAnimationsModule,
     MatDialogModule,
     MatInputModule,
     ReactiveFormsModule,

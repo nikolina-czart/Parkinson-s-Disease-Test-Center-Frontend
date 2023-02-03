@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AuthenticationService} from "../../../core/services/authentication.service";
 import {HttpClient} from "@angular/common/http";
-import {catchError, from, map, Observable, of, switchMap, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Patient} from "../../../models/user/patient";
-import {TestName} from "../../../models/tests/test-name";
 import {FingerTapping} from "../../../models/tests/finger-tapping";
 import {Gyroscope} from "../../../models/tests/gyroscope";
 import {Test} from "../../../models/tests/test";
 import {TestType} from "../../../models/tests/test-type";
 import {Result} from "../../../models/results/result";
-import {UserRegisterForm} from "../../../models/user/user-register-form";
 import {Voice} from "../../../models/tests/voice";
 import {Static} from "../../../models/tests/static";
 import {ToeTapping} from "../../../models/tests/toe-tapping";
@@ -49,7 +47,7 @@ export class DoctorService {
 
   getTest(filters: { formDate: any; toDate: any; testNameID: any }): Observable<Result[]> {
     const userId = this._selectedPatient.uid;
-    return this.httpClient.post<Result[]>(`/api/result/${userId}/fingertapping`, filters)
+    return this.httpClient.post<Result[]>(`/api/result/${userId}/testresult`, filters)
   }
 
   setSelectedPatient(patient: Patient) {
