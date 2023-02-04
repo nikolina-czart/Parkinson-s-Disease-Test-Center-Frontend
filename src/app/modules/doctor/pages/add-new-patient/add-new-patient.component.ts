@@ -18,6 +18,8 @@ import {TestType} from "../../../../models/tests/test-type";
 import {TestName} from "../../../../models/tests/test-name";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TestNameEng} from "../../../../models/tests/test-name-en";
+import {Patient} from "../../../../models/user/patient";
+import {T} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-add-new-patient',
@@ -79,13 +81,11 @@ export class AddNewPatientComponent implements OnInit{
     return this.formService.isControlValid(this.newPatientFormGroup, formControlName)
   }
   submitForm() {
-    if(!this.newPatientFormGroup.valid){
-      console.log("Niepoprawnie")
-    }else if(!this.selectedTests.length){
-     console.log("Puste")
-    }else {
-      this.authService.addNewPatient(this.mapAddNewPatientForm(), this.mapSelectedTestToRequest()).pipe(take(1)).subscribe()
-      this.closeDialog()
+    if(this.newPatientFormGroup.valid){
+      this.authService.addNewPatient(this.mapAddNewPatientForm(), this.mapSelectedTestToRequest()).pipe(take(1)).subscribe( it => {
+        const newPatientUid = it.split(" ").at(-1);
+        this.closeDialog(newPatientUid);
+      });
     }
   }
 
@@ -110,8 +110,21 @@ export class AddNewPatientComponent implements OnInit{
     this.selectedTests = this.allTest.filter(test => test.completed).map(element => element.test)
   }
 
-  closeDialog() {
-    //Write your stuff here
-    this.dialogRef.close(); // <- Closes the dialog
+  closeDialog(newPatientUid: string | undefined) {
+    const userRegisterForm = this.mapAddNewPatientForm();
+
+    if(!!newPatientUid || newPatientUid?.includes("auth")){
+      const newPatient: Patient = {
+        name: userRegisterForm.name,
+        surname: userRegisterForm.surname,
+        email: userRegisterForm.email,
+        patientTests: this.selectedTests,
+        uid: newPatientUid
+      }
+
+      this.dialogRef.close(newPatient);
+    }
   }
+
+
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Patient} from "../../../../models/user/patient";
 import {Gyroscope} from "../../../../models/tests/gyroscope";
 import {FingerTapping} from "../../../../models/tests/finger-tapping";
@@ -8,7 +8,7 @@ import {Static} from "../../../../models/tests/static";
 import {NavigationExtras, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {AddNewPatientComponent} from "../add-new-patient/add-new-patient.component";
-import {take} from "rxjs";
+import {Observable, of, take} from "rxjs";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {DoctorService} from "../../services/doctor.service";
 
@@ -24,7 +24,8 @@ export class BrowserPatientComponent implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly dialog: MatDialog,
-              private readonly doctorService: DoctorService) {
+              private readonly doctorService: DoctorService,
+              private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -39,16 +40,23 @@ export class BrowserPatientComponent implements OnInit {
     this.router.navigateByUrl(`browser-patient/${patient.uid}/edit`)
   }
 
-  addNewPatient() {
+  addNewPatient(): Observable<Patient[]> {
     const dialogRef = this.dialog.open(AddNewPatientComponent);
 
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      this.doctorService.getPatients().pipe(take(1)).subscribe(patients => {
-        console.log(patients)
-        this.patients = patients;
-        this.showTable = !!this.patients.length
-      })
+    dialogRef.afterClosed().pipe(take(1)).subscribe(newPatient => {
+      if(!!newPatient){
+        this.patients.push(newPatient)
+        this.refresh();
+      }
     });
+    return of(this.patients)
+  }
+
+  refresh() {
+    this.doctorService.getPatients().pipe(take(1)).subscribe(patients => {
+      this.patients = patients;
+      this.showTable = !!this.patients.length
+      this.changeDetectorRefs.detectChanges();
+    })
   }
 }

@@ -21,8 +21,7 @@ export class LoginPageComponent {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
-              private readonly authenticationService: AuthenticationService,
-              private _snackBar: MatSnackBar) {
+              private readonly authenticationService: AuthenticationService) {
 
   }
 

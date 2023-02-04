@@ -17,6 +17,7 @@ import {TestNameEng} from "../../models/tests/test-name-en";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FirebaseErrorService} from "../../services/firebase-error.service";
 import {ErrorService} from "../../services/error.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +28,16 @@ export class AuthenticationService {
   private _jwtToken!: string;
   private _userCredential!: UserCredential;
   private _jwtTokenSubj$ = new BehaviorSubject<string>("")
-  private _jwtToken$ = this._jwtTokenSubj$.asObservable()
-
+  private _jwtToken$ = this._jwtTokenSubj$.asObservable();
+  private newUserUid!: string | undefined;
 
   constructor(private readonly firebaseAuth: AngularFireAuth,
               private readonly httpClient: HttpClient,
               private readonly router: Router,
               private readonly tokenService: TokenService,
               private _snackBar: MatSnackBar,
-              private readonly errorService: ErrorService) {
+              private readonly errorService: ErrorService,
+              private readonly dialog: MatDialog) {
   }
 
   register(userRegisterForm: UserRegisterForm): Observable<string> {
@@ -54,7 +56,9 @@ export class AuthenticationService {
           this.router.navigateByUrl('/browser-patient')
         }),
         catchError((err: Error) => {
-          this._snackBar.open(this.errorService.getErrorMessage(err));
+          this._snackBar.open(this.errorService.getErrorMessage(err), "X",{
+            duration: 5000,
+          });
           this.router.navigateByUrl('/register')
           return of(err.message)
         })
@@ -76,8 +80,9 @@ export class AuthenticationService {
           this.router.navigateByUrl('/browser-patient')
         }),
         catchError((err) => {
-          this._snackBar.open(this.errorService.getErrorMessage(err));
-          this.router.navigateByUrl('/login')
+          this._snackBar.open(this.errorService.getErrorMessage(err), "X",{
+            duration: 5000,
+          });          this.router.navigateByUrl('/login')
           return of(err.message)
         })
       )
@@ -88,6 +93,32 @@ export class AuthenticationService {
     this._jwtToken = null as any;
     this._jwtTokenSubj$.next(null as any);
     this.router.navigateByUrl("/login");
+  }
+
+  addNewPatient(userRegisterForm: UserRegisterForm, selectedTests: { uid: TestType; name: TestNameEng }[]): Observable<string>  {
+    return from(this.firebaseAuth
+      .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
+      tap(userCredential => {
+        this._userCredential = userCredential;
+        this.newUserUid = userCredential.user?.uid;
+      }),
+      map(() => this._userCredential),
+      switchMap(userCredential => this.createUserInDatabase(userRegisterForm, userCredential.user?.uid)),
+      map(() => this._userCredential),
+      switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
+      tap(() => {
+        this._snackBar.open("Dodano nowego pacjenta", "X",{
+          duration: 5000,
+        });
+        this.router.navigateByUrl('/browser-patient')
+      }),
+      catchError((err: Error) => {
+        this._snackBar.open(this.errorService.getErrorMessage(err), "X",{
+          duration: 5000,
+        });
+        return of("")
+      })
+    )
   }
 
   public getToken$(): Observable<string> {
@@ -119,28 +150,6 @@ export class AuthenticationService {
 
   public setDecodedToken(token: string): void {
     this._decodedToken = this.tokenService.decodeToken(token);
-  }
-
-  addNewPatient(userRegisterForm: UserRegisterForm, selectedTests: { uid: TestType; name: TestNameEng }[]): Observable<string>  {
-    return from(this.firebaseAuth
-      .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
-      tap(userCredential => {
-        this._userCredential = userCredential;
-      }),
-      map(() => this._userCredential),
-      switchMap(userCredential => this.createUserInDatabase(userRegisterForm, userCredential.user?.uid)),
-      map(() => this._userCredential),
-      switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
-      tap(() => {
-        this.router.navigateByUrl('/browser-patient')
-      }),
-      catchError((err: Error) => {
-        console.error("[Auth error]", err.message)
-        this.router.navigateByUrl('/browser-patient')
-        return of(err.message)
-      })
-      // switchMap(token => )
-    )
   }
 
   private addTestToPatient(selectedTests: { uid: TestType; name: TestNameEng }[], uid?: string): Observable<string> {
