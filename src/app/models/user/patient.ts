@@ -5,5 +5,5 @@ export interface Patient {
   name: string;
   surname: string;
   email: string
-  patientTests: Array<Test>
+  patientTests: Test[]
 }

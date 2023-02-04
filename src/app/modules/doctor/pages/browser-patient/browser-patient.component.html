@@ -18,11 +18,6 @@
     <div class="table" *ngIf="showTable">
       <mat-table class="table-details" [dataSource]="patients" class="mat-elevation-z8">
 
-        <!--      <ng-container matColumnDef="position" sticky>-->
-        <!--        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>-->
-        <!--        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>-->
-        <!--      </ng-container>-->
-
         <ng-container matColumnDef="fullName">
           <mat-header-cell *matHeaderCellDef> Imię i nazwisko </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name+ " " + element.surname}} </mat-cell>
