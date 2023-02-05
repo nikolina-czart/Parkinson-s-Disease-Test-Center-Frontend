@@ -1,6 +1,6 @@
 import {Role} from "./user-role";
 
-export interface UserRegisterForm {
+export interface UserAddForm {
   email: string;
   name: string;
   surname: string;

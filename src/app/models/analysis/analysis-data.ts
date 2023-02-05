@@ -1,6 +1,6 @@
-import {TestType} from "../tests/test-type";
-import {Side} from "../side";
-import {MedicineSupply} from "../medicine-supply";
+import {Side} from "./side";
+import {MedicineSupply} from "./medicine-supply";
+import {TestType} from "../tests/test-info";
 
 export interface Result{
   patientFullName: string;

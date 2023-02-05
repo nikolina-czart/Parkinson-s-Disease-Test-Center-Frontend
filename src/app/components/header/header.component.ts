@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../core/services/authentication.service";
 import {Observable, take, tap} from "rxjs";
-import {UserDetails} from "../../models/user/user-model";
+import {UserDetails} from "../../models/user/shared/user-model";
+import {UserService} from "../../modules/shared/services/user.service";
 
 @Component({
   selector: 'app-header',
@@ -11,21 +12,24 @@ import {UserDetails} from "../../models/user/user-model";
 })
 export class HeaderComponent implements OnInit{
   token$!: Observable<string>;
-  user!: UserDetails;
+  user!: UserDetails | undefined;
   logoUser!: string;
 
   constructor(private readonly router: Router,
-              private readonly authService: AuthenticationService) {
+              private readonly authService: AuthenticationService,
+              private readonly userService: UserService) {
   }
 
   ngOnInit(): void {
     this.token$ = this.authService.getToken$();
-    if(this.token$){
-      this.authService.getUserDetails(this.authService.decodedToken.userId).pipe(take(1)).subscribe(user => {
-        this.user = user
-        this.logoUser = this.user.name.at(0)!.toString() + this.user.surname.at(0)!.toString();
-      })
-    }
+    this.token$.subscribe(token => {
+      if(token) {
+        this.userService.getUserDetails(this.authService.decodedToken.userId).pipe(take(1)).subscribe(user => {
+          this.user = user
+          this.logoUser = this.user.name.at(0)!.toString() + this.user.surname.at(0)!.toString();
+        })
+      }
+    })
   }
 
   logout() {
@@ -39,6 +43,4 @@ export class HeaderComponent implements OnInit{
   register() {
     this.router.navigate(['/register'])
   }
-
-
 }

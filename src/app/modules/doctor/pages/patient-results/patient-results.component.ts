@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Patient} from "../../../../models/user/patient";
+import {Patient} from "../../../../models/user/patient/patient";
 import {Router} from "@angular/router";
 import {DoctorService} from "../../services/doctor.service";
 import {FormControl, FormGroup} from "@angular/forms";
-import {TestResultFilter} from "../../../../models/results/test-result-filter";
 import {Result} from "../../../../models/results/result";
-import {Test} from "../../../../models/tests/test";
 import {take} from "rxjs";
-import {AuthenticationService} from "../../../../core/services/authentication.service";
-import {TestType} from "../../../../models/tests/test-type";
+import {TestType} from "../../../../models/tests/test-info";
 
 @Component({
   selector: 'app-patient-results',
@@ -74,7 +71,7 @@ export class PatientResultsComponent implements OnInit{
     this.selectedResult = resulTest;
     this.isSelectedResult = true;
     this.isSend = true;
-    if(this.selectedTest === TestType.FINGER) {
+    if(this.selectedTest === TestType.FINGER_TAPPING) {
       this.isFingerTapping = true;
     }else {
       this.isFingerTapping = false;

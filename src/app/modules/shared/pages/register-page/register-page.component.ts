@@ -1,32 +1,30 @@
-import {Component} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormService} from "../../../../core/services/form.service";
-import {passwordMatchValidator} from "../../../../core/validators/password-match.validator";
-import {UserRegisterForm} from "../../../../models/user/user-register-form";
+import {UserAddForm} from "../../../../models/user/shared/user-add-form";
 import {take} from "rxjs";
-import {AuthenticationService} from "../../../../core/services/authentication.service";
-import {Role} from "../../../../models/user/user-role";
+import {Role} from "../../../../models/user/shared/user-role";
+import {UserService} from "../../services/user.service";
+import {createNewUserFormGroup, mapUserForm} from "../../../../../utils/form-utils";
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit{
   hidePassword = true;
   hidePasswordConfirmation= true;
-  registerFormGroup = this._formBuilder.group({
-    email: ['', [Validators.email, Validators.required]],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
-    passwordConfirmation: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('password')]]
-  });
+  registerFormGroup!: FormGroup;
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
-              private readonly authenticationService: AuthenticationService) {
+              private readonly userService: UserService) {
 
+  }
+
+  ngOnInit(): void {
+    this.registerFormGroup = createNewUserFormGroup(this._formBuilder);
   }
 
   getErrorMessage(formControlName: string): string {
@@ -39,19 +37,7 @@ export class RegisterPageComponent {
 
   submitForm() {
     if(this.registerFormGroup.valid){
-      this.authenticationService.register(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
-    }
-  }
-
-  private mapRegisterForm(): UserRegisterForm {
-    return {
-      email: this.registerFormGroup.get('email')?.value || '',
-      name: this.registerFormGroup.get('name')?.value || '',
-      surname: this.registerFormGroup.get('surname')?.value || '',
-      password: this.registerFormGroup.get('password')?.value || '',
-      uid : "",
-      role: Role.DOCTOR,
-      doctorID: ""
+      this.userService.register(mapUserForm(this.registerFormGroup, "", "", Role.DOCTOR)).pipe(take(1)).subscribe(console.log)
     }
   }
 }

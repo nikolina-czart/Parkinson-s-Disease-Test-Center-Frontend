@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Patient} from "../../../../models/user/patient";
+import {Patient} from "../../../../models/user/patient/patient";
 import {DoctorService} from "../../services/doctor.service";
 
 @Component({
@@ -9,7 +9,6 @@ import {DoctorService} from "../../services/doctor.service";
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent implements OnInit{
-  name = ""
   selectedPatient!: Patient;
 
   constructor(private router: Router,
@@ -33,6 +32,5 @@ export class PatientDetailsComponent implements OnInit{
 
   navigateToBrowserPatient() {
     this.router.navigateByUrl(`browser-patient`)
-
   }
 }

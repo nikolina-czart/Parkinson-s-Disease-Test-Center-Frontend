@@ -1,78 +1,46 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {passwordMatchValidator} from "../../../../core/validators/password-match.validator";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormService} from "../../../../core/services/form.service";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
-import {UserRegisterForm} from "../../../../models/user/user-register-form";
-import {Role} from "../../../../models/user/user-role";
-import {Test} from "../../../../models/tests/test";
-import {Gyroscope} from "../../../../models/tests/gyroscope";
-import {FingerTapping} from "../../../../models/tests/finger-tapping";
-import {Static} from "../../../../models/tests/static";
-import {ToeTapping} from "../../../../models/tests/toe-tapping";
-import {Voice} from "../../../../models/tests/voice";
+import {Role} from "../../../../models/user/shared/user-role";
+import {TestDistribution} from "../../../../models/tests/test-distribution";
 import {take} from "rxjs";
 import {DoctorService} from "../../services/doctor.service";
-import {TestRequest} from "@angular/common/http/testing";
-import {TestType} from "../../../../models/tests/test-type";
-import {TestName} from "../../../../models/tests/test-name";
 import {MatDialogRef} from "@angular/material/dialog";
-import {TestNameEng} from "../../../../models/tests/test-name-en";
-import {Patient} from "../../../../models/user/patient";
-import {T} from "@angular/cdk/keycodes";
+import {Patient} from "../../../../models/user/patient/patient";
+import {createNewUserFormGroup, mapUserForm} from "../../../../../utils/form-utils";
+import {testCheckboxesSelector} from "../../../../models/tests/test-checkboxes-selector";
+import {getLastElementFromString} from "../../../../../utils/app-utils";
+import {TestModelFirebase} from "../../../../models/tests/test-model-firebase";
+import {TestSelectorChecked} from "../../../../models/tests/test-selector-checked";
+import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-add-new-patient',
   templateUrl: './add-new-patient.component.html',
   styleUrls: ['./add-new-patient.component.scss']
 })
-export class AddNewPatientComponent implements OnInit{
+export class AddNewPatientComponent implements OnInit {
   hidePassword = true;
-  hidePasswordConfirmation= true;
-  newPatientFormGroup = this._formBuilder.group({
-    email: ['', [Validators.email, Validators.required]],
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
-    passwordConfirmation: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('password')]]
-  });
-
-  selectedTests: Test[] = []
-
-  allTest = [
-    {
-      test: new Gyroscope(),
-      completed: false
-    },
-    {
-      test: new FingerTapping(),
-      completed: false
-    },
-    {
-      test: new Static(),
-      completed: false
-    },
-    {
-      test: new ToeTapping(),
-      completed: false
-    },
-    {
-      test: new Voice(),
-      completed: false
-    },
-  ];
+  hidePasswordConfirmation = true;
+  newPatientFormGroup!: FormGroup;
+  selectedTests: TestDistribution[] = []
+  testCheckboxesSelector = testCheckboxesSelector;
   private userID!: string;
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
               private readonly authService: AuthenticationService,
               private readonly doctorService: DoctorService,
-              private dialogRef: MatDialogRef<AddNewPatientComponent>) {
+              private dialogRef: MatDialogRef<AddNewPatientComponent>,
+              private readonly userService: UserService) {
   }
 
   ngOnInit(): void {
     this.userID = this.authService.decodedToken.userId;
+    this.newPatientFormGroup = createNewUserFormGroup(this._formBuilder);
   }
+
   getErrorMessage(formControlName: string): string {
     return this.formService.mapErrorMessages(this.newPatientFormGroup, formControlName)
   }
@@ -80,40 +48,26 @@ export class AddNewPatientComponent implements OnInit{
   isControlValid(formControlName: string): boolean {
     return this.formService.isControlValid(this.newPatientFormGroup, formControlName)
   }
+
   submitForm() {
-    if(this.newPatientFormGroup.valid){
-      this.authService.addNewPatient(this.mapAddNewPatientForm(), this.mapSelectedTestToRequest()).pipe(take(1)).subscribe( it => {
-        const newPatientUid = it.split(" ").at(-1);
+    if (this.newPatientFormGroup.valid) {
+      this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT),
+        this.mapSelectedTestToRequest()).pipe(take(1)).subscribe(it => {
+        const newPatientUid = getLastElementFromString(it);
         this.closeDialog(newPatientUid);
       });
     }
   }
 
-  private mapAddNewPatientForm(): UserRegisterForm {
-    return {
-      email: this.newPatientFormGroup.get('email')?.value || '',
-      name: this.newPatientFormGroup.get('name')?.value || '',
-      surname: this.newPatientFormGroup.get('surname')?.value || '',
-      password: this.newPatientFormGroup.get('password')?.value || '',
-      uid: "",
-      role: Role.PATIENT,
-      doctorID: this.userID
-    }
-  }
-
-  private mapSelectedTestToRequest(): { uid: TestType; name: TestNameEng }[] {
-    return this.selectedTests.map(test => ({name: test.name, uid: test.uid}));
-  }
-
-  changeCheckbox(test: { test: Gyroscope; completed: boolean } | { test: FingerTapping; completed: boolean } | { test: Static; completed: boolean } | { test: ToeTapping; completed: boolean } | { test: Voice; completed: boolean }) {
-    test.completed = !test.completed
-    this.selectedTests = this.allTest.filter(test => test.completed).map(element => element.test)
+  changeCheckbox(test: TestSelectorChecked) {
+    test.checked = !test.checked
+    this.selectedTests = this.testCheckboxesSelector.filter(test => test.checked).map(element => element.test)
   }
 
   closeDialog(newPatientUid: string | undefined) {
-    const userRegisterForm = this.mapAddNewPatientForm();
+    const userRegisterForm = mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT);
 
-    if(!!newPatientUid || newPatientUid?.includes("auth")){
+    if (!!newPatientUid || newPatientUid?.includes("auth")) {
       const newPatient: Patient = {
         name: userRegisterForm.name,
         surname: userRegisterForm.surname,
@@ -126,5 +80,7 @@ export class AddNewPatientComponent implements OnInit{
     }
   }
 
-
+  private mapSelectedTestToRequest(): TestModelFirebase[] {
+    return this.selectedTests.map(test => ({name: test.name, uid: test.uid}));
+  }
 }

@@ -17,6 +17,8 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 import {PlotlyModule} from 'angular-plotly.js';
 import {LoadingSpinnerInterceptor} from "./core/interceptors/loading-spinner.interceptor";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { RemovePatientComponent } from './modules/doctor/pages/remove-patient/remove-patient.component';
+import {MatButtonModule} from "@angular/material/button";
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -24,6 +26,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
   declarations: [
     AppComponent,
     BlankPageComponent,
+    RemovePatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlotlyModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
+    MatButtonModule,
 
   ],
   providers: [{

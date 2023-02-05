@@ -1,2 +1,4 @@
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
+export function getLastElementFromString(value: string): string | undefined {
+  return value.split(" ").at(-1);
+}
 

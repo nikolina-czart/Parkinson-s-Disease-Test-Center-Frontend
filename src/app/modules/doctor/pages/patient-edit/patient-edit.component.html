@@ -1,44 +1,45 @@
-<div class="add-new-patient-dialog">
-  <h3 class="title-patient-form">Dane wybranego pacjenta</h3>
+<div class="patient-info-box">
+  <h3 class="title-patient-form">Informacje o pacjencie</h3>
   <div class="container-form-group">
-    <div class="info-patient-row">
-      <p class="patient-info">Imię: </p>
-      <p class="patient-detils">{{selectedPatient.name}}</p>
-    </div>
-    <div class="info-patient-row">
-      <p class="patient-info">Nazwisko: </p>
-      <p class="patient-detils">{{selectedPatient.surname}}</p>
-    </div>
-    <div class="info-patient-row">
-      <p class="patient-info">Email: </p>
-      <p class="patient-detils">{{selectedPatient.email}}</p>
-    </div>
+    <form [formGroup]="selectedPatientFormGroup" (ngSubmit)="updatePatient()">
+      <div class="form-fields">
 
-    <div>
-      <p class="patient-info">Dostępne test pacjenta:</p>
-      <div class="tests" *ngFor="let test of selectedPatient.patientTests">
-        <p class="patient-detils">{{test.name_pl}}</p>
-        <mat-icon [matTooltip]="test.name_pl" [matTooltipPosition]="'above'">{{test.icon}}</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="imię" formControlName="name" required>
+          <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Nazwisko" formControlName="surname" required>
+          <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
+        </mat-form-field>
       </div>
-    </div>
 
+      <p class="info-form">Testy pacjenta:</p>
+      <section class="example-section">
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let test of testCheckboxesSelector">
+              <mat-checkbox (change)="changeCheckbox(test)"  [disabled]="isReadOnlyMode" [checked]="test.checked">
+                {{test.test.name_pl}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
 
-<!--      <p class="info-form">Wybierz testy, do których pacjent będzie miał dostęp:</p>-->
-<!--      <section class="example-section">-->
-<!--        <span class="example-list-section">-->
-<!--          <ul>-->
-<!--            <li *ngFor="let test of allTest">-->
-<!--              <mat-checkbox (change)="changeCheckbox(test)">-->
-<!--                {{test.test.name_pl}}-->
-<!--              </mat-checkbox>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </span>-->
-<!--      </section>-->
-
+      <div class="button-position" *ngIf="isReadOnlyMode">
+        <button mat-raised-button type="button" color="primary" class="edit-button" (click)="editPatientData()" >Edytuj dane</button>
+        <button mat-raised-button type="button" color="warn" class="edit-button" (click)="deletePatient()" >Usuń użytkownika</button>
+      </div>
+      <div class="button-position" *ngIf="!isReadOnlyMode">
+        <button mat-raised-button type="submit" color="primary" class="edit-button" (click)="updatePatient()" >Zapisz dane</button>
+        <button mat-raised-button type="button" color="warn" class="edit-button" (click)="cancelEditMode()"  >Anuluj</button>
+      </div>
+    </form>
   </div>
-
-
 </div>
 
 

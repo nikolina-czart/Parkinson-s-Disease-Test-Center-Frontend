@@ -1,15 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Patient} from "../../../../models/user/patient";
-import {Gyroscope} from "../../../../models/tests/gyroscope";
-import {FingerTapping} from "../../../../models/tests/finger-tapping";
-import {ToeTapping} from "../../../../models/tests/toe-tapping";
-import {Voice} from "../../../../models/tests/voice";
-import {Static} from "../../../../models/tests/static";
-import {NavigationExtras, Router} from "@angular/router";
+import {Patient} from "../../../../models/user/patient/patient";
+import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {AddNewPatientComponent} from "../add-new-patient/add-new-patient.component";
 import {Observable, of, take} from "rxjs";
-import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {DoctorService} from "../../services/doctor.service";
 
 @Component({
@@ -31,6 +25,7 @@ export class BrowserPatientComponent implements OnInit {
   ngOnInit() {
      this.doctorService.getPatients().pipe(take(1)).subscribe(patients => {
        this.patients = patients;
+       console.log(this.patients[0].patientTests)
        this.showTable = !!this.patients.length
      })
   }

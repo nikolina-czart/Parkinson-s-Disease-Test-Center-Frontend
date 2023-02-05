@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {FirebaseErrorCode} from "../models/firebaseErrorCode";
-import {FirebaseErrorMessage} from "../models/firebaseErrorMessage";
+import {FirebaseErrorCode} from "../models/error/firebaseErrorCode";
+import {FirebaseErrorMessage} from "../models/error/firebaseErrorMessage";
 
 @Injectable({
   providedIn: 'root'

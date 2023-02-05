@@ -46,7 +46,7 @@
       <section class="example-section">
         <span class="example-list-section">
           <ul>
-            <li *ngFor="let test of allTest">
+            <li *ngFor="let test of testCheckboxesSelector">
               <mat-checkbox (change)="changeCheckbox(test)">
                 {{test.test.name_pl}}
               </mat-checkbox>
