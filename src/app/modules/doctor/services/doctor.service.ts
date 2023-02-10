@@ -13,6 +13,7 @@ import {
   ToeTapping,
   Voice
 } from "../../../models/tests/test-distribution";
+import {AggregatedData} from "../../../models/analysis/analysis-data";
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,10 @@ export class DoctorService {
 
   get selectedPatient(): Patient {
     return this._selectedPatient
+  }
+
+  getAggregateDate(filters: { testNameID: string; timeRange: string }): Observable<AggregatedData[]> {
+    const userId = this._selectedPatient.uid;
+    return this.httpClient.post<AggregatedData[]>(`/api/analyzed/${userId}/test`, filters);
   }
 }

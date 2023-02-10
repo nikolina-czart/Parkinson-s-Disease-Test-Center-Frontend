@@ -1,4 +1,4 @@
 export enum MedicineSupply {
-  BEFORE = "before medicine",
-  AFTER = "after medicine"
+  BEFORE = "Before medicine",
+  AFTER = "After medicine"
 }

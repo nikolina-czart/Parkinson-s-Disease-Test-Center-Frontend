@@ -40,9 +40,10 @@ export class PatientEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.selectedPatient = this.doctorService.selectedPatient;
     this.doctorID = this.authService.decodedToken.userId;
     this.selectedPatientFormGroup = createSelectedPatientFormGroup(this._formBuilder);
-    this.selectedPatient = this.doctorService.selectedPatient;
+    this.patientSetDefaultValue();
 
     this.selectedTests = this.selectedPatient.patientTests;
     this.selectedTests.forEach(test => {
@@ -108,5 +109,12 @@ export class PatientEditComponent implements OnInit {
     for (const control in this.selectedPatientFormGroup.controls) {
       this.selectedPatientFormGroup.get(control)!.disable();
     }
+  }
+
+  private patientSetDefaultValue() {
+    this.selectedPatientFormGroup.setValue({
+      name: this.selectedPatient.name,
+      surname: this.selectedPatient.surname
+    })
   }
 }

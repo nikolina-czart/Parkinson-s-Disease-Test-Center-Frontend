@@ -1,1 +1,101 @@
-<p>Analiza wyników w trakcie</p>
+<div class="result-container">
+  <h3 class="title-patient-form">Zagregowane dane</h3>
+  <div class="filter-container">
+    <p class="results-info">Filtry testu:</p>
+    <div class="filter-row">
+      <div class="mat-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Rodzaj testu</mat-label>
+          <mat-select [(ngModel)]="selectedTest" name="test">
+            <mat-option *ngFor="let test of selectedPatient.patientTests" [value]="test.uid">
+              {{test.name_pl}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Okres czasu</mat-label>
+          <mat-select [(ngModel)]="selectedTimeRange" name="test">
+            <mat-option *ngFor="let time of timeRanges" [value]="time">
+              {{time}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button (click)="getAggregatedData()"
+              [disabled]="!(!!selectedTest && !!selectedTimeRange)">
+        Zagreguj dane
+      </button>
+
+      <!--      <button mat-raised-button (click)="resetFilters()"  *ngIf="isSend">-->
+      <!--        Resetuj filtry-->
+      <!--      </button>-->
+    </div>
+
+    <div *ngIf="!showTable">
+      <p class="results-info">Dla wybranego zakresu pacjent nie ma wyników</p>
+    </div>
+
+    <div class="show-results" *ngIf="showTable">
+      <p class="results-info">Wyniki agregacji testów:</p>
+      <div class="table">
+        <mat-table class="table-details" [dataSource]="aggregatedData" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="timeRange">
+            <mat-header-cell *matHeaderCellDef> Okres agregacji </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.testLabel}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="side">
+            <mat-header-cell *matHeaderCellDef> Strona </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.side}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="averageHours">
+            <mat-header-cell *matHeaderCellDef> średni czas od przyjęcia leku [h] </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.hoursSinceLastMedAverage}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="medicineSupply">
+            <mat-header-cell *matHeaderCellDef>Przyjęcie leków</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.medicineSupply}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="vectorLength">
+            <mat-header-cell *matHeaderCellDef>Długość wektora</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.vectorLength}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            (click)="showTestDetails(row)"
+            *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+<!--      <div class="chart-show-group" *ngIf="isSelectedResult">-->
+<!--        <div class="button-group" *ngIf="isFingerTapping">-->
+<!--          <button mat-button (click)="chart3D()">Wykres 3D</button>-->
+<!--          <button mat-button (click)="chartX()">Wykres X</button>-->
+<!--          <button mat-button (click)="chartY()">Wykres Y</button>-->
+<!--          <button mat-button (click)="chartZ()">Wykres Z</button>-->
+<!--          <button mat-button (click)="chartUpDown()">Wykres UpDown</button>-->
+<!--        </div>-->
+<!--        <div class="button-group"  *ngIf="!isFingerTapping">-->
+<!--          <button mat-button (click)="chart3D()">Wykres 3D</button>-->
+<!--          <button mat-button (click)="chartX()">Wykres X</button>-->
+<!--          <button mat-button (click)="chartY()">Wykres Y</button>-->
+<!--          <button mat-button (click)="chartZ()">Wykres Z</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="chart-show" *ngIf="isSelectedResult">-->
+<!--        <plotly-plot [data]="chart.data" [layout]="chart.layout"></plotly-plot>-->
+<!--      </div>-->
+
+
+
+    </div>
+
+  </div>
+</div>
