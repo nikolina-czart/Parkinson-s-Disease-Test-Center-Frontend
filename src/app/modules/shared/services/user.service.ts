@@ -10,9 +10,8 @@ import {Router} from "@angular/router";
 import firebase from "firebase/compat";
 import {AuthenticationService} from "../../../core/services/authentication.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-// import {TestModelFirebase} from "../../../models/tests/test-model-firebase";
-import UserCredential = firebase.auth.UserCredential;
 import {TestModelFirebase} from "../../../models/tests/test-model-firebase";
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root'
