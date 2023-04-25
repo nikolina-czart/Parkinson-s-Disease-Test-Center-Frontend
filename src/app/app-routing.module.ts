@@ -9,6 +9,7 @@ import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details/pa
 import {AuthGuard} from "./core/guards/auth.guard";
 import {PatientEditComponent} from "./modules/doctor/pages/patient-edit/patient-edit.component";
 import {PatientAnalysisComponent} from "./modules/doctor/pages/patient-analysis/patient-analysis.component";
+import {PatientInformationComponent} from "./modules/doctor/pages/patient-information/patient-information.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: "edit",
         component: PatientEditComponent,
+      },
+      {
+        path: "information",
+        component: PatientInformationComponent,
       },
       {
         path: "result",

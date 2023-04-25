@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
-import {UserAddForm} from "../../../models/user/shared/user-add-form";
+import {UserRegisterForm} from "../../../models/user/shared/user-register-form";
 import {catchError, from, map, Observable, of, switchMap, tap} from "rxjs";
 import {UserLoginForm} from "../../../models/user/shared/user-login";
 import {UserDetails} from "../../../models/user/shared/user-model";
 import {ErrorService} from "../../../services/error.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import firebase from "firebase/compat";
 import {AuthenticationService} from "../../../core/services/authentication.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {TestModelFirebase} from "../../../models/tests/test-model-firebase";
+// import {TestModelFirebase} from "../../../models/tests/test-model-firebase";
 import UserCredential = firebase.auth.UserCredential;
+import {TestModelFirebase} from "../../../models/tests/test-model-firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class UserService {
               private _snackBar: MatSnackBar) {
   }
 
-  register(userRegisterForm: UserAddForm): Observable<string> {
+  register(userRegisterForm: UserRegisterForm): Observable<string> {
     return from(this.firebaseAuth
       .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
       tap(userCredential => {
@@ -54,7 +55,6 @@ export class UserService {
     return from(this.firebaseAuth
       .signInWithEmailAndPassword(userLoginForm.email, userLoginForm.password)).pipe(
       tap(userCredential => {
-        console.log(userCredential)
         this._userCredential = userCredential;
       }),
       switchMap(userCredential => from(userCredential.user?.getIdToken() || of(""))),
@@ -72,7 +72,7 @@ export class UserService {
     )
   }
 
-  addNewPatient(userRegisterForm: UserAddForm, selectedTests: TestModelFirebase[]): Observable<string>  {
+  addNewPatient(userRegisterForm: UserRegisterForm, selectedTests: TestModelFirebase[]): Observable<string>  {
     return from(this.firebaseAuth
       .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
       tap(userCredential => {
@@ -85,7 +85,6 @@ export class UserService {
       switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
       tap(() => {
         this.createSnackBar("Dodano nowego pacjenta");
-
         this.router.navigateByUrl('/browser-patient')
       }),
       catchError((err: Error) => {
@@ -98,10 +97,10 @@ export class UserService {
   }
 
   getUserDetails(uid: any): Observable<UserDetails> {
-    return this.httpClient.get<UserDetails>(`/api/user/${uid}`);
+    return this.httpClient.get<UserDetails>(`/api/user/${uid}`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
-  private createUserInDatabase(userRegisterForm: UserAddForm, uid?: string): Observable<string> {
+  private createUserInDatabase(userRegisterForm: UserRegisterForm, uid?: string): Observable<string> {
     userRegisterForm.uid = uid!;
     return this.httpClient.post(`/api/user/save/${uid}`, userRegisterForm, {responseType: 'text'})
   }

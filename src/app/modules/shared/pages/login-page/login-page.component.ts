@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit{
 
   submitForm() {
     if(this.loginFormGroup.valid){
-      this.userService.login(this.mapRegisterForm()).pipe(take(1)).subscribe()
+      this.userService.login(this.mapRegisterForm()).pipe(take(1)).subscribe(console.log)
     }
   }
 

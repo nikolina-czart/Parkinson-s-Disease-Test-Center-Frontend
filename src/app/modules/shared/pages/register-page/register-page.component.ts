@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormService} from "../../../../core/services/form.service";
-import {UserAddForm} from "../../../../models/user/shared/user-add-form";
+import {UserRegisterForm} from "../../../../models/user/shared/user-register-form";
 import {take} from "rxjs";
 import {Role} from "../../../../models/user/shared/user-role";
 import {UserService} from "../../services/user.service";
@@ -20,7 +20,6 @@ export class RegisterPageComponent implements OnInit{
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService,
               private readonly userService: UserService) {
-
   }
 
   ngOnInit(): void {
@@ -37,7 +36,8 @@ export class RegisterPageComponent implements OnInit{
 
   submitForm() {
     if(this.registerFormGroup.valid){
-      this.userService.register(mapUserForm(this.registerFormGroup, "", "", Role.DOCTOR)).pipe(take(1)).subscribe(console.log)
+      this.userService.register(mapUserForm(this.registerFormGroup, "", "", Role.DOCTOR))
+        .pipe(take(1)).subscribe(console.log)
     }
   }
 }
