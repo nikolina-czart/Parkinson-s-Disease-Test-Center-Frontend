@@ -1,19 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormService} from "../../../../core/services/form.service";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {Role} from "../../../../models/user/shared/user-role";
-import {TestDistribution} from "../../../../models/tests/test-distribution";
-import {take} from "rxjs";
 import {DoctorService} from "../../services/doctor.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {Patient} from "../../../../models/user/patient/patient";
 import {createNewUserFormGroup, mapUserForm} from "../../../../../utils/form-utils";
-import {testCheckboxesSelector} from "../../../../models/tests/test-checkboxes-selector";
-import {getLastElementFromString} from "../../../../../utils/app-utils";
-import {TestModelFirebase} from "../../../../models/tests/test-model-firebase";
-import {TestSelectorChecked} from "../../../../models/tests/test-selector-checked";
 import {UserService} from "../../../shared/services/user.service";
+import {ConfigTests} from "../../../../models/tests/config-tests";
+import {TestModelFirebase} from "../../../../models/tests/test-model-firebase";
+import {take} from "rxjs";
+import {getLastElementFromString} from "../../../../../utils/app-utils";
+import {Patient} from "../../../../models/user/patient/patient";
 
 @Component({
   selector: 'app-add-new-patient',
@@ -21,11 +19,12 @@ import {UserService} from "../../../shared/services/user.service";
   styleUrls: ['./add-new-patient.component.scss']
 })
 export class AddNewPatientComponent implements OnInit {
-  hidePassword = true;
-  hidePasswordConfirmation = true;
+  @Input() tests!: ConfigTests[];
+  patientForm!: FormGroup;
+  patientTests!: ConfigTests[];
+  patientDataSummary!: Patient;
   newPatientFormGroup!: FormGroup;
-  selectedTests: TestDistribution[] = []
-  testCheckboxesSelector = testCheckboxesSelector;
+
   private userID!: string;
 
   constructor(private readonly _formBuilder: FormBuilder,
@@ -39,17 +38,53 @@ export class AddNewPatientComponent implements OnInit {
   ngOnInit(): void {
     this.userID = this.authService.decodedToken.userId;
     this.newPatientFormGroup = createNewUserFormGroup(this._formBuilder);
+    console.log("Component rodzica")
   }
 
-  getErrorMessage(formControlName: string): string {
-    return this.formService.mapErrorMessages(this.newPatientFormGroup, formControlName)
+  getPatientForm(patientForm: FormGroup) {
+    this.patientForm = patientForm;
+    // this.patientDataSummary: Patient = {
+    //   name: userRegisterForm.name,
+    //   surname: userRegisterForm.surname,
+    //   email: userRegisterForm.email,
+    //   patientTests: this.patientTests.map(test => ({...test,
+    //     numberTest: "Brak przeprowadzonych testów",
+    //     lastDate: "Brak przeprowadzonych testów",
+    //     startDate: "Brak przeprowadzonych testów"
+    //   })),
+    //   uid: ""
+    // }
+
+    this.patientDataSummary.name = patientForm.controls['name'].value;
+    this.patientDataSummary.surname = patientForm.controls['surname'].value;
+    this.patientDataSummary.email = patientForm.controls['email'].value;
+
+    console.log(this.patientDataSummary);
   }
 
-  isControlValid(formControlName: string): boolean {
-    return this.formService.isControlValid(this.newPatientFormGroup, formControlName)
+  getSelectedTest(selectedTests: ConfigTests[]) {
+    this.patientTests = selectedTests;
+
+    this.patientDataSummary = {
+      name: this.patientForm.controls['name'].value,
+      surname: this.patientForm.controls['surname'].value,
+      email: this.patientForm.controls['email'].value,
+      patientTests: this.patientTests.map(test => ({...test,
+        numberTest: "Brak przeprowadzonych testów",
+        lastDate: "Brak przeprowadzonych testów",
+        startDate: "Brak przeprowadzonych testów"
+      })),
+      uid: ""
+    }
+  }
+
+  onSaveFormClick() {
+    console.log(this.patientForm);
+    console.log(this.patientTests);
   }
 
   submitForm() {
+    console.log(this.patientTests)
     if (this.newPatientFormGroup.valid) {
       this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT),
         this.mapSelectedTestToRequest()).pipe(take(1)).subscribe(it => {
@@ -57,11 +92,6 @@ export class AddNewPatientComponent implements OnInit {
         this.closeDialog(newPatientUid);
       });
     }
-  }
-
-  changeCheckbox(test: TestSelectorChecked) {
-    test.checked = !test.checked
-    this.selectedTests = this.testCheckboxesSelector.filter(test => test.checked).map(element => element.test)
   }
 
   closeDialog(newPatientUid: string | undefined) {
@@ -72,7 +102,11 @@ export class AddNewPatientComponent implements OnInit {
         name: userRegisterForm.name,
         surname: userRegisterForm.surname,
         email: userRegisterForm.email,
-        patientTests: this.selectedTests,
+        patientTests: this.patientTests.map(test => ({...test,
+          numberTest: "Brak przeprowadzonych testów",
+          lastDate: "Brak przeprowadzonych testów",
+          startDate: "Brak przeprowadzonych testów"
+        })),
         uid: newPatientUid
       }
 
@@ -81,6 +115,7 @@ export class AddNewPatientComponent implements OnInit {
   }
 
   private mapSelectedTestToRequest(): TestModelFirebase[] {
-    return this.selectedTests.map(test => ({name: test.name, uid: test.uid}));
+    return this.patientTests.map(test => ({name: test.name, uid: test.uid}));
   }
+
 }

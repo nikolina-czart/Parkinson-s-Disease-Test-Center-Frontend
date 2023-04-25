@@ -1,0 +1,47 @@
+@import "src/assets/styles/styles";
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+button.mat-mdc-button {
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+.button-add-patient-position {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.example-section {
+  margin: 12px 0;
+}
+
+.checkbox-label-style {
+  display: flex;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.mat-mdc-icon-button {
+  color: $blue;
+}
+
+.icon-selected-test {
+  color: #2B255A;
+  margin-left: 10px;
+}

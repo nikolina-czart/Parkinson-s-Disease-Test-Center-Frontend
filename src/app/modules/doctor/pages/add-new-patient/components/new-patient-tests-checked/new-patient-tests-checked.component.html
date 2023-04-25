@@ -1,0 +1,21 @@
+<div>
+  <p class="info-form">Wybierz testy, do których pacjent będzie miał dostęp:</p>
+  <section class="example-section">
+          <span class="example-list-section">
+            <ul>
+              <li *ngFor="let test of testCheckboxesSelector">
+                <mat-checkbox (change)="changeCheckbox(test)">
+                  <div class="checkbox-label-style">
+                    <p>{{test.namePL}}</p>
+                    <mat-icon class="icon-selected-test">{{test.icon}}</mat-icon>
+                  </div>
+                </mat-checkbox>
+              </li>
+            </ul>
+          </span>
+  </section>
+  <div class="button-add-patient-position">
+    <button mat-button matStepperPrevious>Wstecz</button>
+    <button mat-raised-button matStepperNext (click)="onSelectedTestsChange()">Dalej</button>
+  </div>
+</div>

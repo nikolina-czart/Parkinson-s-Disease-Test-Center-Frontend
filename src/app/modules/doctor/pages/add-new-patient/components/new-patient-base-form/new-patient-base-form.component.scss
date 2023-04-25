@@ -1,0 +1,36 @@
+@import "src/assets/styles/styles";
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-add-patient-position {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.mat-mdc-raised-button {
+  padding-inline: 50px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: $font-size-l;
+  @include rubik-medium()
+}
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+.mat-mdc-icon-button {
+  color: $blue;
+}
+
+mat-error.mat-mdc-form-field-error {
+  font-size: 12px;
+}

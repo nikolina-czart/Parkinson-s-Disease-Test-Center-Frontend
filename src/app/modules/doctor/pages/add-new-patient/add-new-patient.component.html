@@ -1,66 +1,24 @@
 <div class="add-new-patient-dialog">
-  <h3 class="title-patient-form">Stwórz konto pacjenta</h3>
-  <p class="info-form">Podaj dane potrzene do rejestracji swojego pacjenta.</p>
-  <div class="container-form-group">
-
-    <form [formGroup]="newPatientFormGroup" (ngSubmit)="submitForm()">
-      <div class="form-fields">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email" required>
-          <mat-error *ngIf="!isControlValid('email')">{{getErrorMessage('email')}}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Imię</mat-label>
-          <input matInput placeholder="imię" formControlName="name" required>
-          <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Nazwisko</mat-label>
-          <input matInput placeholder="Nazwisko" formControlName="surname" required>
-          <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Hasło</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!isControlValid('password')">{{getErrorMessage('password')}}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Powtórz hasło</mat-label>
-          <input matInput [type]="hidePasswordConfirmation ? 'password' : 'text'"  formControlName="passwordConfirmation" required>
-          <button mat-icon-button matSuffix (click)="hidePasswordConfirmation = !hidePasswordConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordConfirmation">
-            <mat-icon>{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="!isControlValid('passwordConfirmation')">{{getErrorMessage('passwordConfirmation')}}</mat-error>
-        </mat-form-field>
-      </div>
-
-      <p class="info-form">Wybierz testy, do których pacjent będzie miał dostęp:</p>
-      <section class="example-section">
-        <span class="example-list-section">
-          <ul>
-            <li *ngFor="let test of testCheckboxesSelector">
-              <mat-checkbox (change)="changeCheckbox(test)">
-                {{test.test.name_pl}}
-              </mat-checkbox>
-            </li>
-          </ul>
-        </span>
-      </section>
-
-      <div class="button-position">
-        <button mat-raised-button type="submit">Zarejestruj się</button>
-      </div>
-    </form>
+  <div class="stepper-title">
+    <h3 class="title-patient-form">Stwórz konto pacjenta</h3>
+    <p class="info-form">Podaj dane potrzene do rejestracji swojego pacjenta.</p>
   </div>
-
+  <div class="container-form-group">
+    <mat-stepper linear #stepper >
+      <mat-step >
+        <ng-template matStepLabel>Uzupełnij dane pacjenta</ng-template>
+        <app-new-patient-base-form [patientFormGroup]="newPatientFormGroup"  (patientFormChange)="getPatientForm($event)" />
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Przypisz testy</ng-template>
+        <app-new-patient-tests-checked [tests]="tests" (selectedTestsChange)="getSelectedTest($event)" />
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Podsumowanie</ng-template>
+        <app-new-patient-summary (saveFormClick)="onSaveFormClick()" [patientDataSummary]="patientDataSummary"/>
+      </mat-step>
+    </mat-stepper>
+  </div>
 
 </div>
 
