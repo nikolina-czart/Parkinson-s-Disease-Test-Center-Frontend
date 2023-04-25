@@ -5,7 +5,7 @@
     <p class="search-info">Wyszukaj pacjenta</p>
     <div class="row">
       <div class="search-patient">
-        <input placeholder="Wprowadź imię lub nazwisko pacjenta" class="search-input">
+        <input placeholder="Wprowadź imię, nazwisko lub email pacjenta" class="search-input" (keyup)="searchFilter($event)" #input>
         <mat-icon class="search-icon">search</mat-icon>
       </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="table" *ngIf="showTable">
-      <mat-table class="table-details" [dataSource]="patients" class="mat-elevation-z8">
+      <mat-table class="table-details" [dataSource]="patientsDataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="fullName">
           <mat-header-cell *matHeaderCellDef> Imię i nazwisko </mat-header-cell>
@@ -32,7 +32,7 @@
           <mat-header-cell *matHeaderCellDef> Testy </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div *ngFor="let test of element.patientTests">
-              <mat-icon [matTooltip]="test.name_pl" [matTooltipPosition]="'above'">{{test.icon}}</mat-icon>
+              <mat-icon [matTooltip]="test.namePL" [matTooltipPosition]="'above'">{{test.icon}}</mat-icon>
             </div>
           </mat-cell>
         </ng-container>
