@@ -5,7 +5,7 @@ import {DoctorService} from "../../services/doctor.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Result} from "../../../../models/results/result";
 import {take} from "rxjs";
-import {TestType} from "../../../../models/tests/test-info";
+// import {TestType} from "../../../../models/tests/test-info";
 
 @Component({
   selector: 'app-patient-results',
@@ -71,11 +71,11 @@ export class PatientResultsComponent implements OnInit{
     this.selectedResult = resulTest;
     this.isSelectedResult = true;
     this.isSend = true;
-    if(this.selectedTest === TestType.FINGER_TAPPING) {
-      this.isFingerTapping = true;
-    }else {
-      this.isFingerTapping = false;
-    }
+    // if(this.selectedTest === TestType.FINGER_TAPPING) {
+    //   this.isFingerTapping = true;
+    // }else {
+    //   this.isFingerTapping = false;
+    // }
     this.chartX();
   }
 

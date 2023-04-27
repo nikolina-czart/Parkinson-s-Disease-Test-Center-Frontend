@@ -10,7 +10,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {PatientResultsComponent} from './pages/patient-results/patient-results.component';
 import {PatientDetailsComponent} from './pages/patient-details/patient-details.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatDividerModule} from "@angular/material/divider";
 import {RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -25,6 +25,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {PlotlySharedModule} from "angular-plotly.js";
+import { PatientInformationComponent } from './pages/patient-information/patient-information.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import { NewPatientBaseFormComponent } from './pages/add-new-patient/components/new-patient-base-form/new-patient-base-form.component';
+import { NewPatientTestsCheckedComponent } from './pages/add-new-patient/components/new-patient-tests-checked/new-patient-tests-checked.component';
+import { NewPatientSummaryComponent } from './pages/add-new-patient/components/new-patient-summary/new-patient-summary.component';
 
 @NgModule({
   declarations: [
@@ -33,31 +38,36 @@ import {PlotlySharedModule} from "angular-plotly.js";
     PatientDetailsComponent,
     AddNewPatientComponent,
     PatientAnalysisComponent,
-    PatientEditComponent
+    PatientEditComponent,
+    PatientInformationComponent,
+    NewPatientBaseFormComponent,
+    NewPatientTestsCheckedComponent,
+    NewPatientSummaryComponent
   ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatDividerModule,
-    RouterOutlet,
-    MatToolbarModule,
-    MatDialogModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    PlotlySharedModule
-  ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatDividerModule,
+        RouterOutlet,
+        MatToolbarModule,
+        MatDialogModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        PlotlySharedModule,
+        MatStepperModule
+    ],
   exports: [
   ]
 })

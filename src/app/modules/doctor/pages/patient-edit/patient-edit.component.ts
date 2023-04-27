@@ -3,19 +3,19 @@ import {Patient} from "../../../../models/user/patient/patient";
 import {Router} from "@angular/router";
 import {DoctorService} from "../../services/doctor.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TestDistribution} from "../../../../models/tests/test-distribution";
+// import {TestDistribution} from "../../../../models/tests/test-distribution";
 import {take} from "rxjs";
 import {FormService} from "../../../../core/services/form.service";
 import {PatientService} from "../../services/patient.service";
 import {MatDialog} from "@angular/material/dialog";
 import {RemovePatientComponent} from "../remove-patient/remove-patient.component";
-import {UserAddForm} from "../../../../models/user/shared/user-add-form";
+import {UserRegisterForm} from "../../../../models/user/shared/user-register-form";
 import {Role} from "../../../../models/user/shared/user-role";
 import {AuthenticationService} from "../../../../core/services/authentication.service";
 import {createSelectedPatientFormGroup, mapUserForm} from "../../../../../utils/form-utils";
-import {testCheckboxesSelector} from "../../../../models/tests/test-checkboxes-selector";
-import {TestModelFirebase} from "../../../../models/tests/test-model-firebase";
-import {TestSelectorChecked} from "../../../../models/tests/test-selector-checked";
+// import {testCheckboxesSelector} from "../../../../models/tests/test-checkboxes-selector";
+// import {TestModelFirebase} from "../../../../models/tests/test-model-firebase";
+// import {TestSelectorChecked} from "../../../../models/tests/test-selector-checked";
 
 @Component({
   selector: 'app-patient-edit',
@@ -25,8 +25,8 @@ import {TestSelectorChecked} from "../../../../models/tests/test-selector-checke
 export class PatientEditComponent implements OnInit {
   selectedPatient!: Patient;
   selectedPatientFormGroup!: FormGroup;
-  selectedTests: TestDistribution[] = []
-  testCheckboxesSelector = testCheckboxesSelector;
+  // selectedTests: TestDistribution[] = []
+  // testCheckboxesSelector = testCheckboxesSelector;
   isReadOnlyMode: boolean = true;
   private doctorID!: string;
 
@@ -45,21 +45,21 @@ export class PatientEditComponent implements OnInit {
     this.selectedPatientFormGroup = createSelectedPatientFormGroup(this._formBuilder);
     this.patientSetDefaultValue();
 
-    this.selectedTests = this.selectedPatient.patientTests;
-    this.selectedTests.forEach(test => {
-      this.testCheckboxesSelector.map(it => {
-        if (test.uid === it.test.uid) {
-          this.changeCheckbox({
-            test: it.test,
-            checked: true
-          })
-        }
-      })
-    })
-
-    console.log(this.selectedPatient)
-    console.log(this.selectedTests)
-    console.log(this.testCheckboxesSelector)
+    // this.selectedTests = this.selectedPatient.patientTests;
+    // this.selectedTests.forEach(test => {
+    //   this.testCheckboxesSelector.map(it => {
+    //     if (test.uid === it.test.uid) {
+    //       this.changeCheckbox({
+    //         test: it.test,
+    //         checked: true
+    //       })
+    //     }
+    //   })
+    // })
+    //
+    // console.log(this.selectedPatient)
+    // console.log(this.selectedTests)
+    // console.log(this.testCheckboxesSelector)
   }
 
   getErrorMessage(formControlName: string): string {
@@ -70,13 +70,13 @@ export class PatientEditComponent implements OnInit {
     return this.formService.isControlValid(this.selectedPatientFormGroup, formControlName)
   }
 
-  changeCheckbox(test: TestSelectorChecked) {
-    console.log("test: ", test)
-    console.log(this.testCheckboxesSelector)
-
-    test.checked = !test.checked
-    this.selectedTests = this.testCheckboxesSelector.filter(test => test.checked).map(element => element.test)
-  }
+  // changeCheckbox(test: TestSelectorChecked) {
+  //   console.log("test: ", test)
+  //   console.log(this.testCheckboxesSelector)
+  //
+  //   test.checked = !test.checked
+  //   this.selectedTests = this.testCheckboxesSelector.filter(test => test.checked).map(element => element.test)
+  // }
 
   editPatientData() {
     this.isReadOnlyMode = false;

@@ -1,6 +1,6 @@
 import {Side} from "./side";
 import {MedicineSupply} from "./medicine-supply";
-import {TestType} from "../tests/test-info";
+// import {TestType} from "../tests/test-info";
 
 export interface AggregatedData{
   testLabel: string;

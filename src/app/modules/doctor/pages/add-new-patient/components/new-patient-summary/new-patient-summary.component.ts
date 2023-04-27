@@ -10,10 +10,6 @@ export class NewPatientSummaryComponent {
   @Input() patientDataSummary!: Patient;
   @Output() saveFormClick = new EventEmitter();
 
-  constructor() {
-    console.log("Dziecko: summary")
-  }
-
   submitForm() {
     this.saveFormClick.emit()
   }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {UserAddForm} from "../../../models/user/shared/user-add-form";
+import {UserRegisterForm} from "../../../models/user/shared/user-register-form";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class PatientService {
     return this.httpClient.delete<string>(`/api/user/${uid}`);
   }
 
-  updatePatientData(editPatientForm: UserAddForm, uid: string): Observable<string> {
+  updatePatientData(editPatientForm: UserRegisterForm, uid: string): Observable<string> {
     return this.httpClient.put<string>(`/api/user/${uid}`, editPatientForm);
   }
 }

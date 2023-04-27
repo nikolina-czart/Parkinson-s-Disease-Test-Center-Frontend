@@ -1,24 +1,5 @@
-import {FingerTapping, Gyroscope, Static, ToeTapping, Voice} from "./test-distribution";
+import {ConfigTests} from "./config-tests";
 
-export const testCheckboxesSelector = [
-  {
-    test: Gyroscope,
-    checked: false
-  },
-  {
-    test: FingerTapping,
-    checked: false
-  },
-  {
-    test: Static,
-    checked: false
-  },
-  {
-    test: ToeTapping,
-    checked: false
-  },
-  {
-    test: Voice,
-    checked: false
-  },
-];
+export interface testCheckboxesSelector extends ConfigTests {
+  checked: boolean
+}

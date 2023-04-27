@@ -1,6 +1,6 @@
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {passwordMatchValidator} from "../app/core/validators/password-match.validator";
-import {UserAddForm} from "../app/models/user/shared/user-add-form";
+import {UserRegisterForm} from "../app/models/user/shared/user-register-form";
 import {Role} from "../app/models/user/shared/user-role";
 
 export function createNewUserFormGroup(formBuilder: FormBuilder): FormGroup {
@@ -27,7 +27,7 @@ export function createSelectedPatientFormGroup(formBuilder: FormBuilder): FormGr
   });
 }
 
-export function mapUserForm(formGroup: FormGroup, userUid: string, doctorUid: string, role: Role): UserAddForm {
+export function mapUserForm(formGroup: FormGroup, userUid: string, doctorUid: string, role: Role): UserRegisterForm {
   return {
     email: formGroup.get('email')?.value || '',
     name: formGroup.get('name')?.value || '',

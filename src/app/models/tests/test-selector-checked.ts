@@ -1,6 +1,6 @@
-import {TestDistribution} from "./test-distribution";
+import {ConfigTests} from "./config-tests";
 
 export interface TestSelectorChecked {
-  test: TestDistribution;
+  test: ConfigTests;
   checked: boolean;
 }

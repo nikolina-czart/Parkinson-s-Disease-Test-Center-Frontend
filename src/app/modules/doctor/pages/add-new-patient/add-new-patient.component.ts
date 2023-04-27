@@ -38,28 +38,10 @@ export class AddNewPatientComponent implements OnInit {
   ngOnInit(): void {
     this.userID = this.authService.decodedToken.userId;
     this.newPatientFormGroup = createNewUserFormGroup(this._formBuilder);
-    console.log("Component rodzica")
   }
 
   getPatientForm(patientForm: FormGroup) {
     this.patientForm = patientForm;
-    // this.patientDataSummary: Patient = {
-    //   name: userRegisterForm.name,
-    //   surname: userRegisterForm.surname,
-    //   email: userRegisterForm.email,
-    //   patientTests: this.patientTests.map(test => ({...test,
-    //     numberTest: "Brak przeprowadzonych testów",
-    //     lastDate: "Brak przeprowadzonych testów",
-    //     startDate: "Brak przeprowadzonych testów"
-    //   })),
-    //   uid: ""
-    // }
-
-    this.patientDataSummary.name = patientForm.controls['name'].value;
-    this.patientDataSummary.surname = patientForm.controls['surname'].value;
-    this.patientDataSummary.email = patientForm.controls['email'].value;
-
-    console.log(this.patientDataSummary);
   }
 
   getSelectedTest(selectedTests: ConfigTests[]) {
@@ -79,12 +61,6 @@ export class AddNewPatientComponent implements OnInit {
   }
 
   onSaveFormClick() {
-    console.log(this.patientForm);
-    console.log(this.patientTests);
-  }
-
-  submitForm() {
-    console.log(this.patientTests)
     if (this.newPatientFormGroup.valid) {
       this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT),
         this.mapSelectedTestToRequest()).pipe(take(1)).subscribe(it => {

@@ -14,10 +14,6 @@ export class NewPatientTestsCheckedComponent implements OnInit {
   testCheckboxesSelector!: testCheckboxesSelector[];
   selectedTests: ConfigTests[] = []
 
-  constructor(private readonly _formBuilder: FormBuilder) {
-    console.log("Dziecko: tests")
-  }
-
   ngOnInit(): void {
     this.testCheckboxesSelector = this.tests.map(test => ({...test, checked: false}))
   }

@@ -19,15 +19,15 @@
 
       <p class="info-form">Testy pacjenta:</p>
       <section class="example-section">
-        <span class="example-list-section">
-          <ul>
-            <li *ngFor="let test of testCheckboxesSelector">
-              <mat-checkbox (change)="changeCheckbox(test)"  [disabled]="isReadOnlyMode" [checked]="test.checked">
-                {{test.test.name_pl}}
-              </mat-checkbox>
-            </li>
-          </ul>
-        </span>
+<!--        <span class="example-list-section">-->
+<!--          <ul>-->
+<!--            <li *ngFor="let test of testCheckboxesSelector">-->
+<!--              <mat-checkbox (change)="changeCheckbox(test)"  [disabled]="isReadOnlyMode" [checked]="test.checked">-->
+<!--                {{test.test.name_pl}}-->
+<!--              </mat-checkbox>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </span>-->
       </section>
 
       <div class="button-position" *ngIf="isReadOnlyMode">

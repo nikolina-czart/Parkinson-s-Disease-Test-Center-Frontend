@@ -16,7 +16,6 @@ export class NewPatientBaseFormComponent implements OnInit {
 
   constructor(private readonly _formBuilder: FormBuilder,
               private readonly formService: FormService) {
-    console.log("Dziecko: base-form")
   }
 
   ngOnInit(): void {

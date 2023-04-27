@@ -105,7 +105,7 @@ export class UserService {
   }
 
   private addTestToPatient(selectedTests: TestModelFirebase[], uid?: string): Observable<string> {
-    return this.httpClient.post(`/api/tests/save/${uid}`, selectedTests, {responseType: 'text'})
+    return this.httpClient.post(`/api/patient-tests/save/${uid}`, selectedTests, {responseType: 'text'})
   }
 
   private createSnackBar(message: string) {

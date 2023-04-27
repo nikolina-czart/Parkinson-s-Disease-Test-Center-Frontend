@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {DoctorService} from "../../services/doctor.service";
 import {take} from "rxjs";
 import {AggregatedData} from "../../../../models/analysis/analysis-data";
-import {TestType} from "../../../../models/tests/test-info";
+// import {TestType} from "../../../../models/tests/test-info";
 
 @Component({
   selector: 'app-patient-analysis',

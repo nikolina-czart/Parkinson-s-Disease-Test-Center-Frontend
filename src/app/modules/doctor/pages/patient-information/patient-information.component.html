@@ -1,0 +1,66 @@
+<div class="patient-info-box">
+  <h3 class="title-patient">Informacje o pacjencie</h3>
+
+  <div class="patient-information-section">
+    <h2 class="subtitle-patient">Podstawowe informacje</h2>
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Imię:</p>
+      <p class="patient-information-element-value">{{selectedPatient.name}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Nazwisko:</p>
+      <p class="patient-information-element-value">{{selectedPatient.surname}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Email:</p>
+      <p class="patient-information-element-value">{{selectedPatient.email}}</p>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="patient-information-section">
+    <h2 class="subtitle-patient">Informacje o badaniach</h2>
+    <div class="table" *ngIf="showTable">
+      <mat-table class="table-details" [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="testName">
+          <mat-header-cell *matHeaderCellDef> Nazwa testu </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name_pl}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="testIcon">
+          <mat-header-cell *matHeaderCellDef> Ikona testu </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <mat-icon [matTooltip]="element.name_pl" [matTooltipPosition]="'above'">{{element.icon}}</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <mat-header-cell *matHeaderCellDef> Data rozpoczęcia badania </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name_pl}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastDate">
+          <mat-header-cell *matHeaderCellDef> Data ostatniego badania </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name_pl}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="numberTest">
+          <mat-header-cell *matHeaderCellDef> Ilość wykonanych testów </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name_pl}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+    <div class="" *ngIf="!showTable">
+      <p>Pacjent nie ma przypisanych testów</p>
+    </div>
+  </div>
+</div>
+
+
