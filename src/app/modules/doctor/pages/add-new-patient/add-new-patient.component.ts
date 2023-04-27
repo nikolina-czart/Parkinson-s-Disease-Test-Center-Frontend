@@ -56,21 +56,22 @@ export class AddNewPatientComponent implements OnInit {
         lastDate: "Brak przeprowadzonych testów",
         startDate: "Brak przeprowadzonych testów"
       })),
-      uid: ""
+      uid: "",
+      controlGroup: false
     }
   }
 
-  onSaveFormClick() {
+  onSaveFormClick(controlGroup: boolean) {
     if (this.newPatientFormGroup.valid) {
       this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT),
         this.mapSelectedTestToRequest()).pipe(take(1)).subscribe(it => {
         const newPatientUid = getLastElementFromString(it);
-        this.closeDialog(newPatientUid);
+        this.closeDialog(newPatientUid, controlGroup);
       });
     }
   }
 
-  closeDialog(newPatientUid: string | undefined) {
+  closeDialog(newPatientUid: string | undefined, controlGroup: boolean) {
     const userRegisterForm = mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT);
 
     if (!!newPatientUid || newPatientUid?.includes("auth")) {
@@ -83,7 +84,8 @@ export class AddNewPatientComponent implements OnInit {
           lastDate: "Brak przeprowadzonych testów",
           startDate: "Brak przeprowadzonych testów"
         })),
-        uid: newPatientUid
+        uid: newPatientUid,
+        controlGroup: controlGroup
       }
 
       this.dialogRef.close(newPatient);

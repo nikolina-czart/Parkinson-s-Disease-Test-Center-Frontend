@@ -6,6 +6,7 @@ export interface Patient {
   uid: string;
   name: string;
   surname: string;
-  email: string
-  patientTests: TestInformation[]
+  email: string;
+  patientTests: TestInformation[];
+  controlGroup: boolean;
 }

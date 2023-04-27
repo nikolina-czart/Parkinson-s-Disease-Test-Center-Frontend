@@ -8,9 +8,10 @@ import {Patient} from "../../../../../../models/user/patient/patient";
 })
 export class NewPatientSummaryComponent {
   @Input() patientDataSummary!: Patient;
-  @Output() saveFormClick = new EventEmitter();
+  @Output() saveFormClick = new EventEmitter<boolean>;
+  controlGroup = false;
 
   submitForm() {
-    this.saveFormClick.emit()
+    this.saveFormClick.emit(this.controlGroup);
   }
 }

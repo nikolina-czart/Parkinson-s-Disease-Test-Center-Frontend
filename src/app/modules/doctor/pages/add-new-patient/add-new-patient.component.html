@@ -5,7 +5,8 @@
   </div>
   <div class="container-form-group">
     <mat-stepper linear #stepper >
-      <mat-step [stepControl]="newPatientFormGroup">
+<!--      <mat-step [stepControl]="newPatientFormGroup">-->
+      <mat-step>
         <ng-template matStepLabel>Uzupełnij dane pacjenta</ng-template>
         <app-new-patient-base-form [patientFormGroup]="newPatientFormGroup"  (patientFormChange)="getPatientForm($event)" />
       </mat-step>
@@ -15,7 +16,7 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Podsumowanie</ng-template>
-        <app-new-patient-summary (saveFormClick)="onSaveFormClick()" [patientDataSummary]="patientDataSummary"/>
+        <app-new-patient-summary (saveFormClick)="onSaveFormClick($event)" [patientDataSummary]="patientDataSummary"/>
       </mat-step>
     </mat-stepper>
   </div>

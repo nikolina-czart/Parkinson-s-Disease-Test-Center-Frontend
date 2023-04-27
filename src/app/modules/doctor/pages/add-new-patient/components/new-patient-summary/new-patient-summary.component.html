@@ -24,6 +24,11 @@
       <mat-icon class="icon-selected-test">{{test.icon}}</mat-icon>
     </div>
   </div>
+  <section class="control-group-section">
+    <p class="control-group">Zaznacz, jeśli pacjent należy do grupy kontrolnej:</p>
+    <mat-checkbox [(ngModel)]="controlGroup">Grupa kontrolna</mat-checkbox>
+  </section>
+
   <div class="button-add-patient-position">
     <button mat-button matStepperPrevious>Wstecz</button>
     <button mat-raised-button (click)="submitForm()">Zarejestruj</button>
