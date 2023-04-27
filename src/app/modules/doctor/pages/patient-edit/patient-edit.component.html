@@ -1,0 +1,45 @@
+<div class="patient-info-box">
+  <h3 class="title-patient-form">Informacje o pacjencie</h3>
+  <div class="container-form-group">
+    <form [formGroup]="selectedPatientFormGroup" (ngSubmit)="updatePatient()">
+      <div class="form-fields">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="imię" formControlName="name" required>
+          <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Nazwisko" formControlName="surname" required>
+          <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <p class="info-form">Testy pacjenta:</p>
+      <section class="example-section">
+<!--        <span class="example-list-section">-->
+<!--          <ul>-->
+<!--            <li *ngFor="let test of testCheckboxesSelector">-->
+<!--              <mat-checkbox (change)="changeCheckbox(test)"  [disabled]="isReadOnlyMode" [checked]="test.checked">-->
+<!--                {{test.test.name_pl}}-->
+<!--              </mat-checkbox>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </span>-->
+      </section>
+
+      <div class="button-position" *ngIf="isReadOnlyMode">
+        <button mat-raised-button type="button" color="primary" class="edit-button" (click)="editPatientData()" >Edytuj dane</button>
+        <button mat-raised-button type="button" color="warn" class="edit-button" (click)="deletePatient()" >Usuń użytkownika</button>
+      </div>
+      <div class="button-position" *ngIf="!isReadOnlyMode">
+        <button mat-raised-button type="submit" color="primary" class="edit-button" (click)="updatePatient()" >Zapisz dane</button>
+        <button mat-raised-button type="button" color="warn" class="edit-button" (click)="cancelEditMode()"  >Anuluj</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

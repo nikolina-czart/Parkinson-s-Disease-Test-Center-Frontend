@@ -1,0 +1,92 @@
+<div class="result-container">
+  <div class="filter-container">
+    <p class="results-info">Filtry testu:</p>
+    <div class="filter-row">
+      <div class="mat-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Rodzaj testu</mat-label>
+          <mat-select [(ngModel)]="selectedTest" name="test">
+<!--            <mat-option *ngFor="let test of selectedPatient.patientTests" [value]="test.uid">-->
+<!--              {{test.name_pl}}-->
+<!--            </mat-option>-->
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Zakres czasu</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="end" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button (click)="getTestsResults()"
+              [disabled]="!(!!selectedTest && !!range.controls.start.value && !!range.controls.end.value)">
+        Filtruj
+      </button>
+
+<!--      <button mat-raised-button (click)="resetFilters()"  *ngIf="isSend">-->
+<!--        Resetuj filtry-->
+<!--      </button>-->
+    </div>
+
+    <div *ngIf="!showTable">
+      <p class="results-info">Dla wybranego zakresu pacjent nie ma wyników</p>
+    </div>
+
+    <div class="show-results" *ngIf="showTable">
+      <p class="results-info">Wyniki testów:</p>
+      <div class="table">
+        <mat-table class="table-details" [dataSource]="testResults" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="testDate">
+            <mat-header-cell *matHeaderCellDef> Data wykonania testu </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.testDate}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="side">
+            <mat-header-cell *matHeaderCellDef> Strona </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.side}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="medicineSupply">
+            <mat-header-cell *matHeaderCellDef> Czas od przyjęcia leku [h] </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.medicineSupply}}</mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            (click)="showTestDetails(row)"
+            *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <div class="chart-show-group" *ngIf="isSelectedResult">
+        <div class="button-group" *ngIf="isFingerTapping">
+          <button mat-button (click)="chart3D()">Wykres 3D</button>
+          <button mat-button (click)="chartX()">Wykres X</button>
+          <button mat-button (click)="chartY()">Wykres Y</button>
+          <button mat-button (click)="chartZ()">Wykres Z</button>
+          <button mat-button (click)="chartUpDown()">Wykres UpDown</button>
+        </div>
+        <div class="button-group"  *ngIf="!isFingerTapping">
+          <button mat-button (click)="chart3D()">Wykres 3D</button>
+          <button mat-button (click)="chartX()">Wykres X</button>
+          <button mat-button (click)="chartY()">Wykres Y</button>
+          <button mat-button (click)="chartZ()">Wykres Z</button>
+        </div>
+      </div>
+
+      <div class="chart-show" *ngIf="isSelectedResult">
+        <plotly-plot [data]="chart.data" [layout]="chart.layout"></plotly-plot>
+      </div>
+
+
+
+    </div>
+
+</div>
+</div>

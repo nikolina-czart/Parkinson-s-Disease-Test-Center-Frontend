@@ -1,0 +1,14 @@
+.container{
+  /*display: flex;*/
+  /*justify-content: center;*/
+  width: 100%;
+}
+
+.spinner {
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

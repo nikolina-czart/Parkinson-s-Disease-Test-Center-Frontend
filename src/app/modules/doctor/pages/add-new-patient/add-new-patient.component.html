@@ -1,0 +1,24 @@
+<div class="add-new-patient-dialog">
+  <div class="stepper-title">
+    <h3 class="title-patient-form">Stwórz konto pacjenta</h3>
+    <p class="info-form">Podaj dane potrzene do rejestracji swojego pacjenta.</p>
+  </div>
+  <div class="container-form-group">
+    <mat-stepper linear #stepper >
+      <mat-step [stepControl]="newPatientFormGroup">
+        <ng-template matStepLabel>Uzupełnij dane pacjenta</ng-template>
+        <app-new-patient-base-form [patientFormGroup]="newPatientFormGroup"  (patientFormChange)="getPatientForm($event)" />
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Przypisz testy</ng-template>
+        <app-new-patient-tests-checked [tests]="tests" (selectedTestsChange)="getSelectedTest($event)" />
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Podsumowanie</ng-template>
+        <app-new-patient-summary (saveFormClick)="onSaveFormClick()" [patientDataSummary]="patientDataSummary"/>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+
+

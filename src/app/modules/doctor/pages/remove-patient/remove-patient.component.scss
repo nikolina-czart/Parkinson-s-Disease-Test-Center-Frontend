@@ -1,0 +1,42 @@
+@import "src/assets/styles/styles";
+
+.remove-patient-dialog {
+  width: 600px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding-l $padding-xl;
+  justify-content: space-evenly;
+}
+
+.title-patient-form{
+  font-size: $font-size-xl;
+  color: $blue;
+  margin: 0;
+  @include roboto-bold
+}
+
+
+.button-position {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-l;
+  @include rubik-medium()
+}
+
+button.mat-mdc-raised-button.mat-warn {
+  background: #f44336 !important;
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-l;
+  @include rubik-medium()
+}

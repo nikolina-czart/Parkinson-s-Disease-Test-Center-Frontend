@@ -1,0 +1,17 @@
+@import "src/assets/styles/styles";
+
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: $font-size-l;
+  margin-left: $margin-m;
+  margin-top: $margin-l;
+
+  @include rubik-medium()
+}
+
+.mat-mdc-icon-button {
+  color: $blue;
+}

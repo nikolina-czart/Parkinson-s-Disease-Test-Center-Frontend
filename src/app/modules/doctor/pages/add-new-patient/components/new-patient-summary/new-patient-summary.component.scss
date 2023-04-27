@@ -1,0 +1,76 @@
+@import "src/assets/styles/styles";
+
+button.mat-mdc-raised-button {
+  width: 250px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+button.mat-mdc-button {
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: $font-size-m;
+
+  @include rubik-regular()
+}
+
+mat-stepper.mat-step-icon-state-edit {
+  background-color: $blue;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+.mat-mdc-icon-button {
+  color: $blue;
+}
+
+.button-add-patient-position {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.patient-information-section {
+  margin: 20px 0 30px 0;
+}
+
+.patient-information-element {
+  display: flex;
+}
+
+.patient-information-element-title {
+  margin-right: 5px;
+  font-weight: lighter;
+}
+
+.patient-information-element-value {
+  margin-right: 5px;
+  color: $blue;
+}
+
+.selected-test-for-patient {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  margin-top: 5px;
+  &:last-of-type{
+    margin-bottom: 20px;
+  }
+}
+
+.icon-selected-test {
+  color: #2B255A;
+  margin-left: 10px;
+}
+
+::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+::ng-deep::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
