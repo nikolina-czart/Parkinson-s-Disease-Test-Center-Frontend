@@ -36,7 +36,7 @@ export class RegisterPageComponent implements OnInit{
 
   submitForm() {
     if(this.registerFormGroup.valid){
-      this.userService.register(mapUserForm(this.registerFormGroup, "", "", Role.DOCTOR))
+      this.userService.register(mapUserForm(this.registerFormGroup, "", "", Role.DOCTOR, false))
         .pipe(take(1)).subscribe(console.log)
     }
   }

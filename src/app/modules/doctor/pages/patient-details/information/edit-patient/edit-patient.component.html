@@ -1,0 +1,40 @@
+<div class="info-box">
+  <h3 class="title">Informacje o pacjencie</h3>
+  <div class="container-form-group">
+    <form [formGroup]="selectedPatientFormGroup" (ngSubmit)="updatePatient()">
+      <div class="form-fields">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="imię" formControlName="name" required>
+          <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Nazwisko" formControlName="surname" required>
+          <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <p class="info-form">Testy pacjenta:</p>
+      <section class="example-section">
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let test of testCheckboxesSelector">
+              <mat-checkbox (change)="changeCheckbox(test)" [checked]="test.checked">
+                {{test.namePL}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+
+      <div class="button-position">
+        <button mat-raised-button type="submit" color="primary" class="edit-button" >Zapisz dane</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

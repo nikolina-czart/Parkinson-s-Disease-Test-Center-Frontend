@@ -8,4 +8,5 @@ export interface UserRegisterForm {
   role: Role;
   uid: string;
   doctorID: string;
+  controlGroup: boolean;
 }

@@ -1,0 +1,49 @@
+<div class="information-section">
+  <h2 class="subtitle">Informacje o badaniach</h2>
+  <div class="table" *ngIf="showTable">
+    <mat-table class="table-details" [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="testName">
+        <mat-header-cell *matHeaderCellDef> Nazwa testu </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.namePL}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="testIcon">
+        <mat-header-cell *matHeaderCellDef> Ikona testu </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-icon [matTooltip]="element.namePL" [matTooltipPosition]="'above'">{{element.icon}}</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef> Data rozpoczęcia badania </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.startDate; else numberTest">{{element.startDate}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastDate">
+        <mat-header-cell *matHeaderCellDef> Data ostatniego badania </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.lastDate; else numberTest">{{element.lastDate}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="numberTest">
+        <mat-header-cell *matHeaderCellDef> Ilość wykonanych testów </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="element.numberTest; else numberTest">{{element.numberTest}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="" *ngIf="!showTable">
+    <p>Pacjent nie ma przypisanych testów</p>
+  </div>
+</div>
+
+<ng-template #numberTest>Nie rozpoczęto badań</ng-template>

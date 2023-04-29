@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {PatientEditComponent} from "../patient-edit/patient-edit.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-remove-patient',
@@ -9,7 +9,7 @@ import {PatientEditComponent} from "../patient-edit/patient-edit.component";
 })
 export class RemovePatientComponent {
 
-  constructor(private dialogRef: MatDialogRef<PatientEditComponent>) {
+  constructor(private dialogRef: MatDialogRef<RemovePatientComponent>) {
   }
 
   removePatient() {
@@ -18,6 +18,6 @@ export class RemovePatientComponent {
 
   cancelDialog() {
     this.dialogRef.close(false);
-
   }
+
 }

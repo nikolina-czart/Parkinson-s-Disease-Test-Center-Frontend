@@ -1,0 +1,17 @@
+<div class="info-box">
+  <h3 class="title">Informacje o pacjencie</h3>
+    <app-base-information [patient]="selectedPatient"></app-base-information>
+    <app-tests-information [dataSource]="dataSource" [showTable]="showTable"></app-tests-information>
+
+    <div class="button-position" *ngIf="isNotEditMode">
+      <button mat-raised-button type="button" color="primary" class="edit-button" (click)="editPatientData()" >Edytuj dane</button>
+      <button mat-raised-button type="button" color="warn" class="edit-button" (click)="deletePatient()" >Usuń użytkownika</button>
+    </div>
+<!--    &lt;!&ndash;    <div class="button-position" *ngIf="!isReadOnlyMode">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <button mat-raised-button type="submit" color="primary" class="edit-button" (click)="updatePatient()" >Zapisz dane</button>&ndash;&gt;-->
+<!--    &lt;!&ndash;      <button mat-raised-button type="button" color="warn" class="edit-button" (click)="cancelEditMode()"  >Anuluj</button>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  </div>-->
+</div>
+
+

@@ -8,7 +8,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {PatientResultsComponent} from './pages/patient-results/patient-results.component';
-import {PatientDetailsComponent} from './pages/patient-details/patient-details.component';
+import {PatientDetailsComponent} from './pages/patient-details_remove/patient-details.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatDividerModule} from "@angular/material/divider";
@@ -20,16 +20,19 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { PatientAnalysisComponent } from './pages/patient-analysis/patient-analysis.component';
-import {PatientEditComponent} from "./pages/patient-edit/patient-edit.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {PlotlySharedModule} from "angular-plotly.js";
-import { PatientInformationComponent } from './pages/patient-information/patient-information.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import { NewPatientBaseFormComponent } from './pages/add-new-patient/components/new-patient-base-form/new-patient-base-form.component';
 import { NewPatientTestsCheckedComponent } from './pages/add-new-patient/components/new-patient-tests-checked/new-patient-tests-checked.component';
 import { NewPatientSummaryComponent } from './pages/add-new-patient/components/new-patient-summary/new-patient-summary.component';
+import { InformationComponent } from './pages/patient-details/information/information.component';
+import { BaseInformationComponent } from './pages/patient-details/information/components/base-information/base-information.component';
+import { TestsInformationComponent } from './pages/patient-details/information/components/tests-information/tests-information.component';
+import { EditPatientComponent } from './pages/patient-details/information/edit-patient/edit-patient.component';
+import { RemovePatientComponent } from './pages/patient-details/information/remove-patient/remove-patient.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +41,14 @@ import { NewPatientSummaryComponent } from './pages/add-new-patient/components/n
     PatientDetailsComponent,
     AddNewPatientComponent,
     PatientAnalysisComponent,
-    PatientEditComponent,
-    PatientInformationComponent,
     NewPatientBaseFormComponent,
     NewPatientTestsCheckedComponent,
-    NewPatientSummaryComponent
+    NewPatientSummaryComponent,
+    InformationComponent,
+    BaseInformationComponent,
+    TestsInformationComponent,
+    EditPatientComponent,
+    RemovePatientComponent
   ],
     imports: [
         CommonModule,

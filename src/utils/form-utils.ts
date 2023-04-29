@@ -22,12 +22,12 @@ export function loginUserFormGroup(formBuilder: FormBuilder): FormGroup {
 
 export function createSelectedPatientFormGroup(formBuilder: FormBuilder): FormGroup {
   return formBuilder.group({
-    name: [{value: '', disabled: true}, Validators.required],
-    surname: [{value: '', disabled: true}, Validators.required],
+    name: [{value: ''}, Validators.required],
+    surname: [{value: ''}, Validators.required],
   });
 }
 
-export function mapUserForm(formGroup: FormGroup, userUid: string, doctorUid: string, role: Role): UserRegisterForm {
+export function mapUserForm(formGroup: FormGroup, userUid: string, doctorUid: string, role: Role, controlGroup: boolean): UserRegisterForm {
   return {
     email: formGroup.get('email')?.value || '',
     name: formGroup.get('name')?.value || '',
@@ -35,6 +35,7 @@ export function mapUserForm(formGroup: FormGroup, userUid: string, doctorUid: st
     password: formGroup.get('password')?.value || '',
     uid: userUid,
     role: role,
-    doctorID: doctorUid
+    doctorID: doctorUid,
+    controlGroup: controlGroup
   }
 }

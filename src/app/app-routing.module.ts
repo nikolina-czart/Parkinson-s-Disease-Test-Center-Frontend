@@ -5,11 +5,10 @@ import {LoginPageComponent} from "./modules/shared/pages/login-page/login-page.c
 import {RegisterPageComponent} from "./modules/shared/pages/register-page/register-page.component";
 import {BrowserPatientComponent} from "./modules/doctor/pages/browser-patient/browser-patient.component";
 import {PatientResultsComponent} from "./modules/doctor/pages/patient-results/patient-results.component";
-import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details/patient-details.component";
+import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details_remove/patient-details.component";
 import {AuthGuard} from "./core/guards/auth.guard";
-import {PatientEditComponent} from "./modules/doctor/pages/patient-edit/patient-edit.component";
 import {PatientAnalysisComponent} from "./modules/doctor/pages/patient-analysis/patient-analysis.component";
-import {PatientInformationComponent} from "./modules/doctor/pages/patient-information/patient-information.component";
+import {InformationComponent} from "./modules/doctor/pages/patient-details/information/information.component";
 
 const routes: Routes = [
   {
@@ -39,11 +38,11 @@ const routes: Routes = [
     children: [
       {
         path: "edit",
-        component: PatientEditComponent,
+        component: InformationComponent,
       },
       {
         path: "information",
-        component: PatientInformationComponent,
+        component: InformationComponent,
       },
       {
         path: "result",

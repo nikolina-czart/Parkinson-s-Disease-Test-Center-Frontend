@@ -63,7 +63,7 @@ export class AddNewPatientComponent implements OnInit {
 
   onSaveFormClick(controlGroup: boolean) {
     if (this.newPatientFormGroup.valid) {
-      this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT),
+      this.userService.addNewPatient(mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT, controlGroup),
         this.mapSelectedTestToRequest()).pipe(take(1)).subscribe(it => {
         const newPatientUid = getLastElementFromString(it);
         this.closeDialog(newPatientUid, controlGroup);
@@ -72,7 +72,7 @@ export class AddNewPatientComponent implements OnInit {
   }
 
   closeDialog(newPatientUid: string | undefined, controlGroup: boolean) {
-    const userRegisterForm = mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT);
+    const userRegisterForm = mapUserForm(this.newPatientFormGroup, "", this.userID, Role.PATIENT, controlGroup);
 
     if (!!newPatientUid || newPatientUid?.includes("auth")) {
       const newPatient: Patient = {

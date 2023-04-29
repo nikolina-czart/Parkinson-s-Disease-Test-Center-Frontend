@@ -1,0 +1,26 @@
+@import "src/assets/styles/styles";
+
+.subtitle {
+  font-size: $font-size-l ;
+  font-weight: lighter;
+  color: $blue;
+  margin: 0;
+}
+
+.information-section {
+  margin: 20px 0 30px 0;
+}
+
+.information-element {
+  display: flex;
+}
+
+.information-element-title {
+  margin-right: 5px;
+  font-weight: lighter;
+}
+
+.information-element-value {
+  margin-right: 5px;
+  color: $blue;
+}
