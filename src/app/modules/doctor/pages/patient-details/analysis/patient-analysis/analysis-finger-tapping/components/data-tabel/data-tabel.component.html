@@ -1,0 +1,68 @@
+<div *ngFor="let element of data">
+  <p>{{element.period}} - przed zastosowaniem leczenia farmakologicznego</p>
+  <mat-table class="table-details" [dataSource]="element.data.dataBeforeMed" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="parameter">
+      <mat-header-cell *matHeaderCellDef> Parametr </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="meanLeft">
+      <mat-header-cell *matHeaderCellDef> Średnia - lewa strona </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.meanLeft}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviationLeft">
+      <mat-header-cell *matHeaderCellDef> Odchylenie - lewa strona  </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.deviationLeft}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="meanRight">
+      <mat-header-cell *matHeaderCellDef> Średnia - prawa strona </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.meanRight}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviationRight">
+      <mat-header-cell *matHeaderCellDef> Odchylenie - prawa strona  </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.deviationRight}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <p>{{element.period}} - po zastosowaniu leczenia farmakologicznego</p>
+  <mat-table class="table-details" [dataSource]="element.data.dataAfterMed" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="parameter">
+      <mat-header-cell *matHeaderCellDef> Parametr </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="meanLeft">
+      <mat-header-cell *matHeaderCellDef> Średnia - lewa strona </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.meanLeft}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviationLeft">
+      <mat-header-cell *matHeaderCellDef> Odchylenie - lewa strona  </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.deviationLeft}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="meanRight">
+      <mat-header-cell *matHeaderCellDef> Średnia - prawa strona </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.meanRight}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviationRight">
+      <mat-header-cell *matHeaderCellDef> Odchylenie - prawa strona  </mat-header-cell>
+      <mat-cell *matCellDef="let testInfo"> {{testInfo.deviationRight}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

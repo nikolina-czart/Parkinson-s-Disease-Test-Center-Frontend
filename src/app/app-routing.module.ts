@@ -7,8 +7,11 @@ import {BrowserPatientComponent} from "./modules/doctor/pages/browser-patient/br
 import {PatientResultsComponent} from "./modules/doctor/pages/patient-results/patient-results.component";
 import {PatientDetailsComponent} from "./modules/doctor/pages/patient-details_remove/patient-details.component";
 import {AuthGuard} from "./core/guards/auth.guard";
-import {PatientAnalysisComponent} from "./modules/doctor/pages/patient-analysis/patient-analysis.component";
+import {PatientAnalysisComponent_remove} from "./modules/doctor/pages/patient-analysis_remove/patient-analysis-component_remove.component";
 import {InformationComponent} from "./modules/doctor/pages/patient-details/information/information.component";
+import {
+  PatientAnalysisComponent
+} from "./modules/doctor/pages/patient-details/analysis/patient-analysis/patient-analysis.component";
 
 const routes: Routes = [
   {

@@ -19,7 +19,7 @@ import { AddNewPatientComponent } from './pages/add-new-patient/add-new-patient.
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { PatientAnalysisComponent } from './pages/patient-analysis/patient-analysis.component';
+import { PatientAnalysisComponent_remove } from './pages/patient-analysis_remove/patient-analysis-component_remove.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
@@ -33,6 +33,11 @@ import { BaseInformationComponent } from './pages/patient-details/information/co
 import { TestsInformationComponent } from './pages/patient-details/information/components/tests-information/tests-information.component';
 import { EditPatientComponent } from './pages/patient-details/information/edit-patient/edit-patient.component';
 import { RemovePatientComponent } from './pages/patient-details/information/remove-patient/remove-patient.component';
+import {PatientAnalysisComponent} from "./pages/patient-details/analysis/patient-analysis/patient-analysis.component";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { AnalysisFingerTappingComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/analysis-finger-tapping.component';
+import { AnalysisGyroscopeComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/analysis-gyroscope.component';
+import { DataTabelComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/data-tabel/data-tabel.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,7 @@ import { RemovePatientComponent } from './pages/patient-details/information/remo
     PatientResultsComponent,
     PatientDetailsComponent,
     AddNewPatientComponent,
-    PatientAnalysisComponent,
+    PatientAnalysisComponent_remove,
     NewPatientBaseFormComponent,
     NewPatientTestsCheckedComponent,
     NewPatientSummaryComponent,
@@ -48,32 +53,37 @@ import { RemovePatientComponent } from './pages/patient-details/information/remo
     BaseInformationComponent,
     TestsInformationComponent,
     EditPatientComponent,
-    RemovePatientComponent
+    RemovePatientComponent,
+    PatientAnalysisComponent,
+    AnalysisFingerTappingComponent,
+    AnalysisGyroscopeComponent,
+    DataTabelComponent
   ],
-    imports: [
-        CommonModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatProgressSpinnerModule,
-        MatTooltipModule,
-        MatSidenavModule,
-        BrowserAnimationsModule,
-        MatDividerModule,
-        RouterOutlet,
-        MatToolbarModule,
-        MatDialogModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatCheckboxModule,
-        FormsModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        PlotlySharedModule,
-        MatStepperModule
-    ],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    MatDividerModule,
+    RouterOutlet,
+    MatToolbarModule,
+    MatDialogModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    PlotlySharedModule,
+    MatStepperModule,
+    MatExpansionModule
+  ],
   exports: [
   ]
 })

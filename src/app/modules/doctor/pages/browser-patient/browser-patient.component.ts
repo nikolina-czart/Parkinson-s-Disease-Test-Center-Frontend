@@ -29,14 +29,41 @@ export class BrowserPatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.configService.configTest().pipe(take(1)).subscribe(configTests => {
-      this.doctorService.getPatients(configTests).pipe(take(1)).subscribe(patients => {
-        this.patients = patients;
-        this.patientsDataSource = new MatTableDataSource(patients);
-        this.showTable = !!patients.length;
-        this.configTest = configTests;
-      })
-    })
+    // this.configService.configTest().pipe(take(1)).subscribe(configTests => {
+    //   this.doctorService.getPatients(configTests).pipe(take(1)).subscribe(patients => {
+    //     this.patients = patients;
+    //     this.patientsDataSource = new MatTableDataSource(patients);
+    //     this.showTable = !!patients.length;
+    //     this.configTest = configTests;
+    //   })
+    // })
+    const tests: ConfigTests = {
+      icon: "accessibility",
+      name: "Static Test",
+      namePL: "Test posturalny",
+      uid: "STATIC_TEST"
+    };
+
+    const patient: Patient = {
+      uid: "123",
+      name: "Jan",
+      surname: "Kowalski",
+      email: "jan.kowalski@example.com",
+      patientTests: [{
+        icon: "accessibility",
+        name: "Static Test",
+        namePL: "Test posturalny",
+        uid: "STATIC_TEST",
+        startDate: "2022-06-04 11:21:41",
+        lastDate: "2022-12-05 11:38:06",
+        numberTest: "381"
+      }],
+      controlGroup: false
+    };
+    this.patients = [patient];
+    this.patientsDataSource = new MatTableDataSource(this.patients);
+    this.showTable = !!this.patients.length;
+    this.configTest = [tests];
   }
 
   showPatientDetails(patient: Patient) {

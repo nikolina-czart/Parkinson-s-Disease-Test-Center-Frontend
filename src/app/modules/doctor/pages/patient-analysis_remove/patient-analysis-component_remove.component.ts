@@ -9,10 +9,10 @@ import {AggregatedData} from "../../../../models/analysis/analysis-data";
 
 @Component({
   selector: 'app-patient-analysis',
-  templateUrl: './patient-analysis.component.html',
-  styleUrls: ['./patient-analysis.component.scss']
+  templateUrl: './patient-analysis-component_remove.component.html',
+  styleUrls: ['./patient-analysis-component_remove.component.scss']
 })
-export class PatientAnalysisComponent implements OnInit{
+export class PatientAnalysisComponent_remove implements OnInit{
   displayedColumns: string[] =  ["timeRange", "side", "averageHours", "medicineSupply", "vectorLength"];
 
   timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku"]
