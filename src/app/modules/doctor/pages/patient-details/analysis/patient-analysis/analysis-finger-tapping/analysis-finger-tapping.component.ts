@@ -3,8 +3,8 @@ import {
   FingerTappingAnalysisData
 } from "../../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
 import {
-  FingerTappingAnalysisHistogram
-} from "../../../../../../../models/analysis/finger-tapping/histogram/finger-tapping-analysis-histogram";
+  FingerTappingAnalysis
+} from "../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 
 @Component({
   selector: 'app-analysis-finger-tapping',
@@ -14,6 +14,6 @@ import {
 export class AnalysisFingerTappingComponent {
   panelOpenState = false;
   @Input() tableData!: FingerTappingAnalysisData[];
-  @Input() histogramData!: FingerTappingAnalysisHistogram[];
+  @Input() histogramData!: FingerTappingAnalysis[];
 
 }

@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {
-  FingerTappingAnalysisHistogram
-} from "../../../../../../../../../models/analysis/finger-tapping/histogram/finger-tapping-analysis-histogram";
+  FingerTappingAnalysis
+} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {
-  HistogramFingerTapping
-} from "../../../../../../../../../models/analysis/finger-tapping/histogram/histogram-finger-tapping";
+  FingerTappingData
+} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-data";
 import {
   FingerTappingAnalysisParameterDetails
-} from "../../../../../../../../../models/analysis/finger-tapping/histogram/finger-tapping-analysis-parameter-details";
+} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis-parameter-details";
 
 @Component({
   selector: 'app-histogram',
@@ -15,8 +15,8 @@ import {
   styleUrls: ['./histogram.component.css']
 })
 export class HistogramComponent implements OnInit {
-  @Input() histogramData!: FingerTappingAnalysisHistogram[];
-  graphs: HistogramFingerTapping[] = [];
+  @Input() histogramData!: FingerTappingAnalysis[];
+  graphs: FingerTappingData[] = [];
 
   ngOnInit(): void {
     this.histogramData.forEach(histogram => {

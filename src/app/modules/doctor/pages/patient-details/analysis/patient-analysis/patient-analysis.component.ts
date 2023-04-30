@@ -3,8 +3,8 @@ import {Patient} from "../../../../../../models/user/patient/patient";
 import {DoctorService} from "../../../../services/doctor.service";
 import {FingerTappingAnalysisData} from "../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
 import {
-  FingerTappingAnalysisHistogram
-} from "../../../../../../models/analysis/finger-tapping/histogram/finger-tapping-analysis-histogram";
+  FingerTappingAnalysis
+} from "../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {AnalysisDataService} from "../../../../services/analysis-data.service";
 import {take} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
@@ -23,7 +23,7 @@ export class PatientAnalysisComponent implements OnInit {
   selectedTimeRange!: string
   showTable!: boolean;
   tableData!: FingerTappingAnalysisData[];
-  histogramData!: FingerTappingAnalysisHistogram[];
+  histogramData!: FingerTappingAnalysis[];
 
   constructor(private doctorService: DoctorService,
               private analysisService: AnalysisDataService) {

@@ -29,7 +29,7 @@
         Wykresy pudełkowe
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
+    <app-box-plot [data]="histogramData"></app-box-plot>
   </mat-expansion-panel>
 
   <mat-expansion-panel (opened)="panelOpenState = true"
