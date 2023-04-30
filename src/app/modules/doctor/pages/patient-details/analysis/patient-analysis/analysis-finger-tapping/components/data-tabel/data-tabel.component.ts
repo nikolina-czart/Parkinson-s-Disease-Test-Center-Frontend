@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {
   FingerTappingAnalysisData
-} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis-data";
+} from "../../../../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({

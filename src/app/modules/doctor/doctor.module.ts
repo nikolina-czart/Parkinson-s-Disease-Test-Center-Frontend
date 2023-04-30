@@ -38,6 +38,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { AnalysisFingerTappingComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/analysis-finger-tapping.component';
 import { AnalysisGyroscopeComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/analysis-gyroscope.component';
 import { DataTabelComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/data-tabel/data-tabel.component';
+import { HistogramComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/histogram/histogram.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { DataTabelComponent } from './pages/patient-details/analysis/patient-ana
     PatientAnalysisComponent,
     AnalysisFingerTappingComponent,
     AnalysisGyroscopeComponent,
-    DataTabelComponent
+    DataTabelComponent,
+    HistogramComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Patient} from "../../../../../../models/user/patient/patient";
 import {DoctorService} from "../../../../services/doctor.service";
-import {FingerTappingAnalysisData} from "../../../../../../models/analysis/finger-tapping/finger-tapping-analysis-data";
+import {FingerTappingAnalysisData} from "../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
+import {
+  FingerTappingAnalysisHistogram
+} from "../../../../../../models/analysis/finger-tapping/histogram/finger-tapping-analysis-histogram";
+import {AnalysisDataService} from "../../../../services/analysis-data.service";
+import {take} from "rxjs";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-patient-analysis',
@@ -17,18 +23,32 @@ export class PatientAnalysisComponent implements OnInit {
   selectedTimeRange!: string
   showTable!: boolean;
   tableData!: FingerTappingAnalysisData[];
+  histogramData!: FingerTappingAnalysisHistogram[];
 
-  constructor(private doctorService: DoctorService) {
+  constructor(private doctorService: DoctorService,
+              private analysisService: AnalysisDataService) {
   }
   ngOnInit(): void {
     this.showTable = false;
     this.selectedPatient = this.doctorService.selectedPatient;
+
+    const body = {
+      testNameID: "FINGER_TAPPING",
+      period: "Miesiąc"
+    }
+
+    this.analysisService.getAnalysisData(body).pipe(take(1)).subscribe(data => {
+      this.histogramData = data;
+    })
   }
 
   getAnalysisData() {
     this.showTable = true;
+
+
     console.log("Pobranie analizowanych danych")
     this.getDataToTable();
+    // this.getDataToHistogram();
   }
 
   private getDataToTable() {

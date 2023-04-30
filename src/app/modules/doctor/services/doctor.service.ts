@@ -3,16 +3,7 @@ import {AuthenticationService} from "../../../core/services/authentication.servi
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Patient} from "../../../models/user/patient/patient";
-// import {TestType} from "../../../models/tests/test-info";
 import {Result} from "../../../models/results/result";
-// import {
-//   FingerTapping,
-//   Gyroscope,
-//   Static,
-//   TestDistribution,
-//   ToeTapping,
-//   Voice
-// } from "../../../models/tests/test-distribution";
 import {AggregatedData} from "../../../models/analysis/analysis-data";
 import {ConfigTests} from "../../../models/tests/config-tests";
 import {Cacheable} from "ts-cacheable";

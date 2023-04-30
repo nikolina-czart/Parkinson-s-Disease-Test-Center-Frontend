@@ -1,0 +1,9 @@
+<div *ngFor="let graph of graphs">
+  <p>{{graph.period}}</p>
+  <plotly-plot [data]="graph.dataTouchTime.data" [layout]="graph.dataTouchTime.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataUpTime.data" [layout]="graph.dataUpTime.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataIntertapInterval.data" [layout]="graph.dataIntertapInterval.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataTouchTimeMean.data" [layout]="graph.dataTouchTimeMean.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataUpTimeMean.data" [layout]="graph.dataUpTimeMean.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataIntertapIntervalMean.data" [layout]="graph.dataIntertapIntervalMean.layout"></plotly-plot>
+</div>
