@@ -45,7 +45,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true
   },
     {
-      provide: HTTP_INTERCEPTORS, useClass: LoadingSpinnerInterceptor, multi: true
+      provide: HTTP_INTERCEPTORS, useClass: LoadingSpinnerInterceptor, multi: true,
     },
   ],
   exports: [

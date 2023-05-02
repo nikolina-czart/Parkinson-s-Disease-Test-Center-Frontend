@@ -1,4 +1,4 @@
-export interface FingerTappingData {
+export interface FingerTappingGraphData {
   period: string,
   dataTouchTime: FingerTappingDataParameter,
   dataUpTime: FingerTappingDataParameter,

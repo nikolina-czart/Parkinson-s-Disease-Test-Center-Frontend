@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FingerTappingAnalysis} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
-import {FingerTappingData} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-data";
+import {FingerTappingGraphData} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-graph-data";
 import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 
 @Component({
@@ -10,7 +10,7 @@ import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 })
 export class BoxPlotComponent implements OnInit{
   @Input() data!: FingerTappingAnalysis[];
-  graphs: FingerTappingData[] = [];
+  graphs: FingerTappingGraphData[] = [];
 
   ngOnInit(): void {
     this.data.forEach(element => {

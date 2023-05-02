@@ -36,10 +36,20 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
+        Wykresy skrzypcowe
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-violin [data]="histogramData"></app-violin>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         Funkcja gęstości prawdopodbieństwa
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
+    <app-density></app-density>
   </mat-expansion-panel>
 
   <mat-expansion-panel (opened)="panelOpenState = true"

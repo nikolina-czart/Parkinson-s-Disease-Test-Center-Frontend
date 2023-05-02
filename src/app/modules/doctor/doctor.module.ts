@@ -40,6 +40,8 @@ import { AnalysisGyroscopeComponent } from './pages/patient-details/analysis/pat
 import { DataTabelComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/data-tabel/data-tabel.component';
 import { HistogramComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/histogram/histogram.component';
 import { BoxPlotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/box-plot/box-plot.component';
+import { DensityComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/density/density.component';
+import { ViolinComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/violin/violin.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { BoxPlotComponent } from './pages/patient-details/analysis/patient-analy
     AnalysisGyroscopeComponent,
     DataTabelComponent,
     HistogramComponent,
-    BoxPlotComponent
+    BoxPlotComponent,
+    DensityComponent,
+    ViolinComponent
   ],
   imports: [
     CommonModule,

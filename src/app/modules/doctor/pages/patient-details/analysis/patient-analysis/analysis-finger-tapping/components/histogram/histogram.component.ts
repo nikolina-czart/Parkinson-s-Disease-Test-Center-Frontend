@@ -3,8 +3,8 @@ import {
   FingerTappingAnalysis
 } from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {
-  FingerTappingData
-} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-data";
+  FingerTappingGraphData
+} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-graph-data";
 import {
   FingerTappingAnalysisParameterDetails
 } from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis-parameter-details";
@@ -16,7 +16,7 @@ import {
 })
 export class HistogramComponent implements OnInit {
   @Input() histogramData!: FingerTappingAnalysis[];
-  graphs: FingerTappingData[] = [];
+  graphs: FingerTappingGraphData[] = [];
 
   ngOnInit(): void {
     this.histogramData.forEach(histogram => {
