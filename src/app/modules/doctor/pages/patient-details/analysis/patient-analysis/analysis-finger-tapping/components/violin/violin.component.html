@@ -1,9 +1,20 @@
 <div *ngFor="let graph of graphs">
   <p>{{graph.period}}</p>
   <plotly-plot [data]="graph.dataTouchTime.data" [layout]="graph.dataTouchTime.layout"></plotly-plot>
-<!--  <plotly-plot [data]="graph.dataUpTime.data" [layout]="graph.dataUpTime.layout"></plotly-plot>-->
-<!--  <plotly-plot [data]="graph.dataIntertapInterval.data" [layout]="graph.dataIntertapInterval.layout"></plotly-plot>-->
-<!--  <plotly-plot [data]="graph.dataTouchTimeMean.data" [layout]="graph.dataTouchTimeMean.layout"></plotly-plot>-->
-<!--  <plotly-plot [data]="graph.dataUpTimeMean.data" [layout]="graph.dataUpTimeMean.layout"></plotly-plot>-->
-<!--  <plotly-plot [data]="graph.dataIntertapIntervalMean.data" [layout]="graph.dataIntertapIntervalMean.layout"></plotly-plot>-->
+  <plotly-plot [data]="graph.dataTouchTimeSide.data" [layout]="graph.dataTouchTimeSide.layout"></plotly-plot>
+
+  <plotly-plot [data]="graph.dataUpTime.data" [layout]="graph.dataUpTime.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataUpTimeSide.data" [layout]="graph.dataUpTimeSide.layout"></plotly-plot>
+
+  <plotly-plot [data]="graph.dataIntertapInterval.data" [layout]="graph.dataIntertapInterval.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataIntertapIntervalSide.data" [layout]="graph.dataIntertapIntervalSide.layout"></plotly-plot>
+
+  <plotly-plot [data]="graph.dataTouchTimeMean.data" [layout]="graph.dataTouchTimeMean.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataTouchTimeMeanSide.data" [layout]="graph.dataTouchTimeMeanSide.layout"></plotly-plot>
+
+  <plotly-plot [data]="graph.dataUpTimeMean.data" [layout]="graph.dataUpTimeMean.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataUpTimeMeanSide.data" [layout]="graph.dataUpTimeMeanSide.layout"></plotly-plot>
+
+  <plotly-plot [data]="graph.dataIntertapIntervalMean.data" [layout]="graph.dataIntertapIntervalMean.layout"></plotly-plot>
+  <plotly-plot [data]="graph.dataIntertapIntervalMeanSide.data" [layout]="graph.dataIntertapIntervalMeanSide.layout"></plotly-plot>
 </div>

@@ -8,6 +8,15 @@ export interface FingerTappingGraphData {
   dataIntertapIntervalMean: FingerTappingDataParameter
 }
 
+export interface FingerTappingGraphDataViolin extends FingerTappingGraphData {
+  dataTouchTimeSide: FingerTappingDataParameter,
+  dataUpTimeSide: FingerTappingDataParameter,
+  dataIntertapIntervalSide: FingerTappingDataParameter,
+  dataTouchTimeMeanSide: FingerTappingDataParameter,
+  dataUpTimeMeanSide: FingerTappingDataParameter,
+  dataIntertapIntervalMeanSide: FingerTappingDataParameter
+}
+
 export interface FingerTappingDataParameter {
   data: {}[],
   layout: {}
