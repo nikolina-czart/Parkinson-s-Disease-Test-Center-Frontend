@@ -15,7 +15,7 @@ import {AggregatedData} from "../../../../models/analysis/analysis-data";
 export class PatientAnalysisComponent_remove implements OnInit{
   displayedColumns: string[] =  ["timeRange", "side", "averageHours", "medicineSupply", "vectorLength"];
 
-  timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku"]
+  timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku", "Wszystkie pomiary"]
   selectedPatient!: Patient;
   selectedTest!: string;
   selectedTimeRange!: string
@@ -36,11 +36,11 @@ export class PatientAnalysisComponent_remove implements OnInit{
       timeRange: this.selectedTimeRange
     }
 
-    this.doctorService.getAggregateDate(filters).pipe(take(1)).subscribe(results => {
-      this.aggregatedData = results;
-      this.showTable = !!this.aggregatedData.length;;
-      console.log(this.aggregatedData);
-    });
+    // this.doctorService.getAggregateDate(filters).pipe(take(1)).subscribe(results => {
+    //   this.aggregatedData = results;
+    //   this.showTable = !!this.aggregatedData.length;;
+    //   console.log(this.aggregatedData);
+    // });
   }
 
   showTestDetails(value: AggregatedData) {

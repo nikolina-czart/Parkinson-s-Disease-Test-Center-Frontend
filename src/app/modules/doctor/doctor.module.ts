@@ -42,6 +42,7 @@ import { HistogramComponent } from './pages/patient-details/analysis/patient-ana
 import { BoxPlotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/box-plot/box-plot.component';
 import { DensityComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/density/density.component';
 import { ViolinComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/violin/violin.component';
+import { MeanPlotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/mean-plot/mean-plot.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ViolinComponent } from './pages/patient-details/analysis/patient-analys
     HistogramComponent,
     BoxPlotComponent,
     DensityComponent,
-    ViolinComponent
+    ViolinComponent,
+    MeanPlotComponent
   ],
   imports: [
     CommonModule,

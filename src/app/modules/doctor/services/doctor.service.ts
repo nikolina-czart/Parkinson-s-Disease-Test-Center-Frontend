@@ -7,6 +7,8 @@ import {Result} from "../../../models/results/result";
 import {AggregatedData} from "../../../models/analysis/analysis-data";
 import {ConfigTests} from "../../../models/tests/config-tests";
 import {Cacheable} from "ts-cacheable";
+import {FingerTappingAnalysis} from "../../../models/analysis/finger-tapping/finger-tapping-analysis";
+import {TremorAnalysis} from "../../../models/analysis/finger-tapping/TremorAnalysis";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,17 @@ export class DoctorService {
             })
         }
       })))
+  }
+
+  @Cacheable({maxAge: 36000000})
+  getAnalysisData(body: {testNameID: string, period:string}): Observable<FingerTappingAnalysis[]> {
+    const userId = this._selectedPatient.uid;
+    return this.httpClient.post<FingerTappingAnalysis[]>(`api/analysis-tests/${userId}/chart-data`, body,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+  }
+
+  getTremorAnalysisData(body: { period: string; testNameID: string }): Observable<TremorAnalysis[]>  {
+    const userId = this._selectedPatient.uid;
+    return this.httpClient.post<TremorAnalysis[]>(`api/analysis-tests/${userId}/tremor/chart-data`, body,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   getTestDetails(filters: { formDate: any; toDate: any; testNameID: any }): Observable<Result[]> {

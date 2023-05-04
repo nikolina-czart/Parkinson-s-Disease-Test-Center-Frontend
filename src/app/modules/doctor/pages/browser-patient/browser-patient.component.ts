@@ -45,19 +45,29 @@ export class BrowserPatientComponent implements OnInit {
     };
 
     const patient: Patient = {
-      uid: "123",
+      uid: "xk2DWuC8nWWcQH4Vj95Ezd1oUA03",
       name: "Jan",
       surname: "Kowalski",
       email: "jan.kowalski@example.com",
       patientTests: [{
         icon: "accessibility",
         name: "Static Test",
-        namePL: "Test posturalny",
-        uid: "STATIC_TEST",
+        namePL: "Drżenie rąk",
+        uid: " GYROSCOPE",
         startDate: "2022-06-04 11:21:41",
         lastDate: "2022-12-05 11:38:06",
         numberTest: "381"
-      }],
+      },
+        {
+          icon: "accessibility",
+          name: "Static Test",
+          namePL: "Stukanie palcami",
+          uid: "FINGER_TAPPING",
+          startDate: "2022-06-04 11:21:41",
+          lastDate: "2022-12-05 11:38:06",
+          numberTest: "381"
+        }
+      ],
       controlGroup: false
     };
     this.patients = [patient];

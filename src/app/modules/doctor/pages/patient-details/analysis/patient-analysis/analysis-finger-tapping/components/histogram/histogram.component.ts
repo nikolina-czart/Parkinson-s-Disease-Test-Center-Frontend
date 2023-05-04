@@ -1,13 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {
-  FingerTappingAnalysis
-} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
+import {FingerTappingAnalysis} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {
   FingerTappingGraphData
 } from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-graph-data";
-import {
-  FingerTappingAnalysisParameterDetails
-} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis-parameter-details";
 
 @Component({
   selector: 'app-histogram',

@@ -8,6 +8,7 @@ import {
 import {AnalysisDataService} from "../../../../services/analysis-data.service";
 import {take} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
+import {TremorAnalysis} from "../../../../../../models/analysis/finger-tapping/TremorAnalysis";
 
 @Component({
   selector: 'app-patient-analysis',
@@ -17,144 +18,45 @@ import {MatTableDataSource} from "@angular/material/table";
 export class PatientAnalysisComponent implements OnInit {
   displayedColumns: string[] =  ["timeRange", "side", "averageHours", "medicineSupply", "vectorLength"];
 
-  timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku"]
+  timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku", "Wszystkie pomiary"]
   selectedPatient!: Patient;
   selectedTest!: string;
   selectedTimeRange!: string
   showTable!: boolean;
-  tableData!: FingerTappingAnalysisData[];
-  histogramData!: FingerTappingAnalysis[];
+  fingerTappindData!: FingerTappingAnalysis[];
+  tremorData!: TremorAnalysis[];
+  showGyroscopeAnalysis!: boolean;
 
-  constructor(private doctorService: DoctorService,
-              private analysisService: AnalysisDataService) {
+  constructor(private doctorService: DoctorService) {
   }
   ngOnInit(): void {
     this.showTable = false;
+    this.showGyroscopeAnalysis = false;
     this.selectedPatient = this.doctorService.selectedPatient;
-
-    const body = {
-      testNameID: "FINGER_TAPPING",
-      period: "Miesiąc"
-    }
-
-    this.analysisService.getAnalysisData(body).pipe(take(1)).subscribe(data => {
-      this.histogramData = data;
-    })
   }
 
   getAnalysisData() {
+    console.log(this.selectedTest)
+    if(this.selectedTest === "FINGER_TAPPING"){
+      const body = {
+        testNameID: "FINGER_TAPPING",
+        period: "Pół roku"
+      }
+      console.log(body)
+      // this.doctorService.getAnalysisData(body).pipe(take(1)).subscribe(data => {
+      //   this.fingerTappindData = data;
+      // })
+    }
+    if(this.selectedTest === " GYROSCOPE"){
+      const body = {
+        testNameID: " GYROSCOPE",
+        period: "Pół roku"
+      }
+      this.doctorService.getTremorAnalysisData(body).pipe(take(1)).subscribe(data => {
+        this.tremorData = data;
+        this.showGyroscopeAnalysis = true
+      })
+    }
     this.showTable = true;
-
-
-    console.log("Pobranie analizowanych danych")
-    this.getDataToTable();
-    // this.getDataToHistogram();
-  }
-
-  private getDataToTable() {
-    this.tableData = [
-      {
-        period: "Marzec",
-        data: {
-          dataBeforeMed: [
-            {
-              name: "Touch Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Up Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Intertap Interval",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-          ],
-          dataAfterMed: [
-            {
-              name: "Touch Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Up Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Intertap Interval",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-          ]
-        }
-      },
-      {
-        period: "Kwiecień",
-        data: {
-          dataBeforeMed: [
-            {
-              name: "Touch Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Up Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Intertap Interval",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-          ],
-          dataAfterMed: [
-            {
-              name: "Touch Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Up Time",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-            {
-              name: "Intertap Interval",
-              meanLeft: 100,
-              deviationLeft: 20,
-              meanRight: 130,
-              deviationRight: 30
-            },
-          ]
-        }
-      },
-    ]
   }
 }

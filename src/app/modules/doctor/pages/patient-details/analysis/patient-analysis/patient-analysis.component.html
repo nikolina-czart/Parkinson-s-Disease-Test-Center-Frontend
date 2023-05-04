@@ -31,8 +31,11 @@
 
     <div class="show-results" *ngIf="showTable">
       <p class="results-info">Wyniki analizy testów:</p>
-      <div *ngIf="selectedTest ==='STATIC_TEST'">
-        <app-analysis-finger-tapping [tableData] = "tableData" [histogramData]="histogramData"></app-analysis-finger-tapping>
+      <div *ngIf="selectedTest ==='FINGER_TAPPING'">
+        <app-analysis-finger-tapping [histogramData]="fingerTappindData"></app-analysis-finger-tapping>
+      </div>
+      <div *ngIf="showGyroscopeAnalysis">
+        <app-analysis-gyroscope [tremorData]="tremorData"></app-analysis-gyroscope>
       </div>
     </div>
     <div *ngIf="!showTable">
