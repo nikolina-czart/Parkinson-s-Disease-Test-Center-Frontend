@@ -15,10 +15,15 @@ import {
 import {PatientsComponent} from "./modules/doctor/pages/patients/patients.component";
 
 const routes: Routes = [
+  // {
+  //   path: "",
+  //   pathMatch: "full",
+  //   redirectTo: "browser-patient",
+  // },
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "browser-patient",
+    redirectTo: "patients",
   },
   {
     path: "login",

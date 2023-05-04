@@ -1,0 +1,46 @@
+@import "src/assets/styles/styles";
+
+.title-card{
+  font-size: 18px;
+  color: $blue;
+  margin: 10px 20px 10px;
+  @include roboto-regular
+}
+
+.mat-card {
+  padding: 25px;
+}
+
+.summary-patient {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plotly-summary{
+  width: 49%;
+}
+
+.table-summary {
+  width: 49%;
+}
+
+mat-header-cell {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+mat-table {
+  padding: 10px;
+}
+
+mat-cell {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+mat-table{
+  box-shadow: none;
+  @include default-shadow()
+}

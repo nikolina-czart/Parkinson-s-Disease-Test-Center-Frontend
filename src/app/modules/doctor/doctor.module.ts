@@ -53,6 +53,19 @@ import { OutliersTremorHistogramComponent } from './pages/patient-details/analys
 import { OutliersTremorKdeComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/outliers-tremor-kde/outliers-tremor-kde.component';
 import { TremorTabelComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/tremor-tabel/tremor-tabel.component';
 import { PatientsComponent } from './pages/patients/patients.component';
+import {MatCardModule} from "@angular/material/card";
+import { SummaryPatientsComponent } from './pages/patients/components/summary-patients/summary-patients.component';
+import { BoxplotPatientComponent } from './pages/patients/components/boxplot-patient/boxplot-patient.component';
+import { DensityTappingPatientComponent } from './pages/patients/components/density-tapping-patient/density-tapping-patient.component';
+import { HistogramTappingPatientComponent } from './pages/patients/components/histogram-tapping-patient/histogram-tapping-patient.component';
+import { TableTappingPatientComponent } from './pages/patients/components/table-tapping-patient/table-tapping-patient.component';
+import { BoxplotTremorPatientComponent } from './pages/patients/components/boxplot-tremor-patient/boxplot-tremor-patient.component';
+import { HistogramTremorPatientComponent } from './pages/patients/components/histogram-tremor-patient/histogram-tremor-patient.component';
+import { DensityTremorPatientComponent } from './pages/patients/components/density-tremor-patient/density-tremor-patient.component';
+import { DensityDifferenceTremorPatientComponent } from './pages/patients/components/density-difference-tremor-patient/density-difference-tremor-patient.component';
+import { BoxplotDifferenceTremorPatientComponent } from './pages/patients/components/boxplot-difference-tremor-patient/boxplot-difference-tremor-patient.component';
+import { TableTremorPatientComponent } from './pages/patients/components/table-tremor-patient/table-tremor-patient.component';
+import { HistogramDifferenceTremorPatientComponent } from './pages/patients/components/histogram-difference-tremor-patient/histogram-difference-tremor-patient.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +100,19 @@ import { PatientsComponent } from './pages/patients/patients.component';
     OutliersTremorHistogramComponent,
     OutliersTremorKdeComponent,
     TremorTabelComponent,
-    PatientsComponent
+    PatientsComponent,
+    SummaryPatientsComponent,
+    BoxplotPatientComponent,
+    DensityTappingPatientComponent,
+    HistogramTappingPatientComponent,
+    TableTappingPatientComponent,
+    BoxplotTremorPatientComponent,
+    HistogramTremorPatientComponent,
+    DensityTremorPatientComponent,
+    DensityDifferenceTremorPatientComponent,
+    BoxplotDifferenceTremorPatientComponent,
+    TableTremorPatientComponent,
+    HistogramDifferenceTremorPatientComponent
   ],
   imports: [
     CommonModule,
@@ -112,7 +137,8 @@ import { PatientsComponent } from './pages/patients/patients.component';
     MatNativeDateModule,
     PlotlySharedModule,
     MatStepperModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule
   ],
   exports: [
   ]

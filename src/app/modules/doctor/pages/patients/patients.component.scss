@@ -1,0 +1,68 @@
+@import "src/assets/styles/styles";
+
+.container-browser {
+  display: flex;
+  margin-top: $margin-xl;
+  width: 1200px;
+  justify-content: center;
+  padding: $padding-xl;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
+.tittle-browser {
+  font-size: $font-size-xl;
+  color: $blue;
+  margin: 0 0 $margin-xl;
+  @include roboto-bold
+}
+
+app-summary-patients {
+  width: 100%;
+}
+
+app-boxplot-patient {
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-histogram-tapping-patient {
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-density-tapping-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-boxplot-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-density-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-histogram-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-boxplot-difference-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-histogram-difference-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}
+
+app-density-difference-tremor-patient{
+  margin-top: 25px;
+  width: 100%;
+}

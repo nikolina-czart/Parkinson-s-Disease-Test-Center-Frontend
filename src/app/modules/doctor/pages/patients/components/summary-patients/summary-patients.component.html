@@ -1,0 +1,30 @@
+<mat-card class="mat-card">
+  <mat-card-header>
+    <mat-card-title class="title-card">Podsumowanie ilości pacjentów i przeprowadzonych testów</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="summary-patient">
+      <div class="table-summary">
+        <mat-table class="table-details" [dataSource]="summaryPatient" class="mat-elevation-z8">
+          <ng-container matColumnDef="parameter">
+            <mat-header-cell *matHeaderCellDef> Parametr </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.parameter}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="patientPD">
+            <mat-header-cell *matHeaderCellDef> Pacjenci z PD </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.patientPD}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="patientControl">
+            <mat-header-cell *matHeaderCellDef> Grupa kontrolna </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.patientControl}} </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+      <div class="plotly-summary">
+        <plotly-plot [data]="graphData" [layout]="graphLayout"></plotly-plot>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
     <a class="logo">
-      <img alt="ParkinsonTestCenter" class="smaller" src="../../../assets/images/logo.svg">
+      <img alt="ParkinsonTestCenter" class="smaller" src="../../../assets/images/logo.svg" (click)="goToBrowserPatient()">
     </a>
     <div class="main-nav">
       <div class="hello-banner" *ngIf="!!(token$ | async)">

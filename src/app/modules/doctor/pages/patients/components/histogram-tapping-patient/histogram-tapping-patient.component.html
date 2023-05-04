@@ -1,0 +1,19 @@
+<mat-card class="mat-card">
+  <mat-card-header>
+    <mat-card-title class="title-card">Histogram - porównanie parametrów FTT</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="plotly-summary">
+      <plotly-plot [data]="graphData.graph1.dataLeft.data" [layout]="graphData.graph1.dataLeft.layout"></plotly-plot>
+      <plotly-plot [data]="graphData.graph1.dataRight.data" [layout]="graphData.graph1.dataRight.layout"></plotly-plot>
+    </div>
+    <div class="plotly-summary">
+      <plotly-plot [data]="graphData.graph2.dataLeft.data" [layout]="graphData.graph2.dataLeft.layout"></plotly-plot>
+      <plotly-plot [data]="graphData.graph2.dataRight.data" [layout]="graphData.graph2.dataRight.layout"></plotly-plot>
+    </div>
+    <div class="plotly-summary">
+      <plotly-plot [data]="graphData.graph3.dataLeft.data" [layout]="graphData.graph3.dataLeft.layout"></plotly-plot>
+      <plotly-plot [data]="graphData.graph3.dataRight.data" [layout]="graphData.graph3.dataRight.layout"></plotly-plot>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit{
   }
 
   allPatientInfo() {
+    this.router.navigate(['/patients'])
+  }
 
+  goToBrowserPatient() {
+    this.router.navigate(['/browser-patient'])
   }
 }

@@ -1,1 +1,18 @@
-<p>patients works!</p>
+<div class="card-position">
+  <div class="container-browser">
+    <h2 class="tittle-browser">Zebrane dane pacjentów:</h2>
+
+    <app-summary-patients [summaryPatient] = "summaryPatient"></app-summary-patients>
+    <app-boxplot-patient [meanPatientData]="meanPatientData"></app-boxplot-patient>
+    <app-histogram-tapping-patient [meanPatientData]="meanPatientData"></app-histogram-tapping-patient>
+    <app-density-tapping-patient [meanPatientData]="meanPatientData"></app-density-tapping-patient>
+    <app-boxplot-tremor-patient [meanPatientData]="meanPatientData"></app-boxplot-tremor-patient>
+    <app-histogram-tremor-patient [meanPatientData]="meanPatientData"></app-histogram-tremor-patient>
+    <app-density-tremor-patient [meanPatientData]="meanPatientData"></app-density-tremor-patient>
+    <app-boxplot-difference-tremor-patient [meanPatientData]="meanPatientData"></app-boxplot-difference-tremor-patient>
+    <app-histogram-difference-tremor-patient [meanPatientData]="meanPatientData"></app-histogram-difference-tremor-patient>
+    <app-density-difference-tremor-patient [meanPatientData]="meanPatientData"></app-density-difference-tremor-patient>
+
+  </div>
+
+</div>
