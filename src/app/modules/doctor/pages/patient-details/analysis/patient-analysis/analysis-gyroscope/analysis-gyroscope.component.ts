@@ -8,8 +8,8 @@ import {TremorAnalysis} from "../../../../../../../models/analysis/finger-tappin
 })
 export class AnalysisGyroscopeComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];
+  panelOpenState = false;
 
   ngOnInit(): void {
-    console.log(this.tremorData)
   }
 }

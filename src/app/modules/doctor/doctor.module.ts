@@ -43,6 +43,7 @@ import { BoxPlotComponent } from './pages/patient-details/analysis/patient-analy
 import { DensityComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/density/density.component';
 import { ViolinComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/violin/violin.component';
 import { MeanPlotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/mean-plot/mean-plot.component';
+import { MeanTremorByDayComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/mean-tremor-by-day/mean-tremor-by-day.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MeanPlotComponent } from './pages/patient-details/analysis/patient-anal
     BoxPlotComponent,
     DensityComponent,
     ViolinComponent,
-    MeanPlotComponent
+    MeanPlotComponent,
+    MeanTremorByDayComponent
   ],
   imports: [
     CommonModule,

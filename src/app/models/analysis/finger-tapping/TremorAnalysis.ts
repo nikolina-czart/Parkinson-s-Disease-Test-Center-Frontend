@@ -1,8 +1,6 @@
-import {FingerTappingAnalysisParameter} from "./finger-tapping-analysis-parameter";
-
 export interface TremorAnalysis {
   period: string;
-  data: FingerTappingAnalysisParameter;
+  data: TremorAnalysisParameter;
 }
 
 export interface TremorAnalysisParameter {

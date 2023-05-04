@@ -1,1 +1,25 @@
-<p>analysis-gyroscope works!</p>
+<mat-accordion>
+
+<!--  &lt;!&ndash;  tabela z danymi&ndash;&gt;-->
+<!--  <mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                       (closed)="panelOpenState = false">-->
+<!--    <mat-expansion-panel-header>-->
+<!--      <mat-panel-title>-->
+<!--        Tabela z analizą danych-->
+<!--      </mat-panel-title>-->
+<!--    </mat-expansion-panel-header>-->
+<!--    <app-data-tabel [data]="histogramData"></app-data-tabel>-->
+<!--  </mat-expansion-panel>-->
+
+  <!--  histogram-->
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Przyśpieszenia na osiach x,y,z (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-mean-tremor-by-day [tremorData]="tremorData" ></app-mean-tremor-by-day>
+  </mat-expansion-panel>
+
+</mat-accordion>
