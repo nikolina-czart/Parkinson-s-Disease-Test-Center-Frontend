@@ -15,7 +15,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Przyśpieszenia na osiach x,y,z (średnia z dni)
+        Przyśpieszenia na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-mean-tremor-by-day [tremorData]="tremorData" ></app-mean-tremor-by-day>
@@ -25,7 +25,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Boxplot przyśpieszeń na osiach x,y,z i zagregowanych danych (średnia z dni)
+        Boxplot przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-boxplot-tremor [tremorData]="tremorData" ></app-boxplot-tremor>

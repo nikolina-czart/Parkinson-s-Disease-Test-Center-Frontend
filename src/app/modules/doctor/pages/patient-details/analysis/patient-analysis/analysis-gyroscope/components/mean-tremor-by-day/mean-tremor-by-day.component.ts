@@ -15,14 +15,17 @@ export class MeanTremorByDayComponent implements OnInit {
       const meanXAxisX = this.createNumberArray(element.data.meanByDayX.dataBeforeMedLeft.length);
       const meanXAxisY = this.createNumberArray(element.data.meanByDayY.dataBeforeMedLeft.length);
       const meanXAxisZ = this.createNumberArray(element.data.meanByDayZ.dataBeforeMedLeft.length);
+      const aggregatedXYZAxisX = this.createNumberArray(element.data.aggregatedMeanByDay.dataBeforeMedLeft.length);
 
       const meanX = this.getDataMeanX(element, meanXAxisX);
       const meanY =  this.getDataMeanY(element, meanXAxisY);
       const meanZ =  this.getDataMeanZ(element, meanXAxisZ);
+      const aggregatedXYZ =  this.getDataAggregatedXYZ(element, aggregatedXYZAxisX);
 
       const layoutMeanXMean =  this.createLayout("Przyśpieszenie na osi x (średnie z dni)", "Prędkość kątowa [*/s]");
       const layoutMeanYMean =  this.createLayout("Przyśpieszenie na osi y (średnie z dni)", "Prędkość kątowa [*/s]");
       const layoutMeanZMean =  this.createLayout("Przyśpieszenie na osi z  (średnie z dni)", "Prędkość kątowa [*/s]");
+      const layoutAggregatedXYZ =  this.createLayout("Całkowite przyśpieszenie (średnie z dni)", "Prędkość kątowa [*/s]");
 
       this.graphs.push({
         period: element.period,
@@ -82,6 +85,15 @@ export class MeanTremorByDayComponent implements OnInit {
       this.createGraph(element.data.meanByDayZ.dataBeforeMedRight, meanXAxisZ, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
       this.createGraph(element.data.meanByDayZ.dataAfterMedLeft, meanXAxisZ, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
       this.createGraph(element.data.meanByDayZ.dataAfterMedRight, meanXAxisZ, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+    ]
+  }
+
+  private getDataAggregatedXYZ(element: TremorAnalysis, meanXAxisZ: number[]) {
+    return [
+      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedLeft, meanXAxisZ, "Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
+      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedRight, meanXAxisZ, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedLeft, meanXAxisZ, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedRight, meanXAxisZ, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
