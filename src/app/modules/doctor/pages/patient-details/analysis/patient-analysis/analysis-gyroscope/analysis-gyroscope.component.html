@@ -40,4 +40,54 @@
     </mat-expansion-panel-header>
     <app-histogram-tremor [tremorData]="tremorData" ></app-histogram-tremor>
   </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Funkcja gęstości prawdopodbieństwa przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-kde-tremor [tremorData]="tremorData" ></app-kde-tremor>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Odstające wartości od średniej na osiach x,y,z (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-outliers-tremor-mean [tremorData]="tremorData" ></app-outliers-tremor-mean>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Odstające wartości od średniej na osiach x,y,z - histogram (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-outliers-tremor-histogram [tremorData]="tremorData" ></app-outliers-tremor-histogram>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Odstające wartości od średniej na osiach x,y,z - boxplot (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-outliers-tremor-boxplot [tremorData]="tremorData" ></app-outliers-tremor-boxplot>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Odstające wartości od średniej na osiach x,y,z - funkcja gęstości prawdopodobieństwa (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-outliers-tremor-kde [tremorData]="tremorData" ></app-outliers-tremor-kde>
+  </mat-expansion-panel>
 </mat-accordion>

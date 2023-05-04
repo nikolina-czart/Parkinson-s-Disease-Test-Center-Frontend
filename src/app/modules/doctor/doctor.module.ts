@@ -46,6 +46,13 @@ import { MeanPlotComponent } from './pages/patient-details/analysis/patient-anal
 import { MeanTremorByDayComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/mean-tremor-by-day/mean-tremor-by-day.component';
 import { BoxplotTremorComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/boxplot-tremor/boxplot-tremor.component';
 import { HistogramTremorComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/histogram-tremor/histogram-tremor.component';
+import { KdeTremorComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/kde-tremor/kde-tremor.component';
+import { OutliersTremorMeanComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/outliers-tremor-mean/outliers-tremor-mean.component';
+import { OutliersTremorBoxplotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/outliers-tremor-boxplot/outliers-tremor-boxplot.component';
+import { OutliersTremorHistogramComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/outliers-tremor-histogram/outliers-tremor-histogram.component';
+import { OutliersTremorKdeComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/outliers-tremor-kde/outliers-tremor-kde.component';
+import { TremorTabelComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/tremor-tabel/tremor-tabel.component';
+import { PatientsComponent } from './pages/patients/patients.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +80,14 @@ import { HistogramTremorComponent } from './pages/patient-details/analysis/patie
     MeanPlotComponent,
     MeanTremorByDayComponent,
     BoxplotTremorComponent,
-    HistogramTremorComponent
+    HistogramTremorComponent,
+    KdeTremorComponent,
+    OutliersTremorMeanComponent,
+    OutliersTremorBoxplotComponent,
+    OutliersTremorHistogramComponent,
+    OutliersTremorKdeComponent,
+    TremorTabelComponent,
+    PatientsComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,7 @@
+<div *ngFor="let graph of graphs">
+  <p>{{graph.period}}</p>
+  <plotly-plot [data]="graph.meanByDayX.data" [layout]="graph.meanByDayX.layout"></plotly-plot>
+  <plotly-plot [data]="graph.meanByDayY.data" [layout]="graph.meanByDayY.layout"></plotly-plot>
+  <plotly-plot [data]="graph.meanByDayZ.data" [layout]="graph.meanByDayZ.layout"></plotly-plot>
+  <plotly-plot [data]="graph.aggregatedMeanByDay.data" [layout]="graph.aggregatedMeanByDay.layout"></plotly-plot>
+</div>

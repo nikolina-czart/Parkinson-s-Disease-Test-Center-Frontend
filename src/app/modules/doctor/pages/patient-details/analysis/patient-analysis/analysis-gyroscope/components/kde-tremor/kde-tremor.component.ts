@@ -3,11 +3,11 @@ import {TremorAnalysis} from "../../../../../../../../../models/analysis/finger-
 import {TremorGraphData} from "../../../../../../../../../models/analysis/finger-tapping/tremor-graph-data";
 
 @Component({
-  selector: 'app-histogram-tremor',
-  templateUrl: './histogram-tremor.component.html',
-  styleUrls: ['./histogram-tremor.component.css']
+  selector: 'app-kde-tremor',
+  templateUrl: './kde-tremor.component.html',
+  styleUrls: ['./kde-tremor.component.css']
 })
-export class HistogramTremorComponent implements OnInit{
+export class KdeTremorComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];
   graphs: TremorGraphData[] = [];
 
@@ -96,32 +96,35 @@ export class HistogramTremorComponent implements OnInit{
   private createGraph(data: number[], name:string, colorLine:string, colorPoint: string) {
     return {
       x: data,
-      type: 'histogram',
+      type: 'violin',
+      y0: "Dane",
+      legendgroup: name,
+      scalegroup: 'Scale group',
       name: name,
-      marker: {
-        color: colorPoint,
-        line: {
-          color:  colorLine,
-          width: 1
-        }
+      side: 'positive',
+      box: {
+        visible: false
       },
-      opacity: 0.5,
-      nbinsx: 20
+      line: {
+        color: colorPoint,
+        width: 2
+      },
+      meanline: {
+        visible: false
+      }
     }
   }
 
-  private createLayout(title: string, titleY: string) {
+  private createLayout(title: string, titleX: string) {
     return {
       title: title,
       xaxis: {
-        title: "Value"
+        title: titleX
       },
       yaxis: {
-        title: "Count"
+        title: "Wykres gętości prawdopodobieństwa",
+        showticklabels: false
       },
-      bargap: 0.01,
-      bargroupgap: 0.1,
-      barmode: "overlay",
     }
   }
 }

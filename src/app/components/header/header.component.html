@@ -7,9 +7,9 @@
         <span>Witaj, {{user?.name}}!</span>
         <button class="circle" [matMenuTriggerFor]="infoMenu">{{logoUser}}</button>
         <mat-menu #infoMenu="matMenu" xPosition="before">
-          <button mat-menu-item>
+          <button mat-menu-item  (click)="allPatientInfo()">
             <mat-icon>person</mat-icon>
-            <span class="menu-text">Informacje</span>
+            <span class="menu-text">Pacjenci</span>
           </button>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
