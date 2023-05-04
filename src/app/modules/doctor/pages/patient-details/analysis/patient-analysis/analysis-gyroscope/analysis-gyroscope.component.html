@@ -31,5 +31,13 @@
     <app-boxplot-tremor [tremorData]="tremorData" ></app-boxplot-tremor>
   </mat-expansion-panel>
 
-
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Histogram przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-histogram-tremor [tremorData]="tremorData" ></app-histogram-tremor>
+  </mat-expansion-panel>
 </mat-accordion>

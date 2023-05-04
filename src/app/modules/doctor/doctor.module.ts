@@ -45,6 +45,7 @@ import { ViolinComponent } from './pages/patient-details/analysis/patient-analys
 import { MeanPlotComponent } from './pages/patient-details/analysis/patient-analysis/analysis-finger-tapping/components/mean-plot/mean-plot.component';
 import { MeanTremorByDayComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/mean-tremor-by-day/mean-tremor-by-day.component';
 import { BoxplotTremorComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/boxplot-tremor/boxplot-tremor.component';
+import { HistogramTremorComponent } from './pages/patient-details/analysis/patient-analysis/analysis-gyroscope/components/histogram-tremor/histogram-tremor.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { BoxplotTremorComponent } from './pages/patient-details/analysis/patient
     ViolinComponent,
     MeanPlotComponent,
     MeanTremorByDayComponent,
-    BoxplotTremorComponent
+    BoxplotTremorComponent,
+    HistogramTremorComponent
   ],
   imports: [
     CommonModule,

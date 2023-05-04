@@ -42,8 +42,8 @@ export class MeanTremorByDayComponent implements OnInit {
           layout: layoutMeanZMean
         },
         aggregatedMeanByDay: {
-          data: [],
-          layout: {}
+          data: aggregatedXYZ,
+          layout: layoutAggregatedXYZ
         },
         differenceMeanByDayX: {
           data: [],
