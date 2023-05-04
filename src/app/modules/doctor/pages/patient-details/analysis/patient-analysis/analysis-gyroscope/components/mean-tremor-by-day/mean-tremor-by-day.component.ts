@@ -12,9 +12,9 @@ export class MeanTremorByDayComponent implements OnInit {
   graphs: TremorGraphData[] = [];
   ngOnInit(): void {
     this.tremorData.forEach(element => {
-      const meanXAxisX = this.createNumberArray(element.data.meanByDayX.dataAfterMedRight.length);
-      const meanXAxisY = this.createNumberArray(element.data.meanByDayY.dataAfterMedRight.length);
-      const meanXAxisZ = this.createNumberArray(element.data.meanByDayZ.dataAfterMedRight.length);
+      const meanXAxisX = this.createNumberArray(element.data.meanByDayX.dataBeforeMedLeft.length);
+      const meanXAxisY = this.createNumberArray(element.data.meanByDayY.dataBeforeMedLeft.length);
+      const meanXAxisZ = this.createNumberArray(element.data.meanByDayZ.dataBeforeMedLeft.length);
 
       const meanX = this.getDataMeanX(element, meanXAxisX);
       const meanY =  this.getDataMeanY(element, meanXAxisY);

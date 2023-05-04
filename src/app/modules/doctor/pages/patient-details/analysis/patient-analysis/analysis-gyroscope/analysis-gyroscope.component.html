@@ -11,7 +11,6 @@
 <!--    <app-data-tabel [data]="histogramData"></app-data-tabel>-->
 <!--  </mat-expansion-panel>-->
 
-  <!--  histogram-->
   <mat-expansion-panel (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
@@ -21,5 +20,16 @@
     </mat-expansion-panel-header>
     <app-mean-tremor-by-day [tremorData]="tremorData" ></app-mean-tremor-by-day>
   </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Boxplot przyśpieszeń na osiach x,y,z i zagregowanych danych (średnia z dni)
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-boxplot-tremor [tremorData]="tremorData" ></app-boxplot-tremor>
+  </mat-expansion-panel>
+
 
 </mat-accordion>
