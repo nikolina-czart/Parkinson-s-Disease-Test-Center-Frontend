@@ -6,7 +6,7 @@ import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 @Component({
   selector: 'app-box-plot',
   templateUrl: './box-plot.component.html',
-  styleUrls: ['./box-plot.component.css']
+  styleUrls: ['./box-plot.component.scss']
 })
 export class BoxPlotComponent implements OnInit{
   @Input() data!: FingerTappingAnalysis[];
@@ -151,9 +151,10 @@ export class BoxPlotComponent implements OnInit{
       title: title,
       yaxis: {
         title: yaxis,
-        autorange: false,
-        range: [0, maxRange],
-      }
+      },
+      xaxis: {
+        showticklabels: false
+      },
     }
   }
 }

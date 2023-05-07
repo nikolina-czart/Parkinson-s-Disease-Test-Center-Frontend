@@ -1,11 +1,22 @@
 export interface Result{
-  testDate: string
+  date: string
   medicineSupply: string
   side: string
+  accelData: Accel
+  tappingData: Tapping
+}
+
+export interface Accel{
   timestamp: string[]
   x: string[]
   y: string[]
   z: string[]
-  timestampUpDown: string[]
+}
+
+export interface Tapping{
+  timestamp: string[]
   upDown: string[]
+  x: string[]
+  y: string[]
+  clickSide: string[]
 }

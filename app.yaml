@@ -1,0 +1,18 @@
+runtime: nodejs18
+service: client
+handlers:
+  # Serve all static files with urls ending with a file extension
+  - url: /(.*\..+)$
+    static_files: dist/pdtest-center-frontend/\1
+    upload: dist/pdtest-center-frontend/(.*\..+)$
+    # catch all handler to index.html
+  - url: /.*
+    static_files: dist/pdtest-center-frontend/index.html
+    upload: dist/pdtest-center-frontend/index.html
+#  - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+#    static_files: dist/pdtest-center-frontend/\1
+#    upload: dist/pdtest-center-frontend/(.*)(|\.map)
+#
+#  - url: /(.*)
+#    static_files: dist/pdtest-center-frontend/index.html
+#    upload: dist/pdtest-center-frontend/index.html

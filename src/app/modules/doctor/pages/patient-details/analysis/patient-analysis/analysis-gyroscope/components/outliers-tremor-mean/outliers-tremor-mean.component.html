@@ -1,5 +1,5 @@
 <div *ngFor="let graph of graphs">
-  <p>{{graph.period}}</p>
+  <p class="title-period">{{graph.period}}</p>
   <plotly-plot [data]="graph.differenceMeanByDayX.data" [layout]="graph.differenceMeanByDayX.layout"></plotly-plot>
   <plotly-plot [data]="graph.differenceMeanByDayY.data" [layout]="graph.differenceMeanByDayY.layout"></plotly-plot>
   <plotly-plot [data]="graph.differenceMeanByDayZ.data" [layout]="graph.differenceMeanByDayZ.layout"></plotly-plot>

@@ -5,7 +5,7 @@ import {TremorGraphData} from "../../../../../../../../../models/analysis/finger
 @Component({
   selector: 'app-outliers-tremor-boxplot',
   templateUrl: './outliers-tremor-boxplot.component.html',
-  styleUrls: ['./outliers-tremor-boxplot.component.css']
+  styleUrls: ['./outliers-tremor-boxplot.component.scss']
 })
 export class OutliersTremorBoxplotComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];

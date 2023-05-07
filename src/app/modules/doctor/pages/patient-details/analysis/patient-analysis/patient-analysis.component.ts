@@ -26,35 +26,33 @@ export class PatientAnalysisComponent implements OnInit {
   fingerTappindData!: FingerTappingAnalysis[];
   tremorData!: TremorAnalysis[];
   showGyroscopeAnalysis!: boolean;
+  showFingerTapping!: boolean;
 
   constructor(private doctorService: DoctorService) {
   }
   ngOnInit(): void {
     this.showTable = false;
     this.showGyroscopeAnalysis = false;
+    this.showFingerTapping = false;
     this.selectedPatient = this.doctorService.selectedPatient;
   }
 
   getAnalysisData() {
-    console.log(this.selectedTest)
-    if(this.selectedTest === "FINGER_TAPPING"){
-      const body = {
-        testNameID: "FINGER_TAPPING",
-        period: "Pół roku"
-      }
-      console.log(body)
-      // this.doctorService.getAnalysisData(body).pipe(take(1)).subscribe(data => {
-      //   this.fingerTappindData = data;
-      // })
+    console.log()
+    const body = {
+      testNameID: this.selectedTest,
+      period: this.selectedTimeRange
     }
-    if(this.selectedTest === " GYROSCOPE"){
-      const body = {
-        testNameID: " GYROSCOPE",
-        period: "Pół roku"
-      }
+    if(this.selectedTest === "FINGER_TAPPING"){
+      this.doctorService.getAnalysisData(body).pipe(take(1)).subscribe(data => {
+        this.fingerTappindData = data;
+        this.showFingerTapping = true;
+      })
+    }
+    if(this.selectedTest === " GYROSCOPE_TEST"){
       this.doctorService.getTremorAnalysisData(body).pipe(take(1)).subscribe(data => {
         this.tremorData = data;
-        this.showGyroscopeAnalysis = true
+        this.showGyroscopeAnalysis = true;
       })
     }
     this.showTable = true;

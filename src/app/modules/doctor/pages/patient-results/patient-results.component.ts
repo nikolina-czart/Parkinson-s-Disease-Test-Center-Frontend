@@ -71,19 +71,19 @@ export class PatientResultsComponent implements OnInit{
     this.selectedResult = resulTest;
     this.isSelectedResult = true;
     this.isSend = true;
-    // if(this.selectedTest === TestType.FINGER_TAPPING) {
-    //   this.isFingerTapping = true;
-    // }else {
-    //   this.isFingerTapping = false;
-    // }
+    if(this.selectedTest === "FINGER_TAPPING") {
+      this.isFingerTapping = true;
+    }else {
+      this.isFingerTapping = false;
+    }
+
     this.chartX();
   }
 
   chart3D() {
-    console.log("3D")
     this.chart = {
       data:
-        [{x: this.selectedResult.x, y: this.selectedResult.y, z: this.selectedResult.z,
+        [{x: this.selectedResult.accelData.x, y: this.selectedResult.accelData.y, z: this.selectedResult.accelData.z,
           type: "scatter3d", mode: "markers", marker: {color: 'red'} },
         ],
       layout: {
@@ -103,8 +103,8 @@ export class PatientResultsComponent implements OnInit{
 
   chartX() {
     this.setChart(
-      this.selectedResult.timestamp,
-      this.selectedResult.x,
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.x,
       "scatter", "" +
       "Wykres pozycji X",
       "Czas [s]",
@@ -114,8 +114,8 @@ export class PatientResultsComponent implements OnInit{
 
   chartY() {
     this.setChart(
-      this.selectedResult.timestamp,
-      this.selectedResult.y,
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.y,
       "scatter", "" +
       "Wykres pozycji Y",
       "Czas [s]",
@@ -125,8 +125,8 @@ export class PatientResultsComponent implements OnInit{
 
   chartZ() {
     this.setChart(
-      this.selectedResult.timestamp,
-      this.selectedResult.z,
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.z,
       "scatter", "" +
       "Wykres pozycji Z",
       "Czas [s]",
@@ -136,8 +136,8 @@ export class PatientResultsComponent implements OnInit{
 
   chartUpDown() {
     this.setChart(
-      this.selectedResult.timestampUpDown,
-      this.selectedResult.upDown,
+      this.selectedResult.tappingData.timestamp,
+      this.selectedResult.tappingData.upDown,
       "scatter", "" +
       "Wykres pozycji X",
       "Czas [s]",

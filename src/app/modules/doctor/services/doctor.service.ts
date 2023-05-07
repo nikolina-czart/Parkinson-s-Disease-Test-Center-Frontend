@@ -9,6 +9,8 @@ import {ConfigTests} from "../../../models/tests/config-tests";
 import {Cacheable} from "ts-cacheable";
 import {FingerTappingAnalysis} from "../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {TremorAnalysis} from "../../../models/analysis/finger-tapping/TremorAnalysis";
+import {SummaryPatient} from "../../../models/user/doctor/summary-patient";
+import {MeanSummaryPatients} from "../../../models/user/doctor/mean-summary-patiens";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +50,18 @@ export class DoctorService {
     return this.httpClient.post<TremorAnalysis[]>(`api/analysis-tests/${userId}/tremor/chart-data`, body,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
+  @Cacheable({maxAge: 36000000})
+  getSummaryData(): Observable<SummaryPatient[]> {
+    const userId = this.authService.decodedToken.userId;
+    return this.httpClient.get<SummaryPatient[]>(`/api/doctor/${userId}/patients-summary/details`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+  }
+
+  @Cacheable({maxAge: 36000000})
+  getMeanSummaryData(): Observable<MeanSummaryPatients[]> {
+    const userId = this.authService.decodedToken.userId;
+    return this.httpClient.get<MeanSummaryPatients[]>(`/api/doctor/${userId}/patients-summary`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+  }
+
   getTestDetails(filters: { formDate: any; toDate: any; testNameID: any }): Observable<Result[]> {
     const userId = this._selectedPatient.uid;
     return this.httpClient.post<Result[]>(`/api/result/${userId}/test`, filters, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
@@ -55,7 +69,7 @@ export class DoctorService {
 
   getTest(filters: { formDate: any; toDate: any; testNameID: any }): Observable<Result[]> {
     const userId = this._selectedPatient.uid;
-    return this.httpClient.post<Result[]>(`/api/result/${userId}/test`, filters, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
+    return this.httpClient.post<Result[]>(`/api/test-results/${userId}`, filters, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
   }
 
   setSelectedPatient(patient: Patient) {
@@ -70,4 +84,6 @@ export class DoctorService {
     const userId = this._selectedPatient.uid;
     return this.httpClient.post<AggregatedData[]>(`/api/analyzed/${userId}/test`, filters, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
+
+
 }

@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'app-density',
   templateUrl: './density.component.html',
-  styleUrls: ['./density.component.css']
+  styleUrls: ['./density.component.scss']
 })
 export class DensityComponent implements OnInit{
   @Input() data!: FingerTappingAnalysis[];
@@ -113,7 +113,6 @@ export class DensityComponent implements OnInit{
         showticklabels: false
       },
       xaxis: {
-        range: rangeX,
         title: titleAxisX
       },
     }

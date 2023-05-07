@@ -4,7 +4,7 @@ import {TremorAnalysis} from "../../../../../../../models/analysis/finger-tappin
 @Component({
   selector: 'app-analysis-gyroscope',
   templateUrl: './analysis-gyroscope.component.html',
-  styleUrls: ['./analysis-gyroscope.component.css']
+  styleUrls: ['./analysis-gyroscope.component.scss']
 })
 export class AnalysisGyroscopeComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];

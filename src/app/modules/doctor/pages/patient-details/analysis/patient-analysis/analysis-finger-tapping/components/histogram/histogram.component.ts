@@ -7,7 +7,7 @@ import {
 @Component({
   selector: 'app-histogram',
   templateUrl: './histogram.component.html',
-  styleUrls: ['./histogram.component.css']
+  styleUrls: ['./histogram.component.scss']
 })
 export class HistogramComponent implements OnInit {
   @Input() histogramData!: FingerTappingAnalysis[];
@@ -24,7 +24,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeft),
             this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRight)
           ],
-          layout: this.getLayout('Hold Time')
+          layout: this.getLayout('Hold Time', "HT [ms]")
         },
         dataUpTime: {
           data: [
@@ -33,7 +33,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeft),
             this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRight)
           ],
-          layout: this.getLayout('Up Time')
+          layout: this.getLayout('Up Time', "UT [ms]")
         },
         dataIntertapInterval: {
           data: [
@@ -42,7 +42,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeft),
             this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRight)
           ],
-          layout: this.getLayout('Intertap Invertal')
+          layout: this.getLayout('Intertap Invertal', "IIT [ms]")
         },
         dataTouchTimeMean: {
           data: [
@@ -51,7 +51,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeftMeanByDays),
             this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRightMeanByDays)
           ],
-          layout: this.getLayout('Hold Time - średnia z pomiaru')
+          layout: this.getLayout('Hold Time - średnia z pomiaru', "HT [ms]")
         },
         dataUpTimeMean: {
           data: [
@@ -60,7 +60,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeftMeanByDays),
             this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRightMeanByDays)
           ],
-          layout: this.getLayout('Up Time - średnia z pomiaru')
+          layout: this.getLayout('Up Time - średnia z pomiaru', "UT [ms]")
         },
         dataIntertapIntervalMean: {
           data: [
@@ -69,7 +69,7 @@ export class HistogramComponent implements OnInit {
             this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeftMeanByDays),
             this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRightMeanByDays)
           ],
-          layout: this.getLayout('Intertap Invertal - średnia z pomiaru')
+          layout: this.getLayout('Intertap Invertal - średnia z pomiaru', "IIT [ms]")
         },
       })
     })
@@ -157,14 +157,14 @@ export class HistogramComponent implements OnInit {
       }
     }
   }
-  private getLayout(title: string) {
+  private getLayout(title: string, titleX: string) {
     return {
       bargap: 0.05,
       bargroupgap: 0.2,
       barmode: "overlay",
       title: title,
-      xaxis: {title: "Value"},
-      yaxis: {title: "Count"}
+      xaxis: {title: titleX},
+      yaxis: {title: "Ilość wystąpień"}
     }
   }
 

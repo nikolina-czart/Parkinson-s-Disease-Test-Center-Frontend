@@ -5,7 +5,7 @@ import {TremorGraphData} from "../../../../../../../../../models/analysis/finger
 @Component({
   selector: 'app-kde-tremor',
   templateUrl: './kde-tremor.component.html',
-  styleUrls: ['./kde-tremor.component.css']
+  styleUrls: ['./kde-tremor.component.scss']
 })
 export class KdeTremorComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];

@@ -2,14 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {
   FingerTappingAnalysisData
 } from "../../../../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
-import {MatTableDataSource} from "@angular/material/table";
 import {FingerTappingAnalysis} from "../../../../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
-import {sum} from "mathjs";
 
 @Component({
   selector: 'app-data-tabel',
   templateUrl: './data-tabel.component.html',
-  styleUrls: ['./data-tabel.component.css']
+  styleUrls: ['./data-tabel.component.scss']
 })
 export class DataTabelComponent implements OnInit {
   displayedColumns: string[] = ['parameter', 'meanLeft', 'deviationLeft', 'meanRight', 'deviationRight'];

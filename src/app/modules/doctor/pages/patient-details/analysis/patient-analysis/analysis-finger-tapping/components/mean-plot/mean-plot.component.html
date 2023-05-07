@@ -1,6 +1,30 @@
 <div *ngFor="let graph of graphs">
-  <p>{{graph.period}}</p>
-  <plotly-plot [data]="graph.dataTouchTimeMean.data" [layout]="graph.dataTouchTimeMean.layout"></plotly-plot>
-  <plotly-plot [data]="graph.dataUpTimeMean.data" [layout]="graph.dataUpTimeMean.layout"></plotly-plot>
-  <plotly-plot [data]="graph.dataIntertapIntervalMean.data" [layout]="graph.dataIntertapIntervalMean.layout"></plotly-plot>
+  <p class="title-period">{{graph.period}}</p>
+  <div class="plotly-summary">
+    <plotly-plot [data]="graph.touchTimeBeforeLeft.data" [layout]="graph.touchTimeBeforeLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.touchTimeBeforeRight.data" [layout]="graph.touchTimeBeforeRight.layout"></plotly-plot>
+  </div>
+  <div class="plotly-summary" *ngIf="!showGraphTouchTimeAfterMed">
+    <plotly-plot [data]="graph.touchTimeAfterLeft.data" [layout]="graph.touchTimeAfterLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.touchTimeAfterRight.data" [layout]="graph.touchTimeAfterRight.layout"></plotly-plot>
+  </div>
+
+  <div class="plotly-summary">
+    <plotly-plot [data]="graph.upTimeBeforeLeft.data" [layout]="graph.upTimeBeforeLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.upTimeBeforeRight.data" [layout]="graph.upTimeBeforeRight.layout"></plotly-plot>
+  </div>
+  <div class="plotly-summary" *ngIf="!showGraphUpTimeAfterMed">
+    <plotly-plot [data]="graph.upTimeAfterLeft.data" [layout]="graph.upTimeAfterLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.upTimeAfterRight.data" [layout]="graph.upTimeAfterRight.layout"></plotly-plot>
+  </div>
+
+  <div class="plotly-summary">
+    <plotly-plot [data]="graph.intertapIntervalBeforeLeft.data" [layout]="graph.intertapIntervalAfterLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.intertapIntervalBeforeRight.data" [layout]="graph.intertapIntervalAfterRight.layout"></plotly-plot>
+  </div>
+  <div class="plotly-summary" *ngIf="!showGraphIntertapIntervalAfterMed">
+    <plotly-plot [data]="graph.intertapIntervalAfterLeft.data" [layout]="graph.intertapIntervalAfterLeft.layout"></plotly-plot>
+    <plotly-plot [data]="graph.intertapIntervalAfterRight.data" [layout]="graph.intertapIntervalAfterRight.layout"></plotly-plot>
+  </div>
+
 </div>

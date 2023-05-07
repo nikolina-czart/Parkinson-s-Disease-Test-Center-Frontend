@@ -15,8 +15,10 @@ export class SummaryPatientsComponent implements OnInit {
   graphLayout!: {}
 
   ngOnInit(): void {
+    console.log(this.summaryPatient)
     const patientPD = this.summaryPatient.find(e => e.parameter === "Liczba pacjentów")!.patientPD;
     const patientControl = this.summaryPatient.find(e => e.parameter === "Liczba pacjentów")!.patientControl;
+
     this.graphData = [{
       values: [patientPD, patientControl],
       labels: ['Pacjenci z PD', 'Pacjenci kontrolni'],

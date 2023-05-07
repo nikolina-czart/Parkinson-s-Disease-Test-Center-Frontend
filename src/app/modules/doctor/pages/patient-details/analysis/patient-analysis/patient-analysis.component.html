@@ -31,7 +31,7 @@
 
     <div class="show-results" *ngIf="showTable">
       <p class="results-info">Wyniki analizy testów:</p>
-      <div *ngIf="selectedTest ==='FINGER_TAPPING'">
+      <div *ngIf="showFingerTapping">
         <app-analysis-finger-tapping [histogramData]="fingerTappindData"></app-analysis-finger-tapping>
       </div>
       <div *ngIf="showGyroscopeAnalysis">

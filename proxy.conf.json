@@ -1,0 +1,16 @@
+{
+  "/api/*": {
+    "target": "http://localhost:8080/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
+//{
+//  "/api/*": {
+//    "target": "https://parkinson-disease-center.ew.r.appspot.com/",
+//    "secure": false,
+//    "logLevel": "debug",
+//    "changeOrigin": true
+//  }
+//}

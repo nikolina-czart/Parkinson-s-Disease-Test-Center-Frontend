@@ -5,7 +5,7 @@ import {TremorGraphData} from "../../../../../../../../../models/analysis/finger
 @Component({
   selector: 'app-mean-tremor-by-day',
   templateUrl: './mean-tremor-by-day.component.html',
-  styleUrls: ['./mean-tremor-by-day.component.css']
+  styleUrls: ['./mean-tremor-by-day.component.scss']
 })
 export class MeanTremorByDayComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];

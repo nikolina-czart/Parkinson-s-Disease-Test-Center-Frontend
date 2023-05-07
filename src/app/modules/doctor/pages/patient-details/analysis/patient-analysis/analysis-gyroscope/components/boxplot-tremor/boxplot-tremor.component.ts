@@ -5,7 +5,7 @@ import {TremorGraphData} from "../../../../../../../../../models/analysis/finger
 @Component({
   selector: 'app-boxplot-tremor',
   templateUrl: './boxplot-tremor.component.html',
-  styleUrls: ['./boxplot-tremor.component.css']
+  styleUrls: ['./boxplot-tremor.component.scss']
 })
 export class BoxplotTremorComponent implements OnInit {
   @Input() tremorData!: TremorAnalysis[];
@@ -115,6 +115,9 @@ export class BoxplotTremorComponent implements OnInit {
       title: title,
       yaxis: {
         title: titleY,
+      },
+      xaxis: {
+        showticklabels: false
       },
     }
   }

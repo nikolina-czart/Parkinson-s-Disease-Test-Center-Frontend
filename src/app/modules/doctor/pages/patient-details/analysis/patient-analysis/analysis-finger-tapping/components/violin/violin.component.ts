@@ -8,7 +8,7 @@ import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 @Component({
   selector: 'app-violin',
   templateUrl: './violin.component.html',
-  styleUrls: ['./violin.component.css']
+  styleUrls: ['./violin.component.scss']
 })
 export class ViolinComponent implements OnInit {
   @Input() data!: FingerTappingAnalysis[];
@@ -92,8 +92,6 @@ export class ViolinComponent implements OnInit {
     return {
       title: title,
       yaxis: {
-        zeroline: false,
-        range: [minRangeY, maxRangeY],
         title: titleAxisY
       },
     }

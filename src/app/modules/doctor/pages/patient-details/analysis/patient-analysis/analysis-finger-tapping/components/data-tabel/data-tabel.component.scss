@@ -1,16 +1,5 @@
 @import "src/assets/styles/styles";
 
-.subtitle {
-  font-size: $font-size-l ;
-  font-weight: bold;
-  color: $blue;
-  margin: 0 0 10px;
-}
-
-.information-section {
-  margin: 20px 0 30px 0;
-}
-
 mat-header-cell {
   font-weight: bold;
   padding-top: 16px;
@@ -18,7 +7,6 @@ mat-header-cell {
 }
 
 mat-table {
-  padding: 16px;
   box-shadow: none;
   @include default-shadow()
 }
@@ -28,3 +16,11 @@ mat-cell {
   padding-bottom: 16px;
 }
 
+.title-period {
+  font-weight: 600;
+  text-align: center;
+}
+
+.period-section {
+  margin-top: 25px;
+}
