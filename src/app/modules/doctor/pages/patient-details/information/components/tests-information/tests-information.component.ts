@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ConfigTests} from "../../../../../../../models/tests/config-tests";
 import {MatTableDataSource} from "@angular/material/table";
 
@@ -7,10 +7,14 @@ import {MatTableDataSource} from "@angular/material/table";
   templateUrl: './tests-information.component.html',
   styleUrls: ['./tests-information.component.scss']
 })
-export class TestsInformationComponent {
+export class TestsInformationComponent implements OnInit{
   @Input() dataSource!: MatTableDataSource<ConfigTests>;
   @Input() showTable!: boolean;
   displayedColumns: string[] = ['testName', 'testIcon', 'startDate', 'lastDate', 'numberTest'];
+
+  ngOnInit(): void {
+    console.log(this.dataSource)
+  }
 
 
 }

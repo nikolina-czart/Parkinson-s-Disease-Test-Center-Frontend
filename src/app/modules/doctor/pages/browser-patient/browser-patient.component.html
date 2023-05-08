@@ -1,16 +1,18 @@
 <div class="card-position">
   <div class="container-browser">
-    <h2 class="tittle-browser">Wszyscy Twoi pacjenci:</h2>
+    <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
 
-    <p class="search-info">Wyszukaj pacjenta</p>
+    <h2 class="tittle-browser">All your patients:</h2>
+
+    <p class="search-info">Search for a patient</p>
     <div class="row">
       <div class="search-patient">
-        <input placeholder="Wprowadź imię, nazwisko lub email pacjenta" class="search-input" (keyup)="searchFilter($event)" #input>
+        <input placeholder="Enter patient's name or email" class="search-input" (keyup)="searchFilter($event)" #input>
         <mat-icon class="search-icon">search</mat-icon>
       </div>
 
       <button mat-raised-button (click)="addNewPatient()">
-        Dodaj nowego pacjenta
+        Add a new patient
         <mat-icon class="add-icon">add_circle</mat-icon>
       </button>
     </div>
@@ -19,7 +21,7 @@
       <mat-table class="table-details" [dataSource]="patientsDataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="fullName">
-          <mat-header-cell *matHeaderCellDef> Imię i nazwisko </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name+ " " + element.surname}} </mat-cell>
         </ng-container>
 
@@ -29,7 +31,7 @@
         </ng-container>
 
         <ng-container matColumnDef="patientTests">
-          <mat-header-cell *matHeaderCellDef> Testy </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Tests </mat-header-cell>
           <mat-cell *matCellDef="let element">
             <div *ngFor="let test of element.patientTests">
               <mat-icon [matTooltip]="test.namePL" [matTooltipPosition]="'above'">{{test.icon}}</mat-icon>
@@ -40,7 +42,7 @@
         <ng-container matColumnDef="details" stickyEnd class="">
           <mat-header-cell *matHeaderCellDef> </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            Sprawdź szczegóły
+            Check details
             <mat-icon>more_vert</mat-icon>
           </mat-cell>
         </ng-container>
@@ -57,7 +59,7 @@
     </div>
 
     <div class="" *ngIf="!showTable">
-      <p>Nie posiadasz przypisanych pacjentów</p>
+      <p>You have no patients assigned</p>
     </div>
 
 

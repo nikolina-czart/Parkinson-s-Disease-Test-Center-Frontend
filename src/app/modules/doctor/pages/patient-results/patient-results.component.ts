@@ -5,6 +5,8 @@ import {DoctorService} from "../../services/doctor.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Result} from "../../../../models/results/result";
 import {take} from "rxjs";
+import {TestInformation} from "../../../../models/tests/test-information";
+import {MatSnackBar} from "@angular/material/snack-bar";
 // import {TestType} from "../../../../models/tests/test-info";
 
 @Component({
@@ -19,7 +21,7 @@ export class PatientResultsComponent implements OnInit{
     end: new FormControl<Date | null>(null),
   });
   selectedPatient!: Patient;
-  selectedTest!: string;
+  selectedTest!: TestInformation;
   testResults!: Result[];
   showTable!: boolean;
   isSend: boolean = false;
@@ -33,12 +35,12 @@ export class PatientResultsComponent implements OnInit{
   isFingerTapping: boolean = false;
 
   constructor(private router: Router,
-              private doctorService: DoctorService) {
+              private doctorService: DoctorService,
+              private _snackBar: MatSnackBar) {
   }
   ngOnInit() {
     this.showTable = false;
     this.selectedPatient = this.doctorService.selectedPatient;
-    console.log(!!this.selectedTest && !!this.range.controls.start.value && !!this.range.controls.end.value)
   }
 
   showPatientDetails(patient: Patient) {
@@ -47,8 +49,10 @@ export class PatientResultsComponent implements OnInit{
   }
 
   getTestsResults() {
+    this.isSelectedResult = false;
+    this.showTable = false;
     const filters = {
-      testNameID: this.selectedTest,
+      testNameID: this.selectedTest.uid,
       formDate: this.range.get('start')?.value?.toLocaleDateString('en-CA'),
       toDate: this.range.get('end')?.value?.toLocaleDateString('en-CA')
     }
@@ -58,20 +62,12 @@ export class PatientResultsComponent implements OnInit{
     })
   }
 
-  resetFilters() {
-    this.showTable = false;
-    this.selectedTest = "";
-    this.testResults = []
-    this.range.reset();
-    this.isSend = false;
-  }
 
   showTestDetails(resulTest: Result) {
-    console.log(resulTest)
     this.selectedResult = resulTest;
     this.isSelectedResult = true;
     this.isSend = true;
-    if(this.selectedTest === "FINGER_TAPPING") {
+    if(this.selectedTest.uid === "FINGER_TAPPING") {
       this.isFingerTapping = true;
     }else {
       this.isFingerTapping = false;
@@ -87,15 +83,15 @@ export class PatientResultsComponent implements OnInit{
           type: "scatter3d", mode: "markers", marker: {color: 'red'} },
         ],
       layout: {
-        title: "Wykres 3D",
+        title: "Graph 3D",
         xaxis: {
-          title: "Pozycja x",
+          title: "Position x",
         },
         yaxis: {
-          title: "Pozycja y"
+          title: "Position y"
         },
         zaxis: {
-          title: "Pozycja z"
+          title: "Position z"
         }
       }
     }
@@ -106,9 +102,9 @@ export class PatientResultsComponent implements OnInit{
       this.selectedResult.accelData.timestamp,
       this.selectedResult.accelData.x,
       "scatter", "" +
-      "Wykres pozycji X",
-      "Czas [s]",
-      "Jednostka przyśpieszenia [m/s2]"
+      "Position chart X",
+      "Time [s]",
+      "Acceleration unit [m/s2]"
     )
   }
 
@@ -117,9 +113,9 @@ export class PatientResultsComponent implements OnInit{
       this.selectedResult.accelData.timestamp,
       this.selectedResult.accelData.y,
       "scatter", "" +
-      "Wykres pozycji Y",
+      "Position chart Y",
       "Czas [s]",
-      "Jednostka przyśpieszenia [m/s2]"
+      "Acceleration unit [m/s2]"
     )
   }
 
@@ -128,9 +124,9 @@ export class PatientResultsComponent implements OnInit{
       this.selectedResult.accelData.timestamp,
       this.selectedResult.accelData.z,
       "scatter", "" +
-      "Wykres pozycji Z",
-      "Czas [s]",
-      "Jednostka przyśpieszenia [m/s2]"
+      "Position chart Z",
+      "Time [s]",
+      "Acceleration unit [m/s2]"
     )
   }
 
@@ -139,9 +135,9 @@ export class PatientResultsComponent implements OnInit{
       this.selectedResult.tappingData.timestamp,
       this.selectedResult.tappingData.upDown,
       "scatter", "" +
-      "Wykres pozycji X",
-      "Czas [s]",
-      "Podniesienie / opuszczenia palce"
+      "Position chart X",
+      "Time [s]",
+      "Raise / lower fingers"
     )
   }
 
@@ -159,5 +155,9 @@ export class PatientResultsComponent implements OnInit{
           title: yaxix
         }}
     };
+  }
+
+  saveAllData() {
+    this.doctorService.saveTestsToFile(this.selectedPatient, this.selectedTest.uid, this.testResults)
   }
 }

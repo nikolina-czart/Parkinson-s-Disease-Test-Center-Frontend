@@ -1,36 +1,36 @@
 <div class="information-section">
-  <h2 class="subtitle">Informacje o badaniach</h2>
+  <h2 class="subtitle">Information about the tests</h2>
   <div class="table" *ngIf="showTable">
     <mat-table class="table-details" [dataSource]="dataSource" class="mat-elevation-z8">
 
       <ng-container matColumnDef="testName">
-        <mat-header-cell *matHeaderCellDef> Nazwa testu </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.namePL}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Name of the test </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nameEN}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="testIcon">
-        <mat-header-cell *matHeaderCellDef> Ikona testu </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Test icon </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-icon [matTooltip]="element.namePL" [matTooltipPosition]="'above'">{{element.icon}}</mat-icon>
+          <mat-icon [matTooltip]="element.nameEN" [matTooltipPosition]="'above'">{{element.icon}}</mat-icon>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="startDate">
-        <mat-header-cell *matHeaderCellDef> Data rozpoczęcia badania </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Date of start of test </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div *ngIf="element.startDate; else numberTest">{{element.startDate}}</div>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="lastDate">
-        <mat-header-cell *matHeaderCellDef> Data ostatniego badania </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Date of last test </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div *ngIf="element.lastDate; else numberTest">{{element.lastDate}}</div>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="numberTest">
-        <mat-header-cell *matHeaderCellDef> Ilość wykonanych testów </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Number of tests completed </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div *ngIf="element.numberTest; else numberTest">{{element.numberTest}}</div>
         </mat-cell>
@@ -42,8 +42,8 @@
   </div>
 
   <div class="" *ngIf="!showTable">
-    <p>Pacjent nie ma przypisanych testów</p>
+    <p>Patient does not have tests assigned</p>
   </div>
 </div>
 
-<ng-template #numberTest>Nie rozpoczęto badań</ng-template>
+<ng-template #numberTest>Research has not started</ng-template>

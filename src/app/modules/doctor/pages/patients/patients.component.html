@@ -1,7 +1,7 @@
 <div class="card-position">
   <mat-spinner class="spinner"  *ngIf="!(showSummaryData && showMeanSummaryData)"></mat-spinner>
   <div class="container-browser" *ngIf="showSummaryData && showMeanSummaryData">
-    <h2 class="tittle-browser">Zebrane dane pacjentów:</h2>
+    <h2 class="tittle-browser">Patient data collected:</h2>
 
     <app-summary-patients [summaryPatient] = "summaryPatient"></app-summary-patients>
     <app-boxplot-patient [meanPatientData]="meanPatientData"></app-boxplot-patient>

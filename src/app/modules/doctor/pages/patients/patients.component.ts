@@ -20,19 +20,20 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.doctorService.getSummaryData().pipe(take(1)).subscribe(data => {
+      console.log("summary: ", data)
       this.summaryPatient = data;
       this.showSummaryData = true;
     })
     this.doctorService.getMeanSummaryData().pipe(take(1)).subscribe(data => {
       this.meanPatientData = data;
       this.showMeanSummaryData = true;
-      console.log(data)
+      console.log("mean: ",data)
     })
 
     // this.meanPatientData =
     //   [
     //     {
-    //       group: "Pacjenci z PD - przed lekami",
+    //       group: "Patients with PD - Before medicines",
     //       data: {
     //         touchTime: {
     //           dataLeft: [2, 4, 5, 6],
@@ -77,7 +78,7 @@ export class PatientsComponent implements OnInit {
     //       }
     //     },
     //     {
-    //       group: "Pacjenci z PD - po lekach",
+    //       group: "Patients with PD - After medication",
     //       data: {
     //         touchTime: {
     //           dataLeft: [2, 4, 5, 6],
@@ -122,7 +123,7 @@ export class PatientsComponent implements OnInit {
     //       }
     //     },
     //     {
-    //       group: "Pacjenci kontrolni",
+    //       group: "Control patients",
     //       data: {
     //         touchTime: {
     //           dataLeft: [2, 4, 5, 6],

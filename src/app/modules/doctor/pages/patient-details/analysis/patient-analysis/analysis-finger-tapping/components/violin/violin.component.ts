@@ -29,12 +29,12 @@ export class ViolinComponent implements OnInit {
       const dataIntertapInterval = intertapIntervalIsAfterMedData === 0 ? this.getIntertapIntervalBeforeMedData(element) : this.getIntertapIntervalAllData(element);
       const dataIntertapIntervalMean = intertapIntervalIsAfterMedData === 0 ? this.getIntertapIntervalBeforeMedDataMean(element) : this.getIntertapIntervalAllDataMean(element);
 
-      const layoutHoldTime =  this.createLayout("Hold Time ", 0, 400, "Hold time [ms]");
-      const layoutHoldTimeMean =  this.createLayout("Hold Time (średnie z dni)", 0, 400, "Hold time [ms]");
-      const layoutUpTime =  this.createLayout("Up Time", 0, 400, "Up time [ms]");
-      const layoutUpTimeMean =  this.createLayout("Up Time (średnie z dni)", 0, 300, "Up time [ms]");
-      const layoutIntertapInterval =  this.createLayout("Intertap Interval", 0, 600, "Intertap invertal time [ms]");
-      const layoutIntertapIntervalMean =  this.createLayout("Intertap Interval (średnie z dni)", 0, 600, "Intertap invertal time [ms]");
+      const layoutHoldTime =  this.createLayout("Hold Time ", -100, 700, "Hold time [ms]");
+      const layoutHoldTimeMean =  this.createLayout("Hold Time (averages over days)", 100, 600, "Hold time [ms]");
+      const layoutUpTime =  this.createLayout("Up Time", -200, 600, "Up time [ms]");
+      const layoutUpTimeMean =  this.createLayout("Up Time (averages over days)", 100, 300, "Up time [ms]");
+      const layoutIntertapInterval =  this.createLayout("Intertap Interval", 0, 1000, "Intertap invertal time [ms]");
+      const layoutIntertapIntervalMean =  this.createLayout("Intertap Interval (averages over days)", 200, 800, "Intertap invertal time [ms]");
 
       this.graphs.push({
         period: element.period,
@@ -66,7 +66,7 @@ export class ViolinComponent implements OnInit {
     })
   }
 
-  private createGraphViolin(xTitle: string, data: number[], legendGroup: string, scaleGroup: string, name: string, side: string, color: string) {
+  private createGraphViolin(xTitle: string, data: number[], legendGroup: string, scaleGroup: string, name: string, side: string, color: string, showLegend:boolean) {
     return {
       type: 'violin',
       x0: xTitle,
@@ -84,7 +84,8 @@ export class ViolinComponent implements OnInit {
       },
       meanline: {
         visible: true
-      }
+      },
+      showlegend: showLegend
     }
   }
 
@@ -92,128 +93,129 @@ export class ViolinComponent implements OnInit {
     return {
       title: title,
       yaxis: {
-        title: titleAxisY
+        title: titleAxisY,
+        range: [minRangeY, maxRangeY]
       },
     }
   }
 
   private getHoldTimeBeforeMedData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ]
   }
 
   private getHoldTimeAllData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.touchTime.dataAfterMedLeft, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.touchTime.dataAfterMedRight, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.touchTime.dataAfterMedRight, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.touchTime.dataAfterMedLeft, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.touchTime.dataAfterMedLeft, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.touchTime.dataAfterMedRight, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.touchTime.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.touchTime.dataAfterMedRight, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.touchTime.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.touchTime.dataAfterMedLeft, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ];
   }
 
   private getHoldTimeBeforeMedDataMean(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ]
   }
 
   private getHoldTimeAllDataMean(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.touchTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.touchTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.touchTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.touchTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.touchTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.touchTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.touchTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.touchTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.touchTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.touchTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ]
   }
 
   private getUpTimeBeforeMedData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ]
   }
 
   private getUpTimeAllData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.upTime.dataAfterMedLeft, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.upTime.dataAfterMedRight, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.upTime.dataAfterMedRight, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.upTime.dataAfterMedLeft, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.upTime.dataAfterMedLeft, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.upTime.dataAfterMedRight, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.upTime.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.upTime.dataAfterMedRight, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.upTime.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.upTime.dataAfterMedLeft, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ]
   }
 
   private getUpTimeBeforeMedDataMean(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ];
   }
 
   private getUpTimeAllDataMean(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.upTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.upTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.upTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.upTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.upTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.upTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.upTime.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.upTime.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.upTime.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.upTime.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ];
   }
 
   private getIntertapIntervalBeforeMedData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ]
   }
 
   private getIntertapIntervalAllData(element: FingerTappingAnalysis) {
     return [
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.intertapInterval.dataAfterMedLeft, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.intertapInterval.dataAfterMedRight, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.intertapInterval.dataAfterMedRight, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.intertapInterval.dataAfterMedLeft, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.intertapInterval.dataAfterMedLeft, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.intertapInterval.dataAfterMedRight, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.intertapInterval.dataBeforeMedRight, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.intertapInterval.dataAfterMedRight, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.intertapInterval.dataBeforeMedLeft, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.intertapInterval.dataAfterMedLeft, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ]
   }
 
   private getIntertapIntervalBeforeMedDataMean(element: FingerTappingAnalysis) {
     return  [
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
     ]
   }
 
   private getIntertapIntervalAllDataMean(element: FingerTappingAnalysis) {
     return  [
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Przed lekami", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Przed lekami - prawa strona", 'positive', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.intertapInterval.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "Po lekach - lewa strona", 'negative', "rgba(0, 102, 204, 0.7)"),
-      this.createGraphViolin("Po lekach", element.data.intertapInterval.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Przed lekami - prawa strona", 'negative', "rgba(0, 204, 102, 0.7)"),
-      this.createGraphViolin("Prawa ręka", element.data.intertapInterval.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "Po lekach - prawa strona", 'positive', "rgba(204, 0, 102, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Przed lekami - lewa strona", 'negative', "rgba(204, 102, 0, 0.7)"),
-      this.createGraphViolin("Lewa ręka", element.data.intertapInterval.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "Po lekach - lewa strona", 'positive', "rgba(0, 102, 204, 0.7)")
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-1", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Before medicines (left/right)", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-1", "Before medication - right hand", 'positive', "rgba(0, 204, 102, 0.7)", false),
+      this.createGraphViolin("After medication (left/right)", element.data.intertapInterval.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-2", "After medication - left hand", 'negative', "rgba(0, 102, 204, 0.7)", true),
+      this.createGraphViolin("After medication (left/right)", element.data.intertapInterval.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-2", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Right hand (before/after)", element.data.intertapInterval.dataBeforeMedRightMeanByDays, "legend-group-2", "scale-group-3", "Before medication - right hand", 'negative', "rgba(0, 204, 102, 0.7)", true),
+      this.createGraphViolin("Right hand (before/after)", element.data.intertapInterval.dataAfterMedRightMeanByDays, "legend-group-4", "scale-group-3", "After medication - right hand", 'positive', "rgba(204, 0, 102, 0.7)", false),
+      this.createGraphViolin("Left hand (before/after)", element.data.intertapInterval.dataBeforeMedLeftMeanByDays, "legend-group-1", "scale-group-4", "Before medication - left hand", 'negative', "rgba(204, 102, 0, 0.7)", true),
+      this.createGraphViolin("Left hand (before/after)", element.data.intertapInterval.dataAfterMedLeftMeanByDays, "legend-group-3", "scale-group-4", "After medication - left hand", 'positive', "rgba(0, 102, 204, 0.7)", false)
     ]
   }
 }

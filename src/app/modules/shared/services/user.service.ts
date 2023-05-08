@@ -83,7 +83,7 @@ export class UserService {
       map(() => this._userCredential),
       switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
       tap(() => {
-        this.createSnackBar("Dodano nowego pacjenta");
+        this.createSnackBar("New patient added");
         this.router.navigateByUrl('/browser-patient')
       }),
       catchError((err: Error) => {

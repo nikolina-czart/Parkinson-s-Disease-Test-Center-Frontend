@@ -5,7 +5,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Tabela z analizą danych
+        Data analysis table
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-data-tabel [data]="histogramData"></app-data-tabel>
@@ -16,7 +16,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Histogramy
+        Histograms
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-histogram [histogramData]="histogramData" ></app-histogram>
@@ -26,7 +26,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Wykresy pudełkowe
+        Box charts
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-box-plot [data]="histogramData"></app-box-plot>
@@ -36,7 +36,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Wykresy skrzypcowe
+        Violin charts
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-violin [data]="histogramData"></app-violin>
@@ -46,7 +46,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Funkcja gęstości prawdopodbieństwa
+        Probability density function
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-density [data]="histogramData"></app-density>
@@ -56,7 +56,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Średnia arytmetyczne z danego badania
+        Arithmetic averages of the survey
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-mean-plot [data]="histogramData"></app-mean-plot>

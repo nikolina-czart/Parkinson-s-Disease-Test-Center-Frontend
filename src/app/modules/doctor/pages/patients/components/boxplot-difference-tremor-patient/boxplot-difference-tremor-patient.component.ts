@@ -11,9 +11,9 @@ export class BoxplotDifferenceTremorPatientComponent  implements OnInit {
   @Input() meanPatientData!: MeanSummaryPatients[];
   graphData!: MeanSummaryGraph;
   ngOnInit(): void {
-    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - przed lekami")!.data;
-    const patientAfterMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - po lekach")!.data;
-    const controls = this.meanPatientData.find(e => e.group === "Pacjenci kontrolni")!.data;
+    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Patients with PD - Before medicines")!.data;
+    const patientAfterMed = this.meanPatientData.find(e => e.group === "Patients with PD - After medication")!.data;
+    const controls = this.meanPatientData.find(e => e.group === "Control patients")!.data;
 
     const differenceMeanXLeft = this.getGraphData(patientBeforeMed.differenceX.dataLeft, patientAfterMed.differenceX.dataLeft, controls.differenceX.dataLeft);
     const differenceMeanXRight = this.getGraphData(patientBeforeMed.differenceX.dataRight, patientAfterMed.differenceX.dataRight, controls.differenceX.dataRight);
@@ -22,12 +22,12 @@ export class BoxplotDifferenceTremorPatientComponent  implements OnInit {
     const differenceMeanZLeft = this.getGraphData(patientBeforeMed.differenceZ.dataLeft, patientAfterMed.differenceZ.dataLeft, controls.differenceZ.dataLeft);
     const differenceMeanZRight = this.getGraphData(patientBeforeMed.differenceZ.dataRight, patientAfterMed.differenceZ.dataRight, controls.differenceZ.dataRight);
 
-    const layoutDifferenceXLeft = this.createLayout('Wartości odstające od średniej - oś X - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutDifferenceXRight = this.createLayout('Wartości odstające od średniej - oś X - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutDifferenceYLeft = this.createLayout('Wartości odstające od średniej - oś Y - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutDifferenceYRight = this.createLayout('Wartości odstające od średniej - oś Y - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutDifferenceZLeft = this.createLayout('Wartości odstające od średniej - oś Z - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutDifferenceZRight = this.createLayout('Wartości odstające od średniej - oś Z - Prawa ręka', 'Prędkość kątowa [*/s]');
+    const layoutDifferenceXLeft = this.createLayout('Deviations from the mean on the x-axis (averages over days) - Left hand', 'Angular velocity [*/s]', [0, 2]);
+    const layoutDifferenceXRight = this.createLayout('Deviations from the mean on the x-axis (averages over days) - Right hand', 'Angular velocity [*/s]', [0, 2]);
+    const layoutDifferenceYLeft = this.createLayout('Deviations from the mean on the y-axis (averages over days) - Left hand', 'Angular velocity [*/s]', [0, 2]);
+    const layoutDifferenceYRight = this.createLayout('Deviations from the mean on the y-axis (averages over days) - Right hand', 'Angular velocity [*/s]', [0, 2]);
+    const layoutDifferenceZLeft = this.createLayout('Deviations from the mean on the z-axis (averages over days) - Left hand', 'Angular velocity [*/s]', [0, 1]);
+    const layoutDifferenceZRight = this.createLayout('Deviations from the mean on the z-axis (averages over days) - Right hand', 'Angular velocity [*/s]', [0, 1]);
 
     this.graphData = {
       graph1: {
@@ -75,9 +75,9 @@ export class BoxplotDifferenceTremorPatientComponent  implements OnInit {
 
   private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[]) {
     return [
-      this.createGraph(patientBeforeMed, "Pacjenci z PD - przed lekami", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(patientAfterMed, "Pacjenci z PD - po lekach", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(controls,"Pacjenci kontrolni", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(patientBeforeMed, "Patients with PD - Before medicines", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(patientAfterMed, "Patients with PD - After medication", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(controls,"Control patients", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
@@ -98,11 +98,12 @@ export class BoxplotDifferenceTremorPatientComponent  implements OnInit {
     }
   }
 
-  private createLayout(title: string, titleY: string) {
+  private createLayout(title: string, titleY: string, range: number[]) {
     return {
       title: title,
       yaxis: {
         title: titleY,
+        range: range
       },
       xaxis: {
         showticklabels: false

@@ -11,9 +11,9 @@ export class DensityTappingPatientComponent implements OnInit {
   @Input() meanPatientData!: MeanSummaryPatients[];
   graphData!: MeanSummaryGraph;
   ngOnInit(): void {
-    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - przed lekami")!.data;
-    const patientAfterMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - po lekach")!.data;
-    const controls = this.meanPatientData.find(e => e.group === "Pacjenci kontrolni")!.data;
+    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Patients with PD - Before medicines")!.data;
+    const patientAfterMed = this.meanPatientData.find(e => e.group === "Patients with PD - After medication")!.data;
+    const controls = this.meanPatientData.find(e => e.group === "Control patients")!.data;
 
     const graphData1Left = this.getGraphData(patientBeforeMed.touchTime.dataLeft, patientAfterMed.touchTime.dataLeft, controls.touchTime.dataLeft);
     const graphData1Right = this.getGraphData(patientBeforeMed.touchTime.dataRight, patientAfterMed.touchTime.dataRight, controls.touchTime.dataRight);
@@ -22,12 +22,12 @@ export class DensityTappingPatientComponent implements OnInit {
     const graphData3Left = this.getGraphData(patientBeforeMed.intertapInterval.dataLeft, patientAfterMed.intertapInterval.dataLeft, controls.intertapInterval.dataLeft);
     const graphData3Right = this.getGraphData(patientBeforeMed.intertapInterval.dataRight, patientAfterMed.intertapInterval.dataRight, controls.intertapInterval.dataRight);
 
-    const layoutGraphData1Left = this.createLayout('Hold time (średnie z dni) - Lewa ręka', 'HT [ms]');
-    const layoutGraphData1Right = this.createLayout('Hold time (średnie z dni) - Prawa ręka', 'HT [ms]');
-    const layoutGraphData2Left = this.createLayout('Up time (średnie z dni) - Lewa ręka', 'UT [ms]');
-    const layoutGraphData2Right = this.createLayout('Up time (średnie z dni) - Prawa ręka', 'UT [ms]');
-    const layoutGraphData3Left = this.createLayout('Intertap interval time (średnie z dni) - Lewa ręka', 'IIT [ms]');
-    const layoutGraphData3Right = this.createLayout('Intertap interval time (średnie z dni) - Prawa ręka', 'IIT [ms]');
+    const layoutGraphData1Left = this.createLayout('Hold time (averages over days) - Left hand', 'HT [ms]', [0, 800]);
+    const layoutGraphData1Right = this.createLayout('Hold time (averages over days) - Right hand', 'HT [ms]', [0, 800]);
+    const layoutGraphData2Left = this.createLayout('Up time (averages over days) - Left hand', 'UT [ms]', [0, 600]);
+    const layoutGraphData2Right = this.createLayout('Up time (averages over days) - Right hand', 'UT [ms]', [0, 600]);
+    const layoutGraphData3Left = this.createLayout('Intertap interval time (averages over days) - Left hand', 'IIT [ms]', [0, 1000]);
+    const layoutGraphData3Right = this.createLayout('Intertap interval time (averages over days) - Right hand', 'IIT [ms]', [0, 1000]);
 
     this.graphData = {
       graph1: {
@@ -75,9 +75,9 @@ export class DensityTappingPatientComponent implements OnInit {
 
   private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[]) {
     return [
-      this.createGraph(patientBeforeMed, "Pacjenci z PD - przed lekami", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(patientAfterMed, "Pacjenci z PD - po lekach", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(controls,"Pacjenci kontrolni", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(patientBeforeMed, "Patients with PD - Before medicines", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(patientAfterMed, "Patients with PD - After medication", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(controls,"Control patients", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
@@ -99,18 +99,19 @@ export class DensityTappingPatientComponent implements OnInit {
       },
       meanline: {
         visible: false
-      }
+      },
     }
   }
 
-  private createLayout(title: string, titleX: string) {
+  private createLayout(title: string, titleX: string, range: number[]) {
     return {
       title: title,
       xaxis: {
-        title: titleX
+        title: titleX,
+        range: range
       },
       yaxis: {
-        title: "Wykres gętości prawdopodobieństwa",
+        title: "Probability density function",
         showticklabels: false
       },
       showlegend: true,

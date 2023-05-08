@@ -1,13 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Patient} from "../../../../../../models/user/patient/patient";
 import {DoctorService} from "../../../../services/doctor.service";
-import {FingerTappingAnalysisData} from "../../../../../../models/analysis/finger-tapping/table/finger-tapping-analysis-data";
-import {
-  FingerTappingAnalysis
-} from "../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
-import {AnalysisDataService} from "../../../../services/analysis-data.service";
+import {FingerTappingAnalysis} from "../../../../../../models/analysis/finger-tapping/finger-tapping-analysis";
 import {take} from "rxjs";
-import {MatTableDataSource} from "@angular/material/table";
 import {TremorAnalysis} from "../../../../../../models/analysis/finger-tapping/TremorAnalysis";
 
 @Component({
@@ -18,7 +13,7 @@ import {TremorAnalysis} from "../../../../../../models/analysis/finger-tapping/T
 export class PatientAnalysisComponent implements OnInit {
   displayedColumns: string[] =  ["timeRange", "side", "averageHours", "medicineSupply", "vectorLength"];
 
-  timeRanges = ["Miesiąc", "Trzy miesiące", "Pół roku", "Wszystkie pomiary"]
+  timeRanges = ["Month", "Three months", "Six months", "All measurements"]
   selectedPatient!: Patient;
   selectedTest!: string;
   selectedTimeRange!: string
@@ -38,7 +33,10 @@ export class PatientAnalysisComponent implements OnInit {
   }
 
   getAnalysisData() {
-    console.log()
+    this.showFingerTapping = false;
+    this.showGyroscopeAnalysis = false;
+    this.showTable = false;
+
     const body = {
       testNameID: this.selectedTest,
       period: this.selectedTimeRange

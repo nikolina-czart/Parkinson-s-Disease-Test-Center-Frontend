@@ -28,6 +28,12 @@
   @include rubik-medium();
 }
 
+.results-info-title{
+  color: $blue;
+  font-size: $font-size-m;
+  @include rubik-bold();
+}
+
 .mat-mdc-form-field {
   color: $blue;
   font-size: $font-size-m;
@@ -79,9 +85,8 @@ mat-table{
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
+  background: $gray-light;
 }
-
 .demo-row-is-clicked {
   font-weight: bold;
 }
@@ -118,8 +123,8 @@ mat-table{
 
 .mat-mdc-button {
   background: #9fadc9;
-  height: 30px;
-  width: 200px;
+  height: 40px;
+  width: 250px;
   color: $blue;
   font-size: $font-size-m;
   margin-right: $margin-l;
@@ -132,4 +137,45 @@ mat-table{
 .chart-show{
   margin-top: 10px;
   width: 100%;
+}
+
+mat-header-cell {
+  font-weight: bold;
+  padding-top: 16px;
+  padding-bottom: 16px
+}
+
+mat-table {
+  padding: 16px;
+  box-shadow: none;
+  @include default-shadow()
+}
+
+mat-cell {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+mat-header-cell {
+  font-weight: bold;
+}
+
+.selected-test{
+  text-align: center;
+  color: $blue;
+  font-size: $font-size-m;
+  @include rubik-bold();
+}
+
+.save-button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.selected-test-title{
+  text-align: center;
+  color: $blue;
+  font-size: $font-size-l;
+  @include rubik-bold();
 }

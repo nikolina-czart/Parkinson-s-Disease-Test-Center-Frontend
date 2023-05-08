@@ -20,9 +20,9 @@ export class OutliersTremorMeanComponent implements OnInit {
       const differenceMeanByDayY =  this.getDataDifferenceY(element, meanXAxisY);
       const differenceMeanByDayZ =  this.getDataDifferenceZ(element, meanXAxisZ);
 
-      const layoutDifferenceX =  this.createLayout("Wartości odstające od średniej na osi x (średnie z dni)", "Prędkość kątowa [*/s]");
-      const layoutDifferenceY =  this.createLayout("Wartości odstające od średniej na osi y (średnie z dni)", "Prędkość kątowa [*/s]");
-      const layoutDifferenceZ =  this.createLayout("Wartości odstające od średniej na osi z  (średnie z dni)", "Prędkość kątowa [*/s]");
+      const layoutDifferenceX =  this.createLayout("Deviations from the mean on the x-axis (averages over days)", "Angular velocity [*/s]");
+      const layoutDifferenceY =  this.createLayout("Deviations from the mean on the y-axis (averages over days)", "Angular velocity [*/s]");
+      const layoutDifferenceZ =  this.createLayout("Deviations from the mean on the z-axis (averages over days)", "Angular velocity [*/s]");
 
       this.graphs.push({
         period: element.period,
@@ -60,28 +60,28 @@ export class OutliersTremorMeanComponent implements OnInit {
 
   private getDataDifferenceX(element: TremorAnalysis, meanXAxisX: number[]) {
     return [
-      this.createGraph(element.data.differenceMeanByDayX.dataBeforeMedLeft, meanXAxisX, "Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayX.dataBeforeMedRight, meanXAxisX, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayX.dataAfterMedLeft, meanXAxisX, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayX.dataAfterMedRight, meanXAxisX, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayX.dataBeforeMedLeft, meanXAxisX, "Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayX.dataBeforeMedRight, meanXAxisX, "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayX.dataAfterMedLeft, meanXAxisX, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayX.dataAfterMedRight, meanXAxisX, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
   private getDataDifferenceY(element: TremorAnalysis, meanXAxisY: number[]) {
     return [
-      this.createGraph(element.data.differenceMeanByDayY.dataBeforeMedLeft, meanXAxisY, "Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayY.dataBeforeMedRight, meanXAxisY, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayY.dataAfterMedLeft, meanXAxisY, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayY.dataAfterMedRight, meanXAxisY, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayY.dataBeforeMedLeft, meanXAxisY, "Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayY.dataBeforeMedRight, meanXAxisY, "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayY.dataAfterMedLeft, meanXAxisY, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayY.dataAfterMedRight, meanXAxisY, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
   private getDataDifferenceZ(element: TremorAnalysis, meanXAxisZ: number[]) {
     return [
-      this.createGraph(element.data.differenceMeanByDayZ.dataBeforeMedLeft, meanXAxisZ, "Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayZ.dataBeforeMedRight, meanXAxisZ, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayZ.dataAfterMedLeft, meanXAxisZ, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.differenceMeanByDayZ.dataAfterMedRight, meanXAxisZ, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayZ.dataBeforeMedLeft, meanXAxisZ, "Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayZ.dataBeforeMedRight, meanXAxisZ, "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayZ.dataAfterMedLeft, meanXAxisZ, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
+      this.createGraph(element.data.differenceMeanByDayZ.dataAfterMedRight, meanXAxisZ, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
     ]
   }
 
@@ -117,7 +117,7 @@ export class OutliersTremorMeanComponent implements OnInit {
         title: titleY,
       },
       xaxis: {
-        title: "Numer badania [-]",
+        title: "Test number [-]",
       },
     }
   }

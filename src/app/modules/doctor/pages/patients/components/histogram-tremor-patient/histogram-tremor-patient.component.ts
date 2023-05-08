@@ -11,27 +11,27 @@ export class HistogramTremorPatientComponent implements OnInit {
   @Input() meanPatientData!: MeanSummaryPatients[];
   graphData!: MeanSummaryGraph;
   ngOnInit(): void {
-    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - przed lekami")!.data;
-    const patientAfterMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - po lekach")!.data;
-    const controls = this.meanPatientData.find(e => e.group === "Pacjenci kontrolni")!.data;
+    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Patients with PD - Before medicines")!.data;
+    const patientAfterMed = this.meanPatientData.find(e => e.group === "Patients with PD - After medication")!.data;
+    const controls = this.meanPatientData.find(e => e.group === "Control patients")!.data;
 
-    const graphData1Left = this.getGraphData(patientBeforeMed.meanX.dataLeft, patientAfterMed.meanX.dataLeft, controls.meanX.dataLeft);
-    const graphData1Right = this.getGraphData(patientBeforeMed.meanX.dataRight, patientAfterMed.meanX.dataRight, controls.meanX.dataRight);
-    const graphData2Left = this.getGraphData(patientBeforeMed.meanY.dataLeft, patientAfterMed.meanY.dataLeft, controls.meanY.dataLeft);
-    const graphData2Right = this.getGraphData(patientBeforeMed.meanY.dataRight, patientAfterMed.meanY.dataRight, controls.meanY.dataRight);
-    const graphData3Left = this.getGraphData(patientBeforeMed.meanZ.dataLeft, patientAfterMed.meanZ.dataLeft, controls.meanZ.dataLeft);
-    const graphData3Right = this.getGraphData(patientBeforeMed.meanZ.dataRight, patientAfterMed.meanZ.dataRight, controls.meanZ.dataRight);
-    const graphData4Left = this.getGraphData(patientBeforeMed.aggregated.dataLeft, patientAfterMed.aggregated.dataLeft, controls.aggregated.dataLeft);
-    const graphData4Right = this.getGraphData(patientBeforeMed.aggregated.dataRight, patientAfterMed.aggregated.dataRight, controls.aggregated.dataRight);
+    const graphData1Left = this.getGraphData(patientBeforeMed.meanX.dataLeft, patientAfterMed.meanX.dataLeft, controls.meanX.dataLeft, -0.4, 0.2, 0.02);
+    const graphData1Right = this.getGraphData(patientBeforeMed.meanX.dataRight, patientAfterMed.meanX.dataRight, controls.meanX.dataRight, -0.4, 0.2, 0.02);
+    const graphData2Left = this.getGraphData(patientBeforeMed.meanY.dataLeft, patientAfterMed.meanY.dataLeft, controls.meanY.dataLeft, -1, 0.5, 0.02);
+    const graphData2Right = this.getGraphData(patientBeforeMed.meanY.dataRight, patientAfterMed.meanY.dataRight, controls.meanY.dataRight, -1, 0.5, 0.02);
+    const graphData3Left = this.getGraphData(patientBeforeMed.meanZ.dataLeft, patientAfterMed.meanZ.dataLeft, controls.meanZ.dataLeft, -0.4, 0.2, 0.02);
+    const graphData3Right = this.getGraphData(patientBeforeMed.meanZ.dataRight, patientAfterMed.meanZ.dataRight, controls.meanZ.dataRight, -0.4, 0.2, 0.02);
+    const graphData4Left = this.getGraphData(patientBeforeMed.aggregated.dataLeft, patientAfterMed.aggregated.dataLeft, controls.aggregated.dataLeft, 0, 3, 0.1);
+    const graphData4Right = this.getGraphData(patientBeforeMed.aggregated.dataRight, patientAfterMed.aggregated.dataRight, controls.aggregated.dataRight, 0, 3, 0.1);
 
-    const layoutGraphData1Left = this.createLayout('Przyśpieszenie na osi x (średnie z dni)- Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData1Right = this.createLayout('Przyśpieszenie na osi x (średnie z dni) - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData2Left = this.createLayout('Przyśpieszenie na osi y (średnie z dni) - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData2Right = this.createLayout('Przyśpieszenie na osi y (średnie z dni) - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData3Left = this.createLayout('Przyśpieszenie na osi z (średnie z dni) - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData3Right = this.createLayout('Przyśpieszenie na osi z (średnie z dni) - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData4Left = this.createLayout('Całkowite przyśpieszenie (średnie z dni) - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData4Right = this.createLayout('Całkowite przyśpieszenie (średnie z dni) - Prawa ręka', 'Prędkość kątowa [*/s]');
+    const layoutGraphData1Left = this.createLayout('Angular velocity on the x-axis (averages over days) - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData1Right = this.createLayout('Angular velocity on the x-axis (averages over days)  - Right hand', 'Angular velocity [*/s]');
+    const layoutGraphData2Left = this.createLayout('Angular velocity on the y-axis (averages over days)  - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData2Right = this.createLayout('Angular velocity on the y-axis (averages over days)  - Right hand', 'Angular velocity [*/s]');
+    const layoutGraphData3Left = this.createLayout('Angular velocity on the z-axis (averages over days)  - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData3Right = this.createLayout('Angular velocity on the z-axis (averages over days)  - Right hand', 'Angular velocity [*/s]');
+    const layoutGraphData4Left = this.createLayout('Length of angular velocity vector (average of days) - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData4Right = this.createLayout('Length of angular velocity vector (average of days) - Right hand', 'Angular velocity [*/s]');
 
     this.graphData = {
       graph1: {
@@ -77,15 +77,15 @@ export class HistogramTremorPatientComponent implements OnInit {
     }
   }
 
-  private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[]) {
+  private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[], start: number, end: number, size: number) {
     return [
-      this.createGraph(patientBeforeMed, "Pacjenci z PD - przed lekami", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(patientAfterMed, "Pacjenci z PD - po lekach", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(controls,"Pacjenci kontrolni", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(patientBeforeMed, "Patients with PD - Before medicines", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", start, end, size),
+      this.createGraph(patientAfterMed, "Patients with PD - After medication", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", start, end, size),
+      this.createGraph(controls,"Control patients", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", start, end, size),
     ]
   }
 
-  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string) {
+  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string, start: number, end: number, size: number) {
     return {
       x: data,
       type: 'histogram',
@@ -98,7 +98,11 @@ export class HistogramTremorPatientComponent implements OnInit {
         }
       },
       opacity: 0.5,
-      nbinsx: 20
+      xbins: {
+        end: end,
+        size: size,
+        start: start
+      }
     }
   }
 
@@ -109,7 +113,7 @@ export class HistogramTremorPatientComponent implements OnInit {
         title: titleX
       },
       yaxis: {
-        title: "Ilość wystąpień"
+        title: "Number of appearances"
       },
       bargap: 0.01,
       bargroupgap: 0.1,

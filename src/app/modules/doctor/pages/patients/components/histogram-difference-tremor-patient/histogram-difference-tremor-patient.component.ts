@@ -11,23 +11,23 @@ export class HistogramDifferenceTremorPatientComponent implements OnInit {
   @Input() meanPatientData!: MeanSummaryPatients[];
   graphData!: MeanSummaryGraph;
   ngOnInit(): void {
-    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - przed lekami")!.data;
-    const patientAfterMed = this.meanPatientData.find(e => e.group === "Pacjenci z PD - po lekach")!.data;
-    const controls = this.meanPatientData.find(e => e.group === "Pacjenci kontrolni")!.data;
+    const patientBeforeMed = this.meanPatientData.find(e => e.group === "Patients with PD - Before medicines")!.data;
+    const patientAfterMed = this.meanPatientData.find(e => e.group === "Patients with PD - After medication")!.data;
+    const controls = this.meanPatientData.find(e => e.group === "Control patients")!.data;
 
-    const graphData1Left = this.getGraphData(patientBeforeMed.differenceX.dataLeft, patientAfterMed.differenceX.dataLeft, controls.differenceX.dataLeft);
-    const graphData1Right = this.getGraphData(patientBeforeMed.differenceX.dataRight, patientAfterMed.differenceX.dataRight, controls.differenceX.dataRight);
-    const graphData2Left = this.getGraphData(patientBeforeMed.differenceY.dataLeft, patientAfterMed.differenceY.dataLeft, controls.differenceY.dataLeft);
-    const graphData2Right = this.getGraphData(patientBeforeMed.differenceY.dataRight, patientAfterMed.differenceY.dataRight, controls.differenceY.dataRight);
-    const graphData3Left = this.getGraphData(patientBeforeMed.differenceZ.dataLeft, patientAfterMed.differenceZ.dataLeft, controls.differenceZ.dataLeft);
-    const graphData3Right = this.getGraphData(patientBeforeMed.differenceZ.dataRight, patientAfterMed.differenceZ.dataRight, controls.differenceZ.dataRight);
+    const graphData1Left = this.getGraphData(patientBeforeMed.differenceX.dataLeft, patientAfterMed.differenceX.dataLeft, controls.differenceX.dataLeft, 0, 2, 0.05);
+    const graphData1Right = this.getGraphData(patientBeforeMed.differenceX.dataRight, patientAfterMed.differenceX.dataRight, controls.differenceX.dataRight, 0, 2, 0.05);
+    const graphData2Left = this.getGraphData(patientBeforeMed.differenceY.dataLeft, patientAfterMed.differenceY.dataLeft, controls.differenceY.dataLeft, 0, 2, 0.05);
+    const graphData2Right = this.getGraphData(patientBeforeMed.differenceY.dataRight, patientAfterMed.differenceY.dataRight, controls.differenceY.dataRight, 0, 2, 0.05);
+    const graphData3Left = this.getGraphData(patientBeforeMed.differenceZ.dataLeft, patientAfterMed.differenceZ.dataLeft, controls.differenceZ.dataLeft, 0, 2, 0.05);
+    const graphData3Right = this.getGraphData(patientBeforeMed.differenceZ.dataRight, patientAfterMed.differenceZ.dataRight, controls.differenceZ.dataRight, 0, 2, 0.05);
 
-    const layoutGraphData1Left = this.createLayout('Wartości odstające od średniej - oś X - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData1Right = this.createLayout('Wartości odstające od średniej - oś X - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData2Left = this.createLayout('Wartości odstające od średniej - oś Y - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData2Right = this.createLayout('Wartości odstające od średniej - oś Y - Prawa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData3Left = this.createLayout('Wartości odstające od średniej - oś Z - Lewa ręka', 'Prędkość kątowa [*/s]');
-    const layoutGraphData3Right = this.createLayout('Wartości odstające od średniej - oś Z - Prawa ręka', 'Prędkość kątowa [*/s]');
+    const layoutGraphData1Left = this.createLayout('Deviations from the mean on the x-axis (averages over days) - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData1Right = this.createLayout('Deviations from the mean on the x-axis (averages over days) - Right hand', 'Angular velocity [*/s]');
+    const layoutGraphData2Left = this.createLayout('Deviations from the mean on the y-axis (averages over days) - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData2Right = this.createLayout('Deviations from the mean on the y-axis (averages over days) - Right hand', 'Angular velocity [*/s]');
+    const layoutGraphData3Left = this.createLayout('Deviations from the mean on the z-axis (averages over days) - Left hand', 'Angular velocity [*/s]');
+    const layoutGraphData3Right = this.createLayout('Deviations from the mean on the z-axis (averages over days) - Right hand', 'Angular velocity [*/s]');
 
     this.graphData = {
       graph1: {
@@ -73,15 +73,15 @@ export class HistogramDifferenceTremorPatientComponent implements OnInit {
     }
   }
 
-  private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[]) {
+  private getGraphData(patientBeforeMed: number[], patientAfterMed: number[], controls: number[], start: number, end: number, size: number) {
     return [
-      this.createGraph(patientBeforeMed, "Pacjenci z PD - przed lekami", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(patientAfterMed, "Pacjenci z PD - po lekach", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(controls,"Pacjenci kontrolni", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(patientBeforeMed, "Patients with PD - Before medicines", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", start, end, size),
+      this.createGraph(patientAfterMed, "Patients with PD - After medication", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", start, end, size),
+      this.createGraph(controls,"Control patients", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", start, end, size),
     ]
   }
 
-  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string) {
+  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string, start: number, end: number, size: number) {
     return {
       x: data,
       type: 'histogram',
@@ -94,7 +94,11 @@ export class HistogramDifferenceTremorPatientComponent implements OnInit {
         }
       },
       opacity: 0.5,
-      nbinsx: 20
+      xbins: {
+        end: end,
+        size: size,
+        start: start
+      }
     }
   }
 
@@ -105,7 +109,7 @@ export class HistogramDifferenceTremorPatientComponent implements OnInit {
         title: titleX
       },
       yaxis: {
-        title: "Ilość wystąpień"
+        title: "Number of appearances"
       },
       bargap: 0.01,
       bargroupgap: 0.1,

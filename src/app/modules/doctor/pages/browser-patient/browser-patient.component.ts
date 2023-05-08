@@ -20,6 +20,7 @@ export class BrowserPatientComponent implements OnInit {
   patients!: Patient[];
   showTable: boolean = false
   configTest!: ConfigTests[];
+  loading = true
 
   constructor(private readonly router: Router,
               private readonly dialog: MatDialog,
@@ -35,6 +36,7 @@ export class BrowserPatientComponent implements OnInit {
         this.patientsDataSource = new MatTableDataSource(patients);
         this.showTable = !!patients.length;
         this.configTest = configTests;
+        this.loading = false;
       })
     })
   }

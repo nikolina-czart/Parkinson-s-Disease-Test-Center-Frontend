@@ -19,67 +19,67 @@ export class HistogramComponent implements OnInit {
         period: histogram.period,
         dataTouchTime: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.touchTime.dataBeforeMedLeft),
-            this.graphBeforeMedRight(histogram.data.touchTime.dataBeforeMedRight),
-            this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeft),
-            this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRight)
+            this.graphBeforeMefLeft(histogram.data.touchTime.dataBeforeMedLeft, 800),
+            this.graphBeforeMedRight(histogram.data.touchTime.dataBeforeMedRight, 800),
+            this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeft, 800),
+            this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRight, 800)
           ],
           layout: this.getLayout('Hold Time', "HT [ms]")
         },
         dataUpTime: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.upTime.dataBeforeMedLeft),
-            this.graphBeforeMedRight(histogram.data.upTime.dataBeforeMedRight),
-            this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeft),
-            this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRight)
+            this.graphBeforeMefLeft(histogram.data.upTime.dataBeforeMedLeft, 600),
+            this.graphBeforeMedRight(histogram.data.upTime.dataBeforeMedRight, 600),
+            this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeft, 600),
+            this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRight, 600)
           ],
           layout: this.getLayout('Up Time', "UT [ms]")
         },
         dataIntertapInterval: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.intertapInterval.dataBeforeMedLeft),
-            this.graphBeforeMedRight(histogram.data.intertapInterval.dataBeforeMedRight),
-            this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeft),
-            this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRight)
+            this.graphBeforeMefLeft(histogram.data.intertapInterval.dataBeforeMedLeft, 1000),
+            this.graphBeforeMedRight(histogram.data.intertapInterval.dataBeforeMedRight, 1000),
+            this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeft, 1000),
+            this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRight, 1000)
           ],
           layout: this.getLayout('Intertap Invertal', "IIT [ms]")
         },
         dataTouchTimeMean: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.touchTime.dataBeforeMedLeftMeanByDays),
-            this.graphBeforeMedRight(histogram.data.touchTime.dataBeforeMedRightMeanByDays),
-            this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeftMeanByDays),
-            this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRightMeanByDays)
+            this.graphBeforeMefLeft(histogram.data.touchTime.dataBeforeMedLeftMeanByDays, 800),
+            this.graphBeforeMedRight(histogram.data.touchTime.dataBeforeMedRightMeanByDays, 800),
+            this.graphAfterMedLeft(histogram.data.touchTime.dataAfterMedLeftMeanByDays, 800),
+            this.graphAfterMedRight(histogram.data.touchTime.dataAfterMedRightMeanByDays, 800)
           ],
-          layout: this.getLayout('Hold Time - średnia z pomiaru', "HT [ms]")
+          layout: this.getLayout('Hold Time (averages on day)', "HT [ms]")
         },
         dataUpTimeMean: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.upTime.dataBeforeMedLeftMeanByDays),
-            this.graphBeforeMedRight(histogram.data.upTime.dataBeforeMedRightMeanByDays),
-            this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeftMeanByDays),
-            this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRightMeanByDays)
+            this.graphBeforeMefLeft(histogram.data.upTime.dataBeforeMedLeftMeanByDays, 600),
+            this.graphBeforeMedRight(histogram.data.upTime.dataBeforeMedRightMeanByDays, 600),
+            this.graphAfterMedLeft(histogram.data.upTime.dataAfterMedLeftMeanByDays, 600),
+            this.graphAfterMedRight(histogram.data.upTime.dataAfterMedRightMeanByDays, 600)
           ],
-          layout: this.getLayout('Up Time - średnia z pomiaru', "UT [ms]")
+          layout: this.getLayout('Up Time (averages on day)', "UT [ms]")
         },
         dataIntertapIntervalMean: {
           data: [
-            this.graphBeforeMefLeft(histogram.data.intertapInterval.dataBeforeMedLeftMeanByDays),
-            this.graphBeforeMedRight(histogram.data.intertapInterval.dataBeforeMedRightMeanByDays),
-            this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeftMeanByDays),
-            this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRightMeanByDays)
+            this.graphBeforeMefLeft(histogram.data.intertapInterval.dataBeforeMedLeftMeanByDays, 1000),
+            this.graphBeforeMedRight(histogram.data.intertapInterval.dataBeforeMedRightMeanByDays, 1000),
+            this.graphAfterMedLeft(histogram.data.intertapInterval.dataAfterMedLeftMeanByDays, 1000),
+            this.graphAfterMedRight(histogram.data.intertapInterval.dataAfterMedRightMeanByDays, 1000)
           ],
-          layout: this.getLayout('Intertap Invertal - średnia z pomiaru', "IIT [ms]")
+          layout: this.getLayout('Intertap Invertal (averages on day)', "IIT [ms]")
         },
       })
     })
   }
 
-  private graphBeforeMefLeft(data: number[]) {
+  private graphBeforeMefLeft(data: number[], end: number) {
     return {
       x: data,
       type: 'histogram',
-      name: 'Przed lekami - lewa ręka',
+      name: 'Before medication - left hand',
       marker: {
         color: "rgba(204, 102, 0, 0.7)",
         line: {
@@ -89,17 +89,17 @@ export class HistogramComponent implements OnInit {
       },
       opacity: 0.5,
       xbins: {
-        end: 800,
+        end: end,
         size: 20,
         start: 0
       }
     }
   }
-  private graphBeforeMedRight(data: number[]) {
+  private graphBeforeMedRight(data: number[], end: number) {
     return {
       x: data,
       type: 'histogram',
-      name: 'Przed lekami - prawa ręka',
+      name: 'Before medication - right hand',
       marker: {
         color: "rgba(0, 204, 102, 0.7)",
         line: {
@@ -109,18 +109,18 @@ export class HistogramComponent implements OnInit {
       },
       opacity: 0.5,
       xbins: {
-        end: 800,
+        end: end,
         size: 20,
         start: 0
 
       }
     }
   }
-  private graphAfterMedLeft(data: number[]) {
+  private graphAfterMedLeft(data: number[], end: number) {
     return {
       x: data,
       type: 'histogram',
-      name: 'Po lekach - lewa ręka',
+      name: 'After medication - left hand',
       marker: {
         color: "rgba(0, 102, 204, 0.7)",
         line: {
@@ -130,18 +130,17 @@ export class HistogramComponent implements OnInit {
       },
       opacity: 0.5,
       xbins: {
-        end: 800,
+        end: end,
         size: 20,
         start: 0
-
       }
     }
   }
-  private graphAfterMedRight(data: number[]) {
+  private graphAfterMedRight(data: number[], end: number) {
     return {
       x: data,
       type: 'histogram',
-      name: 'Po lekach - prawa ręka',
+      name: 'After medication - right hand',
       marker: {
         color: "rgba(204, 0, 102, 0.7)",
         line: {
@@ -151,7 +150,7 @@ export class HistogramComponent implements OnInit {
       },
       opacity: 0.5,
       xbins: {
-        end: 800,
+        end: end,
         size: 20,
         start: 0
       }
@@ -164,7 +163,7 @@ export class HistogramComponent implements OnInit {
       barmode: "overlay",
       title: title,
       xaxis: {title: titleX},
-      yaxis: {title: "Ilość wystąpień"}
+      yaxis: {title: "Number of occurrences"}
     }
   }
 

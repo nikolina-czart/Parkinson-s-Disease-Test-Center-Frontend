@@ -1,18 +1,22 @@
 <div class="result-container">
   <div class="filter-container">
-    <p class="results-info">Filtry testu:</p>
+    <p class="selected-test-title" *ngIf="selectedTest">
+      {{selectedTest.nameEN}} results
+    </p>
+
+    <p class="results-info-title">Test filters:</p>
     <div class="filter-row">
       <div class="mat-fields">
         <mat-form-field appearance="outline">
-          <mat-label>Rodzaj testu</mat-label>
+          <mat-label>Type of test</mat-label>
           <mat-select [(ngModel)]="selectedTest" name="test">
-            <mat-option *ngFor="let test of selectedPatient.patientTests" [value]="test.uid">
-              {{test.namePL}}
+            <mat-option *ngFor="let test of selectedPatient.patientTests" [value]="test">
+              {{test.nameEN}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Zakres czasu</mat-label>
+          <mat-label>Time range</mat-label>
           <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
             <input matStartDate formControlName="start" placeholder="Start date">
             <input matEndDate formControlName="end" placeholder="End date">
@@ -24,35 +28,32 @@
 
       <button mat-raised-button (click)="getTestsResults()"
               [disabled]="!(!!selectedTest && !!range.controls.start.value && !!range.controls.end.value)">
-        Filtruj
+        Filter
       </button>
 
-<!--      <button mat-raised-button (click)="resetFilters()"  *ngIf="isSend">-->
-<!--        Resetuj filtry-->
-<!--      </button>-->
     </div>
 
     <div *ngIf="!showTable">
-      <p class="results-info">Dla wybranego zakresu pacjent nie ma wyników</p>
+      <p class="results-info">For the selected range the patient has no results</p>
     </div>
 
     <div class="show-results" *ngIf="showTable">
-      <p class="results-info">Wyniki testów:</p>
+      <p class="results-info-title">Test results:</p>
       <div class="table">
         <mat-table class="table-details" [dataSource]="testResults" class="mat-elevation-z8">
 
           <ng-container matColumnDef="testDate">
-            <mat-header-cell *matHeaderCellDef> Data wykonania testu </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Date of test </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="side">
-            <mat-header-cell *matHeaderCellDef> Strona </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Site </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.side}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="medicineSupply">
-            <mat-header-cell *matHeaderCellDef> Czas od przyjęcia leku [h] </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Time since medication [h]</mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.medicineSupply}}</mat-cell>
           </ng-container>
 
@@ -60,26 +61,32 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row
             (click)="showTestDetails(row)"
-            *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
         </mat-table>
       </div>
 
-      <div class="chart-show-group" *ngIf="isSelectedResult">
-        <div class="button-group" *ngIf="isFingerTapping">
-          <button mat-button (click)="chart3D()">Wykres 3D</button>
-          <button mat-button (click)="chartX()">Wykres X</button>
-          <button mat-button (click)="chartY()">Wykres Y</button>
-          <button mat-button (click)="chartZ()">Wykres Z</button>
-          <button mat-button (click)="chartUpDown()">Wykres UpDown</button>
-        </div>
-        <div class="button-group"  *ngIf="!isFingerTapping">
-          <button mat-button (click)="chart3D()">Wykres 3D</button>
-          <button mat-button (click)="chartX()">Wykres X</button>
-          <button mat-button (click)="chartY()">Wykres Y</button>
-          <button mat-button (click)="chartZ()">Wykres Z</button>
-        </div>
+      <div class="save-button-group">
+        <button mat-raised-button (click)="saveAllData()">Save the selected tests</button>
       </div>
 
+      <div class="chart-show-group" *ngIf="isSelectedResult">
+        <p class="selected-test">{{this.selectedResult.date}} - {{this.selectedResult.side}} - time since medication {{this.selectedResult.medicineSupply}} [h]</p>
+
+        <div class="button-group" *ngIf="isFingerTapping">
+          <button mat-button (click)="chart3D()">Chart 3D</button>
+          <button mat-button (click)="chartX()">Chart X</button>
+          <button mat-button (click)="chartY()">Chart Y</button>
+          <button mat-button (click)="chartZ()">Chart Z</button>
+          <button mat-button (click)="chartUpDown()">Chart UpDown</button>
+        </div>
+        <div class="button-group"  *ngIf="!isFingerTapping">
+          <button mat-button (click)="chart3D()">Chart 3D</button>
+          <button mat-button (click)="chartX()">Chart X</button>
+          <button mat-button (click)="chartY()">Chart Y</button>
+          <button mat-button (click)="chartZ()">Chart Z</button>
+        </div>
+      </div>
       <div class="chart-show" *ngIf="isSelectedResult">
         <plotly-plot [data]="chart.data" [layout]="chart.layout"></plotly-plot>
       </div>

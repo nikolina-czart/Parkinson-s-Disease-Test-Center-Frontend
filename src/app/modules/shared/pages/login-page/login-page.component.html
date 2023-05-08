@@ -1,7 +1,7 @@
 <div class="card-position">
   <div class="mat-card-default">
-    <h2 class="title-form">Witaj ponownie!</h2>
-    <p class="info-form">Podaj dane potrzene do logowania:</p>
+    <h2 class="title-form">Welcome back!</h2>
+    <p class="info-form">Please enter your login details:</p>
     <div class="container-form-group">
 
       <form [formGroup]="loginFormGroup" (ngSubmit)="submitForm()">
@@ -13,7 +13,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Hasło</mat-label>
+            <mat-label>Password</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -22,7 +22,7 @@
           </mat-form-field>
         </div>
         <div class="button-position">
-          <button mat-raised-button type="submit">Zaloguj się</button>
+          <button mat-raised-button type="submit">Log in</button>
         </div>
       </form>
     </div>

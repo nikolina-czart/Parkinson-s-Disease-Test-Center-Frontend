@@ -28,7 +28,7 @@
 .results-info{
   color: $blue;
   font-size: $font-size-m;
-  @include rubik-medium();
+  @include roboto-bold
 }
 
 .mat-mdc-form-field {

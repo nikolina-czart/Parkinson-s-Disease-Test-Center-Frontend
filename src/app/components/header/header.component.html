@@ -4,24 +4,24 @@
     </a>
     <div class="main-nav">
       <div class="hello-banner" *ngIf="!!(token$ | async)">
-        <span>Witaj, {{user?.name}}!</span>
+        <span>Welcome, {{user?.name}}!</span>
         <button class="circle" [matMenuTriggerFor]="infoMenu">{{logoUser}}</button>
         <mat-menu #infoMenu="matMenu" xPosition="before">
           <button mat-menu-item  (click)="allPatientInfo()">
             <mat-icon>person</mat-icon>
-            <span class="menu-text">Pacjenci</span>
+            <span class="menu-text">Patients</span>
           </button>
           <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
-            <span class="menu-text">Wyloguj się</span>
+            <span class="menu-text">Log out</span>
           </button>
         </mat-menu>
 
       </div>
 
       <div class="header-button" *ngIf="!(token$ | async)">
-        <button mat-button (click)="login()"  class="no-hover-effect">Logowanie</button>
-        <button mat-raised-button (click)="register()">Rejestracja</button>
+        <button mat-button (click)="login()"  class="no-hover-effect">Logging</button>
+        <button mat-raised-button (click)="register()">Registration</button>
       </div>
 
     </div>

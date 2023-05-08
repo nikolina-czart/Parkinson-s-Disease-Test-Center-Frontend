@@ -11,6 +11,7 @@ import {FingerTappingAnalysis} from "../../../models/analysis/finger-tapping/fin
 import {TremorAnalysis} from "../../../models/analysis/finger-tapping/TremorAnalysis";
 import {SummaryPatient} from "../../../models/user/doctor/summary-patient";
 import {MeanSummaryPatients} from "../../../models/user/doctor/mean-summary-patiens";
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class DoctorService {
               return {...test,
                 icon:configTests.filter(configTest => test.uid === configTest.uid).map(configTest => configTest.icon)[0],
                 namePL:configTests.filter(configTest => test.uid === configTest.uid).map(configTest => configTest.namePL)[0],
+                nameEN:configTests.filter(configTest => test.uid === configTest.uid).map(configTest => configTest.nameEN)[0],
                 name:configTests.filter(configTest => test.uid === configTest.uid).map(configTest => configTest.name)[0],
               }
             })
@@ -39,7 +41,6 @@ export class DoctorService {
       })))
   }
 
-  @Cacheable({maxAge: 36000000})
   getAnalysisData(body: {testNameID: string, period:string}): Observable<FingerTappingAnalysis[]> {
     const userId = this._selectedPatient.uid;
     return this.httpClient.post<FingerTappingAnalysis[]>(`api/analysis-tests/${userId}/chart-data`, body,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
@@ -86,4 +87,31 @@ export class DoctorService {
   }
 
 
+  // saveTestsToFile(bodyRequest: { testIDs: string[]; patientName: string; testNameID: string; patientSurname: string }) {
+  //   const userId = this._selectedPatient.uid;
+  //
+  //
+  //   return this.httpClient.post<string>(`/api/doctor/${userId}/save-data-to-file`, bodyRequest, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+  // }
+  saveTestsToFile(selectedPatient: Patient, testName: string, uniqueDates: Result[]) {
+    const userId = this._selectedPatient.uid;
+    const startFileName = `${testName.trimStart()}_${selectedPatient.name}_${selectedPatient.surname}`
+
+    uniqueDates.forEach(data => {
+      const fileName = `${startFileName}_${data.date.replaceAll(' ', '_').replaceAll(':', '-')}_${data.side}.txt`
+      const body = {
+        testName: testName,
+        testId: data.date,
+        fileName: fileName,
+        side: data.side
+      }
+      this.httpClient.post(`/api/doctor/${userId}/save-data-to-file`, body, { responseType: 'blob' })
+        .subscribe(response => {
+          const blob = new Blob([response], { type: 'text/plain' });
+          const file = new File([blob], fileName, { type: 'text/plain' });
+
+          saveAs(file);
+        });
+    })
+  }
 }

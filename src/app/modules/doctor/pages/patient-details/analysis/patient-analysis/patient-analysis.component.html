@@ -1,19 +1,19 @@
 <div class="result-container">
-  <h3 class="title-patient-form">Analizowane dane</h3>
+  <h3 class="title-patient-form">Data analysed</h3>
   <div class="filter-container">
-    <p class="results-info">Filtry testu:</p>
+    <p class="results-info">Test filters:</p>
     <div class="filter-row">
       <div class="mat-fields">
         <mat-form-field appearance="outline">
-          <mat-label>Rodzaj testu</mat-label>
+          <mat-label>Type of test</mat-label>
           <mat-select [(ngModel)]="selectedTest" name="test">
             <mat-option *ngFor="let test of selectedPatient.patientTests" [value]="test.uid">
-              {{test.namePL}}
+              {{test.nameEN}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Okres czasu</mat-label>
+          <mat-label>Time period</mat-label>
           <mat-select [(ngModel)]="selectedTimeRange" name="test">
             <mat-option *ngFor="let time of timeRanges" [value]="time">
               {{time}}
@@ -24,13 +24,13 @@
 
       <button mat-raised-button (click)="getAnalysisData()"
               [disabled]="!(!!selectedTest && !!selectedTimeRange)">
-        Zagreguj dane
+        Aggregate data
       </button>
 
     </div>
 
     <div class="show-results" *ngIf="showTable">
-      <p class="results-info">Wyniki analizy testów:</p>
+      <p class="results-info">Test analysis results:</p>
       <div *ngIf="showFingerTapping">
         <app-analysis-finger-tapping [histogramData]="fingerTappindData"></app-analysis-finger-tapping>
       </div>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div *ngIf="!showTable">
-      <p class="results-info">Dla wybranego zakresu pacjent nie ma wyników</p>
+      <p class="results-info">For the selected range the patient has no results</p>
     </div>
 
 

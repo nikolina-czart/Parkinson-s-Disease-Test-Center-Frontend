@@ -1,9 +1,9 @@
 export enum FirebaseErrorMessage {
-  USER_NOT_FOUND = "Nie ma użytkownika o podanej wartości email",
-  UID_ALREADY_EXISTS = "Podany uidelement jest już używany przez istniejącego użytkownika. Każdy użytkownik musi mieć unikalny uid.",
-  WRONG_PASSWORD = "Hasło jest nieprawidłowe lub użytkownik nie ma hasła",
-  EMAIL_ALREADY_EXISTS = "Podany adres e-mail jest już używany przez istniejącego użytkownika. Każdy użytkownik musi mieć unikalny adres e-mail.",
-  TOO_MANY_REQUEST = "Dostęp do tego konta został tymczasowo wyłączony z powodu wielu nieudanych prób logowania. Możesz go natychmiast przywrócić resetując swoje hasło lub spróbować ponownie później",
-  EMAIL_ALREADY_IN_USE = "Podany adres e-mail jest już używany przez istniejącego użytkownika. Każdy użytkownik musi mieć unikalny adres e-mail.",
+  USER_NOT_FOUND = "There is no user with the specified email value.",
+  UID_ALREADY_EXISTS = "The specified uidelement is already used by an existing user. Each user must have a unique uid.",
+  WRONG_PASSWORD = "The password is incorrect or the user does not exist.",
+  EMAIL_ALREADY_EXISTS = "The e-mail address provided is already used by an existing user. Each user must have a unique e-mail address.",
+  TOO_MANY_REQUEST = "Access to this account has been temporarily disabled due to multiple failed login attempts. You can restore it immediately by resetting your password or try again later.",
+  EMAIL_ALREADY_IN_USE = "The e-mail address provided is already used by an existing user. Each user must have a unique e-mail address.",
 }
 

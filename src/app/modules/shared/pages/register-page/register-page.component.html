@@ -1,7 +1,7 @@
 <div class="card-position">
   <div class="mat-card-default">
-    <h2 class="title-form">Stwórz konto</h2>
-    <p class="info-form">Podaj dane potrzene do rejestracji:</p>
+    <h2 class="title-form">Create an account</h2>
+    <p class="info-form">Please enter the data required for registration:</p>
     <div class="container-form-group">
 
       <form [formGroup]="registerFormGroup" (ngSubmit)="submitForm()">
@@ -13,19 +13,19 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Imię</mat-label>
-            <input matInput placeholder="imię" formControlName="name" required>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" required>
             <mat-error *ngIf="!isControlValid('name')">{{getErrorMessage('name')}}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Nazwisko</mat-label>
-            <input matInput placeholder="Nazwisko" formControlName="surname" required>
+            <mat-label>Surname</mat-label>
+            <input matInput placeholder="Surname" formControlName="surname" required>
             <mat-error *ngIf="!isControlValid('surname')">{{getErrorMessage('surname')}}</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Hasło</mat-label>
+            <mat-label>Password</mat-label>
             <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
             <button mat-icon-button type="button" matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
               <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -34,7 +34,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Powtórz hasło</mat-label>
+            <mat-label>Repeat password</mat-label>
             <input matInput [type]="hidePasswordConfirmation ? 'password' : 'text'"  formControlName="passwordConfirmation" required>
             <button mat-icon-button type="button" matSuffix (click)="hidePasswordConfirmation = !hidePasswordConfirmation" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordConfirmation">
               <mat-icon>{{hidePasswordConfirmation ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -44,7 +44,7 @@
 
         </div>
         <div class="button-position">
-          <button mat-raised-button type="submit">Zarejestruj się</button>
+          <button mat-raised-button type="submit">Register</button>
         </div>
       </form>
     </div>

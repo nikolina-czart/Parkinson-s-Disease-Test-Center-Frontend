@@ -3,21 +3,21 @@
     <h4 class="name">{{selectedPatient.name + " " + selectedPatient.surname}}</h4>
     <button mat-button class="menu-button" (click)="navigateToEdit()">
       <mat-icon>person</mat-icon>
-      <span class="button-span">Informacje</span>
+      <span class="button-span">Information</span>
     </button>
 
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" (click)="navigateToResult()">
       <mat-icon>home</mat-icon>
-      <span>Wyniki testów</span>
+      <span>Test results</span>
     </button>
 
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" (click)="navigateToAnalysis()">
       <mat-icon>info</mat-icon>
-      <span>Analiza testów</span>
+      <span>Analysis of the tests</span>
     </button>
 
 
@@ -26,7 +26,7 @@
     <div class="content mat-elevation-z8">
       <button class="back-button" (click)=navigateToBrowserPatient()>
         <mat-icon class="back-icon">arrow_back_ios</mat-icon>
-        <span>Powrót</span>
+        <span>Back</span>
       </button>
       <router-outlet></router-outlet>
 <!--      Main content here!-->

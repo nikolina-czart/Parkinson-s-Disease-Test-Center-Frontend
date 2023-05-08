@@ -1,13 +1,13 @@
 <div *ngIf="patientDataSummary">
-  <p>Sprawdź wprowadzone dane i zarejestruj pacjenta</p>
+  <p>Check the data entered and register the patient</p>
   <div class="patient-information-section">
     <div class="patient-information-element">
-      <p class="patient-information-element-title">Imię:</p>
+      <p class="patient-information-element-title">Name:</p>
       <p class="patient-information-element-value">{{patientDataSummary.name}}</p>
     </div>
     <mat-divider></mat-divider>
     <div class="patient-information-element">
-      <p class="patient-information-element-title">Nazwisko:</p>
+      <p class="patient-information-element-title">Surname:</p>
       <p class="patient-information-element-value">{{patientDataSummary.surname}}</p>
     </div>
     <mat-divider></mat-divider>
@@ -17,20 +17,22 @@
     </div>
     <mat-divider></mat-divider>
   </div>
-  <p>Wybrane testy:</p>
-  <div *ngFor="let test of patientDataSummary.patientTests">
-    <div class="selected-test-for-patient">
-      <span>{{test.namePL}}</span>
-      <mat-icon class="icon-selected-test">{{test.icon}}</mat-icon>
+  <div class="selected-test-section">
+    <p>Selected tests:</p>
+    <div *ngFor="let test of patientDataSummary.patientTests">
+      <div class="selected-test-for-patient">
+        <span>{{test.namePL}}</span>
+        <mat-icon class="icon-selected-test">{{test.icon}}</mat-icon>
+      </div>
     </div>
   </div>
   <section class="control-group-section">
-    <p class="control-group">Zaznacz, jeśli pacjent należy do grupy kontrolnej:</p>
-    <mat-checkbox [(ngModel)]="controlGroup">Grupa kontrolna</mat-checkbox>
+    <p class="control-group">Tick if the patient is in the control group:</p>
+    <mat-checkbox [(ngModel)]="controlGroup">Control group</mat-checkbox>
   </section>
 
   <div class="button-add-patient-position">
-    <button mat-button matStepperPrevious>Wstecz</button>
-    <button mat-raised-button (click)="submitForm()">Zarejestruj</button>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-raised-button (click)="submitForm()">Create a patient account</button>
   </div>
 </div>

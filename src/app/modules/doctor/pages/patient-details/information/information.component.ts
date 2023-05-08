@@ -31,6 +31,7 @@ export class InformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedPatient = this.doctorService.selectedPatient;
+    console.log(this.selectedPatient)
     this.selectedTests = this.selectedPatient.patientTests;
     this.dataSource = new MatTableDataSource<ConfigTests>(this.selectedTests)
     this.showTable = !!this.selectedTests.length;

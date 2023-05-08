@@ -16,12 +16,13 @@ export class SummaryPatientsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.summaryPatient)
-    const patientPD = this.summaryPatient.find(e => e.parameter === "Liczba pacjentów")!.patientPD;
-    const patientControl = this.summaryPatient.find(e => e.parameter === "Liczba pacjentów")!.patientControl;
+    const patientPD = this.summaryPatient.find(e => e.parameter === "Number of patients")!.patientPD;
+    const patientControl = this.summaryPatient.find(e => e.parameter === "Number of patients")!.patientControl;
+    console.log(patientPD)
 
     this.graphData = [{
       values: [patientPD, patientControl],
-      labels: ['Pacjenci z PD', 'Pacjenci kontrolni'],
+      labels: ['Patients with PD', 'Control patients'],
       type: 'pie',
       marker: {
         colors: ["rgba(204, 0, 102, 0.7)", "rgba(0, 102, 204, 0.7)"]
@@ -29,7 +30,7 @@ export class SummaryPatientsComponent implements OnInit {
     }]
 
     this.graphLayout = {
-      title: "Zestawienie pacjentów"
+      title: "Summary of patients"
     }
   }
 }

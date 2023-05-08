@@ -17,22 +17,22 @@ export class FormService {
   mapErrorMessages(formGroup: FormGroup, formControlName: string): string {
     const formControl = this.getFormControl(formGroup, formControlName)
     if(formControl.hasError('required')){
-      return "Pole jest obowiązkowe"
+      return "Field is mandatory"
     }
     if(formControl.hasError('email')){
-      return "Nieprawidłowy format email"
+      return "Incorrect email format"
     }
     if(formControl.hasError('maxlength')){
       console.log(formControl.getError('maxlength'))
       const {requiredLength} = formControl.getError('maxlength')
-      return `Maksymalna ilość znaków: ${requiredLength}`
+      return `Maximum number of characters: ${requiredLength}`
     }
     if(formControl.hasError('minlength')){
       const {requiredLength} = formControl.getError('minlength')
-      return `Minimalna ilość znaków: ${requiredLength}`
+      return `Minimum number of characters: ${requiredLength}`
     }
     if(formControl.hasError('matching')){
-      return "Hasła muszą być takie same"
+      return "Passwords must be the same"
     }
 
     return ""

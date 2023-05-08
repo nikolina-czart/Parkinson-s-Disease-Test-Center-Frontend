@@ -14,6 +14,6 @@ export class ErrorService {
     if(error.name === "FirebaseError"){
       return this.firebaseErrorService.firebaseAuthMessage(error);
     }
-    return "Problem z zalogowaniem skontaktuj się z działem IT."
+    return "Problem logging in contact the IT department."
   }
 }

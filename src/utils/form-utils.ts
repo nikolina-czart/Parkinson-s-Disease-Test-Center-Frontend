@@ -8,15 +8,15 @@ export function createNewUserFormGroup(formBuilder: FormBuilder): FormGroup {
     email: ['', [Validators.email, Validators.required]],
     name: ['', Validators.required],
     surname: ['', Validators.required],
-    password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
-    passwordConfirmation: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('password')]]
+    password: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
+    passwordConfirmation: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(8), passwordMatchValidator('password')]]
   });
 }
 
 export function loginUserFormGroup(formBuilder: FormBuilder): FormGroup {
   return formBuilder.group({
     email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
+    password: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(8), passwordMatchValidator('passwordConfirmation', true)]],
   });
 }
 

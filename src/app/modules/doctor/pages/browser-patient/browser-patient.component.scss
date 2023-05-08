@@ -95,6 +95,7 @@ mat-table{
 .mat-column-name {
   height: 100px;
 }
+
 .mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
@@ -102,7 +103,7 @@ mat-table{
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
+  background: $gray-light;
 }
 
 .demo-row-is-clicked {

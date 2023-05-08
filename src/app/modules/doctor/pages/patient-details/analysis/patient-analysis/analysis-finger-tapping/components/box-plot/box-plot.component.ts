@@ -55,27 +55,27 @@ export class BoxPlotComponent implements OnInit{
         period: element.period,
         dataTouchTime: {
           data: dataTouchTime,
-          layout: this.getLayout(250,'Hold Time', 'HT [ms]')
+          layout: this.getLayout(0, 800,'Hold Time', 'HT [ms]')
         },
         dataUpTime: {
           data: dataUpTime,
-          layout: this.getLayout(250,'Up Time', 'UP [ms]')
+          layout: this.getLayout(0, 600,'Up Time', 'UP [ms]')
         },
         dataIntertapInterval: {
           data: dataIntertapInterval,
-          layout: this.getLayout(350, 'Intertap Invertal', 'ITI [ms]')
+          layout: this.getLayout(100, 1000, 'Intertap Invertal', 'ITI [ms]')
         },
         dataTouchTimeMean: {
           data: dataTouchTimeMean,
-          layout: this.getLayout(250, 'Hold Time - średnia z pomiaru', 'HT [ms]')
+          layout: this.getLayout(0, 700, 'Hold Time (Average for the day)', 'HT [ms]')
         },
         dataUpTimeMean: {
           data: dataUpTimeMean,
-          layout: this.getLayout(250, 'Up Time - średnia z pomiaru', 'UT [ms]')
+          layout: this.getLayout(0,500, 'Up Time (Average for the day)', 'UT [ms]')
         },
         dataIntertapIntervalMean: {
           data: dataIntertapIntervalMean,
-          layout: this.getLayout(350,'Intertap Invertal - średnia z pomiaru', 'ITI [ms]')
+          layout: this.getLayout(200, 1000,'Intertap Invertal (Average for the day)', 'ITI [ms]')
         },
       })
     })
@@ -85,7 +85,7 @@ export class BoxPlotComponent implements OnInit{
     return {
       y: data,
       type: 'box',
-      name: 'Przed lekami - lewa ręka',
+      name: 'Before medication - left hand',
       marker: {
         color: "rgba(204, 102, 0, 0.7)",
         line: {
@@ -101,7 +101,7 @@ export class BoxPlotComponent implements OnInit{
     return {
       y: data,
       type: 'box',
-      name: 'Przed lekami - prawa ręka',
+      name: 'Before medication - right hand',
       marker: {
         color: "rgba(0, 204, 102, 0.7)",
         line: {
@@ -117,7 +117,7 @@ export class BoxPlotComponent implements OnInit{
     return {
       y: data,
       type: 'box',
-      name: 'Po lekach - lewa ręka',
+      name: 'After medication - left hand',
       marker: {
         color: "rgba(0, 102, 204, 0.7)",
         line: {
@@ -133,7 +133,7 @@ export class BoxPlotComponent implements OnInit{
     return {
       y: data,
       type: 'box',
-      name: 'Po lekach - prawa ręka',
+      name: 'After medication - right hand',
       marker: {
         color: "rgba(204, 0, 102, 0.7)",
         line: {
@@ -146,11 +146,12 @@ export class BoxPlotComponent implements OnInit{
     }
   }
 
-  private getLayout(maxRange:number, title: string, yaxis: string) {
+  private getLayout(minRange:number, maxRange:number, title: string, yaxis: string) {
     return {
       title: title,
       yaxis: {
         title: yaxis,
+        range: [minRange, maxRange]
       },
       xaxis: {
         showticklabels: false

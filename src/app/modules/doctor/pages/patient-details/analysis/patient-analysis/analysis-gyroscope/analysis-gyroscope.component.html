@@ -15,7 +15,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Przyśpieszenia na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+        Angular velocity on the x,y,z axes and length of the angular velocity vector (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-mean-tremor-by-day [tremorData]="tremorData" ></app-mean-tremor-by-day>
@@ -25,7 +25,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Boxplot przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+        Boxplot of angular velocities on the x,y,z axes and length of the angular velocity vector (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-boxplot-tremor [tremorData]="tremorData" ></app-boxplot-tremor>
@@ -35,7 +35,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Histogram przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+        Histogram of angular velocities on the x,y,z axes and length of the angular velocity vector (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-histogram-tremor [tremorData]="tremorData" ></app-histogram-tremor>
@@ -45,7 +45,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Funkcja gęstości prawdopodbieństwa przyśpieszeń na osiach x,y,z i całkowitego przyśpieszenia (średnia z dni)
+        Probability density function of angular velocities on the x,y,z axes and length of the angular velocity vector (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-kde-tremor [tremorData]="tremorData" ></app-kde-tremor>
@@ -55,7 +55,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Odstające wartości od średniej na osiach x,y,z (średnia z dni)
+        Values deviating from the average - angular velocity on the x,y,z (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-outliers-tremor-mean [tremorData]="tremorData" ></app-outliers-tremor-mean>
@@ -65,7 +65,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Odstające wartości od średniej na osiach x,y,z - histogram (średnia z dni)
+        Histogram of values deviating from the average - angular velocity on the x,y,z (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-outliers-tremor-histogram [tremorData]="tremorData" ></app-outliers-tremor-histogram>
@@ -75,7 +75,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Odstające wartości od średniej na osiach x,y,z - boxplot (średnia z dni)
+        Boxplot of values deviating from the average - angular velocity on the x,y,z (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-outliers-tremor-boxplot [tremorData]="tremorData" ></app-outliers-tremor-boxplot>
@@ -85,7 +85,7 @@
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Odstające wartości od średniej na osiach x,y,z - funkcja gęstości prawdopodobieństwa (średnia z dni)
+        Probability density function of values deviating from the average - angular velocity on the x,y,z (average of days)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <app-outliers-tremor-kde [tremorData]="tremorData" ></app-outliers-tremor-kde>

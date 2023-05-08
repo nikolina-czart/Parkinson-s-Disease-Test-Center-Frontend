@@ -29,7 +29,7 @@ export class FirebaseErrorService {
       case FirebaseErrorCode.EMAIL_ALREADY_IN_USE:
         return FirebaseErrorMessage.EMAIL_ALREADY_IN_USE;
     }
-    return "Problem z zalogowaniem skontaktuj się z działem IT."
+    return "Problem logging in contact the IT department."
   }
 
   private getErrorCode(message: string): string{

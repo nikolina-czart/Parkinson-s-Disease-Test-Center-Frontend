@@ -18,10 +18,10 @@ export class HistogramTremorComponent implements OnInit{
       const meanZ =  this.getDataMeanZ(element);
       const aggregatedXYZ =  this.getDataAggregatedXYZ(element);
 
-      const layoutMeanXMean =  this.createLayout("Przyśpieszenie na osi x (średnie z dni)", "Prędkość kątowa [*/s]");
-      const layoutMeanYMean =  this.createLayout("Przyśpieszenie na osi y (średnie z dni)", "Prędkość kątowa [*/s]");
-      const layoutMeanZMean =  this.createLayout("Przyśpieszenie na osi z  (średnie z dni)", "Prędkość kątowa [*/s]");
-      const layoutAggregatedXYZ =  this.createLayout("Całkowite przyśpieszenie (średnie z dni)", "Prędkość kątowa [*/s]");
+      const layoutMeanXMean =  this.createLayout("Angular velocity on the x-axis (averages over days)", "Angular velocity [*/s]");
+      const layoutMeanYMean =  this.createLayout("Angular velocity on the y-axis (averages over days)", "Angular velocity [*/s]");
+      const layoutMeanZMean =  this.createLayout("Angular velocity on the z-axis (averages over days)", "Angular velocity [*/s]");
+      const layoutAggregatedXYZ =  this.createLayout("Length of angular velocity vector (average of days)", "Angular velocity [*/s]");
 
       this.graphs.push({
         period: element.period,
@@ -59,41 +59,41 @@ export class HistogramTremorComponent implements OnInit{
 
   private getDataMeanX(element: TremorAnalysis) {
     return [
-      this.createGraph(element.data.meanByDayX.dataBeforeMedLeft,"Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.meanByDayX.dataBeforeMedRight,"Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.meanByDayX.dataAfterMedLeft, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.meanByDayX.dataAfterMedRight,"Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.meanByDayX.dataBeforeMedLeft,"Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayX.dataBeforeMedRight,"Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayX.dataAfterMedLeft, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayX.dataAfterMedRight,"After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", -0.5, 0.5, 0.02),
     ]
   }
 
   private getDataMeanY(element: TremorAnalysis) {
     return [
-      this.createGraph(element.data.meanByDayY.dataBeforeMedLeft, "Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.meanByDayY.dataBeforeMedRight,  "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.meanByDayY.dataAfterMedLeft,  "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.meanByDayY.dataAfterMedRight, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.meanByDayY.dataBeforeMedLeft, "Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)", -1, 0.2, 0.02),
+      this.createGraph(element.data.meanByDayY.dataBeforeMedRight,  "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", -1, 0.2, 0.02),
+      this.createGraph(element.data.meanByDayY.dataAfterMedLeft,  "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", -1, 0.2, 0.02),
+      this.createGraph(element.data.meanByDayY.dataAfterMedRight, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", -1, 0.2, 0.02),
     ]
   }
 
   private getDataMeanZ(element: TremorAnalysis) {
     return [
-      this.createGraph(element.data.meanByDayZ.dataBeforeMedLeft,"Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.meanByDayZ.dataBeforeMedRight, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.meanByDayZ.dataAfterMedLeft, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.meanByDayZ.dataAfterMedRight, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.meanByDayZ.dataBeforeMedLeft,"Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayZ.dataBeforeMedRight, "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayZ.dataAfterMedLeft, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", -0.5, 0.5, 0.02),
+      this.createGraph(element.data.meanByDayZ.dataAfterMedRight, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", -0.5, 0.5, 0.02),
     ]
   }
 
   private getDataAggregatedXYZ(element: TremorAnalysis) {
     return [
-      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedLeft,"Przed lekami - lewa strona", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)"),
-      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedRight, "Przed lekami - prawa strona", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)"),
-      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedLeft, "Po lekach - lewa strona", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)"),
-      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedRight, "Po lekach - prawa strona", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)"),
+      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedLeft,"Before medication - left hand", "rgba(204, 102, 0, 1)","rgba(204, 102, 0, 0.7)", 0, 4, 0.1),
+      this.createGraph(element.data.aggregatedMeanByDay.dataBeforeMedRight, "Before medication - right hand", "rgba(0, 204, 102, 1)","rgba(0, 204, 102, 0.7)", 0, 4, 0.1),
+      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedLeft, "After medication - left hand", "rgba(0, 102, 204, 1)","rgba(0, 102, 204, 0.7)", 0, 4, 0.1),
+      this.createGraph(element.data.aggregatedMeanByDay.dataAfterMedRight, "After medication - right hand", "rgba(204, 0, 102, 1)","rgba(204, 0, 102, 0.7)", 0, 4, 0.1),
     ]
   }
 
-  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string) {
+  private createGraph(data: number[], name:string, colorLine:string, colorPoint: string, start: number, end:number, size:number) {
     return {
       x: data,
       type: 'histogram',
@@ -106,7 +106,11 @@ export class HistogramTremorComponent implements OnInit{
         }
       },
       opacity: 0.5,
-      nbinsx: 20
+      xbins: {
+        end: end,
+        size: size,
+        start: start
+      }
     }
   }
 
