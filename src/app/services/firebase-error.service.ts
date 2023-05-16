@@ -12,9 +12,6 @@ export class FirebaseErrorService {
 
   firebaseAuthMessage(error: Error): string {
     const errorCode = this.getErrorCode(error.message);
-    console.log(errorCode)
-    console.log(FirebaseErrorCode.TOO_MANY_REQUEST)
-    console.log(errorCode === FirebaseErrorCode.TOO_MANY_REQUEST)
     switch (errorCode) {
       case FirebaseErrorCode.USER_NOT_FOUND:
         return FirebaseErrorMessage.USER_NOT_FOUND;
@@ -28,6 +25,8 @@ export class FirebaseErrorService {
         return FirebaseErrorMessage.TOO_MANY_REQUEST;
       case FirebaseErrorCode.EMAIL_ALREADY_IN_USE:
         return FirebaseErrorMessage.EMAIL_ALREADY_IN_USE;
+      case FirebaseErrorCode.EMAIL_INVALID_EMAIL:
+        return FirebaseErrorMessage.EMAIL_INVALID_EMAIL;
     }
     return "Problem logging in contact the IT department."
   }

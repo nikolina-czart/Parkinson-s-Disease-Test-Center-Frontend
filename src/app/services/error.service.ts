@@ -14,6 +14,9 @@ export class ErrorService {
     if(error.name === "FirebaseError"){
       return this.firebaseErrorService.firebaseAuthMessage(error);
     }
+    console.log("---")
+    console.log(error)
+    console.log("---")
     return "Problem logging in contact the IT department."
   }
 }

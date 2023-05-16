@@ -5,5 +5,6 @@ export enum FirebaseErrorMessage {
   EMAIL_ALREADY_EXISTS = "The e-mail address provided is already used by an existing user. Each user must have a unique e-mail address.",
   TOO_MANY_REQUEST = "Access to this account has been temporarily disabled due to multiple failed login attempts. You can restore it immediately by resetting your password or try again later.",
   EMAIL_ALREADY_IN_USE = "The e-mail address provided is already used by an existing user. Each user must have a unique e-mail address.",
+  EMAIL_INVALID_EMAIL = "The email address is badly formatted.",
 }
 

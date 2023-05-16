@@ -18,6 +18,9 @@ import {PlotlyModule} from 'angular-plotly.js';
 import {LoadingSpinnerInterceptor} from "./core/interceptors/loading-spinner.interceptor";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {AdminModule} from "./modules/admin/admin.module";
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -39,7 +42,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     MatButtonModule,
-
+    MatTableModule,
+    MatIconModule,
+    AdminModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true

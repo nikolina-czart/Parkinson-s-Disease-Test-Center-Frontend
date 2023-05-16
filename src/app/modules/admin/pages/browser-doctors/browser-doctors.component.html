@@ -1,0 +1,68 @@
+<div class="card-position">
+  <div class="container-browser">
+    <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+
+    <h2 class="tittle-browser">All doctors:</h2>
+
+    <p class="search-info">Search for a doctor</p>
+    <div class="row">
+      <div class="search-patient">
+        <input placeholder="Enter doctor's name or email" class="search-input" (keyup)="searchFilter($event)" #input>
+        <mat-icon class="search-icon">search</mat-icon>
+      </div>
+
+      <button mat-raised-button (click)="addNewDoctor()">
+        Add a new doctor
+        <mat-icon class="add-icon">add_circle</mat-icon>
+      </button>
+    </div>
+
+    <div class="table" *ngIf="showTable">
+      <mat-table class="table-details" [dataSource]="doctorsDataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="fullName">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name+ " " + element.surname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="patientsNumber">
+          <mat-header-cell *matHeaderCellDef> Patients number </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.patientsNumber}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="controlsNumber">
+          <mat-header-cell *matHeaderCellDef> Controls number </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.controlsNumber}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="details" stickyEnd class="">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-raised-button type="button" color="primary" aria-label="expand row" (click)="removeDoctor(element)" class="button-remove-doctor">
+              Remove doctor
+            </button>
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <!--    <mat-paginator [length]="40" [pageSize]="5" aria-label="Select page of GitHub search results"></mat-paginator>-->
+
+    </div>
+
+    <div class="" *ngIf="!showTable">
+      <p>You have no doctors assigned</p>
+    </div>
+
+
+  </div>
+
+</div>

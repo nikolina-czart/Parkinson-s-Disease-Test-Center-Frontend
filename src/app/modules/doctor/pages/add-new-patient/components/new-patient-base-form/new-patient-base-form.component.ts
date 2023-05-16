@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormService} from "../../../../../../core/services/form.service";
-import {createNewUserFormGroup} from "../../../../../../../utils/form-utils";
 
 @Component({
   selector: 'app-new-patient-base-form',

@@ -1,0 +1,25 @@
+<div *ngIf="doctorDataSummary">
+  <p>Check the data entered and register the patient</p>
+  <div class="patient-information-section">
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Name:</p>
+      <p class="patient-information-element-value">{{doctorDataSummary.name}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Surname:</p>
+      <p class="patient-information-element-value">{{doctorDataSummary.surname}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="patient-information-element">
+      <p class="patient-information-element-title">Email:</p>
+      <p class="patient-information-element-value">{{doctorDataSummary.email}}</p>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="button-add-patient-position">
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-raised-button (click)="submitForm()">Create a doctor account</button>
+  </div>
+</div>

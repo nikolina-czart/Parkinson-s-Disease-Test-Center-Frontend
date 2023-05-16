@@ -50,6 +50,24 @@ export class UserService {
     )
   }
 
+  addDoctor(userRegisterForm: UserRegisterForm): Observable<string> {
+    return from(this.firebaseAuth
+      .createUserWithEmailAndPassword(userRegisterForm.email, userRegisterForm.password)).pipe(
+      tap(userCredential => {
+        this._userCredential = userCredential;
+      }),
+      map(() => this._userCredential),
+      switchMap(userCredential => this.createUserInDatabase(userRegisterForm, userCredential.user?.uid)),
+      tap(() => {
+        this.router.navigateByUrl('/browser-doctors')
+      }),
+      catchError((err: Error) => {
+        this.createSnackBar(this.errorService.getErrorMessage(err));
+        return of(err.message)
+      })
+    )
+  }
+
   login(userLoginForm: UserLoginForm): Observable<string> {
     return from(this.firebaseAuth
       .signInWithEmailAndPassword(userLoginForm.email, userLoginForm.password)).pipe(
@@ -60,7 +78,10 @@ export class UserService {
       tap(token => {
         this.authService.setToken(token)
       }),
-      tap(() => {
+      tap(a => {
+        console.log("----")
+        console.log(this._userCredential)
+        console.log("---")
         this.router.navigateByUrl('/browser-patient')
       }),
       catchError((err) => {
@@ -83,7 +104,6 @@ export class UserService {
       map(() => this._userCredential),
       switchMap(userCredential => this.addTestToPatient(selectedTests, userCredential.user?.uid)),
       tap(() => {
-        this.createSnackBar("New patient added");
         this.router.navigateByUrl('/browser-patient')
       }),
       catchError((err: Error) => {
@@ -95,8 +115,9 @@ export class UserService {
     )
   }
 
-  getUserDetails(uid: any): Observable<UserDetails> {
-    return this.httpClient.get<UserDetails>(`/api/user/${uid}`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+  getUserDetails(): Observable<UserDetails> {
+    const userId = this.authService.decodedToken.userId;
+    return this.httpClient.get<UserDetails>(`/api/user/${userId}`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   private createUserInDatabase(userRegisterForm: UserRegisterForm, uid?: string): Observable<string> {
@@ -108,7 +129,7 @@ export class UserService {
     return this.httpClient.post(`/api/patient-tests/save/${uid}`, selectedTests, {responseType: 'text'})
   }
 
-  private createSnackBar(message: string) {
+  createSnackBar(message: string) {
     this._snackBar.open(message, "X",{
       duration: 5000,
     });

@@ -8,6 +8,9 @@ import {DoctorService} from "../../services/doctor.service";
 import {ConfigService} from "../../services/config.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {ConfigTests} from "../../../../models/tests/config-tests";
+import {UserService} from "../../../shared/services/user.service";
+import {UserDetails} from "../../../../models/user/shared/user-model";
+import {Role} from "../../../../models/user/shared/user-role";
 
 @Component({
   selector: 'app-browser-patient',
@@ -20,24 +23,25 @@ export class BrowserPatientComponent implements OnInit {
   patients!: Patient[];
   showTable: boolean = false
   configTest!: ConfigTests[];
-  loading = true
+  loading = true;
+  user!: UserDetails | undefined;
 
   constructor(private readonly router: Router,
               private readonly dialog: MatDialog,
               private readonly doctorService: DoctorService,
               private changeDetectorRefs: ChangeDetectorRef,
-              private readonly configService: ConfigService) {
+              private readonly configService: ConfigService,
+              private readonly userService: UserService) {
   }
 
   ngOnInit() {
-    this.configService.configTest().pipe(take(1)).subscribe(configTests => {
-      this.doctorService.getPatients(configTests).pipe(take(1)).subscribe(patients => {
-        this.patients = patients;
-        this.patientsDataSource = new MatTableDataSource(patients);
-        this.showTable = !!patients.length;
-        this.configTest = configTests;
-        this.loading = false;
-      })
+    this.userService.getUserDetails().pipe(take(1)).subscribe(user => {
+      this.user = user
+      if(user.role===Role.DOCTOR){
+        this.getDataForRoleDoctor();
+      }else if(user.role===Role.ADMIN) {
+        this.router.navigateByUrl(`browser-doctors`)
+      }
     })
   }
 
@@ -74,5 +78,17 @@ export class BrowserPatientComponent implements OnInit {
   searchFilter($event: KeyboardEvent) {
     const filterValue = ($event.target as HTMLInputElement).value;
     this.patientsDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private getDataForRoleDoctor(): void {
+    this.configService.configTest().pipe(take(1)).subscribe(configTests => {
+      this.doctorService.getPatients(configTests).pipe(take(1)).subscribe(patients => {
+        this.patients = patients;
+        this.patientsDataSource = new MatTableDataSource(patients);
+        this.showTable = !!patients.length;
+        this.configTest = configTests;
+        this.loading = false;
+      })
+    })
   }
 }

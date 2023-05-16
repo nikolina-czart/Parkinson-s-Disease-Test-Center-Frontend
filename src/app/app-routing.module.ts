@@ -12,6 +12,7 @@ import {
   PatientAnalysisComponent
 } from "./modules/doctor/pages/patient-details/analysis/patient-analysis/patient-analysis.component";
 import {PatientsComponent} from "./modules/doctor/pages/patients/patients.component";
+import {BrowserDoctorsComponent} from "./modules/admin/pages/browser-doctors/browser-doctors.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: "browser-patient",
     component: BrowserPatientComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "browser-doctors",
+    component: BrowserDoctorsComponent,
     canActivate: [AuthGuard]
   },
   {

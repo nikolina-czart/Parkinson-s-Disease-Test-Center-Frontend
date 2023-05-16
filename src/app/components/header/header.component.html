@@ -6,8 +6,8 @@
       <div class="hello-banner" *ngIf="!!(token$ | async)">
         <span>Welcome, {{user?.name}}!</span>
         <button class="circle" [matMenuTriggerFor]="infoMenu">{{logoUser}}</button>
-        <mat-menu #infoMenu="matMenu" xPosition="before">
-          <button mat-menu-item  (click)="allPatientInfo()">
+        <mat-menu #infoMenu="matMenu" xPosition="before" >
+          <button mat-menu-item  (click)="allPatientInfo()" *ngIf="!isAdmin">
             <mat-icon>person</mat-icon>
             <span class="menu-text">Patients</span>
           </button>

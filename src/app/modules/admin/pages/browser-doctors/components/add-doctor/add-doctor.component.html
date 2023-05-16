@@ -1,0 +1,20 @@
+<div class="add-new-patient-dialog">
+  <div class="stepper-title">
+    <h3 class="title-patient-form">Create patient account</h3>
+    <p class="info-form">Enter the data needed to register your patient.</p>
+  </div>
+  <div class="container-form-group">
+    <mat-stepper linear #stepper >
+      <mat-step [stepControl]="newDoctorFormGroup">
+        <ng-template matStepLabel>Complete doctor data</ng-template>
+        <app-base-form [doctorFormGroup]="newDoctorFormGroup"  (doctorFormChange)="getDoctorForm($event)"></app-base-form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Summary doctor data</ng-template>
+        <app-summary-doctor (saveFormClick)="onSaveFormClick()" [doctorDataSummary]="doctorDataSummary"/>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+
+

@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, AfterContentInit{
 
   }
   ngOnInit() {
-    console.log("XD")
     if(!!this.tokenService.getTokenFormLocalStorage()){
       this.authService.setToken(this.tokenService.getTokenFormLocalStorage());
       this.router.navigateByUrl("/browser-patient")
@@ -31,6 +30,5 @@ export class AppComponent implements OnInit, AfterContentInit{
 
   ngAfterContentInit() {
     this.isLoading$ = this.loadingService.shouldDisplay$;
-
   }
 }
