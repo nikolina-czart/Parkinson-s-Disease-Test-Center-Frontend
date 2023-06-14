@@ -23,7 +23,6 @@ export class FormService {
       return "Incorrect email format"
     }
     if(formControl.hasError('maxlength')){
-      console.log(formControl.getError('maxlength'))
       const {requiredLength} = formControl.getError('maxlength')
       return `Maximum number of characters: ${requiredLength}`
     }

@@ -28,7 +28,7 @@ export class FirebaseErrorService {
       case FirebaseErrorCode.EMAIL_INVALID_EMAIL:
         return FirebaseErrorMessage.EMAIL_INVALID_EMAIL;
     }
-    return "Problem logging in contact the IT department."
+    return error.message
   }
 
   private getErrorCode(message: string): string{

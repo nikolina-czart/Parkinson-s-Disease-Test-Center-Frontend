@@ -23,7 +23,6 @@ export class DoctorService {
               private readonly httpClient: HttpClient) {
   }
 
-  @Cacheable({maxAge: 36000000})
   getPatients(configTests: ConfigTests[]): Observable<Patient[]> {
     const userId = this.authService.decodedToken.userId;
     return this.httpClient.get<Patient[]>(`/api/doctor/${userId}/patients`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
@@ -51,13 +50,11 @@ export class DoctorService {
     return this.httpClient.post<TremorAnalysis[]>(`api/analysis-tests/${userId}/tremor/chart-data`, body,{headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
-  @Cacheable({maxAge: 36000000})
   getSummaryData(): Observable<SummaryPatient[]> {
     const userId = this.authService.decodedToken.userId;
     return this.httpClient.get<SummaryPatient[]>(`/api/doctor/${userId}/patients-summary/details`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})
   }
 
-  @Cacheable({maxAge: 36000000})
   getMeanSummaryData(): Observable<MeanSummaryPatients[]> {
     const userId = this.authService.decodedToken.userId;
     return this.httpClient.get<MeanSummaryPatients[]>(`/api/doctor/${userId}/patients-summary`, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })})

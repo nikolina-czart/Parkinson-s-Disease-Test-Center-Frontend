@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, AfterContentInit{
 
   }
   ngOnInit() {
-    if(!!this.tokenService.getTokenFormLocalStorage()){
+    if(!!this.tokenService.getTokenFormLocalStorage() && this.tokenService.isTokenValid()){
       this.authService.setToken(this.tokenService.getTokenFormLocalStorage());
       this.router.navigateByUrl("/browser-patient")
     }else {

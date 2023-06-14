@@ -66,25 +66,25 @@
         </mat-table>
       </div>
 
-<!--      <div class="save-button-group">-->
-<!--        <button mat-raised-button (click)="saveAllData()">Save the selected tests</button>-->
-<!--      </div>-->
+      <div class="save-button-group">
+        <button mat-raised-button (click)="saveAllData()">Save the selected tests</button>
+      </div>
 
       <div class="chart-show-group" *ngIf="isSelectedResult">
         <p class="selected-test">{{this.selectedResult.date}} - {{this.selectedResult.side}} - time since medication {{this.selectedResult.medicineSupply}} [h]</p>
 
         <div class="button-group" *ngIf="isFingerTapping">
           <button mat-button (click)="chart3D()">Chart 3D</button>
-          <button mat-button (click)="chartX()">Chart X</button>
-          <button mat-button (click)="chartY()">Chart Y</button>
-          <button mat-button (click)="chartZ()">Chart Z</button>
+          <button mat-button (click)="chartXFTT()">Chart X</button>
+          <button mat-button (click)="chartYFTT()">Chart Y</button>
+          <button mat-button (click)="chartZFTT()">Chart Z</button>
           <button mat-button (click)="chartUpDown()">Chart UpDown</button>
         </div>
         <div class="button-group"  *ngIf="!isFingerTapping">
           <button mat-button (click)="chart3D()">Chart 3D</button>
-          <button mat-button (click)="chartX()">Chart X</button>
-          <button mat-button (click)="chartY()">Chart Y</button>
-          <button mat-button (click)="chartZ()">Chart Z</button>
+          <button mat-button (click)="chartXTremor()">Chart X</button>
+          <button mat-button (click)="chartYTremor()">Chart Y</button>
+          <button mat-button (click)="chartZTremor()">Chart Z</button>
         </div>
       </div>
       <div class="chart-show" *ngIf="isSelectedResult">

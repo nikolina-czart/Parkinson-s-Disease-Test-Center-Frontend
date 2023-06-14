@@ -1,3 +1,4 @@
+
 export interface Result{
   date: string
   medicineSupply: string

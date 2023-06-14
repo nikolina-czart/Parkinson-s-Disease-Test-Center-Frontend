@@ -50,12 +50,11 @@ export class BrowserDoctorsComponent implements OnInit {
 
   addNewDoctor() {
     const dialogRef = this.dialog.open(AddDoctorComponent);
+    dialogRef.componentInstance.doctors = this.doctors;
 
-    dialogRef.afterClosed().pipe(take(1)).subscribe(newDoctor => {
-      if(!!newDoctor){
-        this.doctors.push(newDoctor)
-        this.doctorsDataSource.data = [...this.doctors];
-      }
+    dialogRef.afterClosed().pipe(take(1)).subscribe(doctors => {
+        this.doctors = doctors
+        this.doctorsDataSource.data = [...doctors];
     });
   }
 

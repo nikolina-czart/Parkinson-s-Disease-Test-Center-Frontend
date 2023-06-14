@@ -25,11 +25,6 @@ export class MeanPlotComponent implements OnInit {
       this.showGraphTouchTimeAfterMed = element.data.touchTime.dataAfterMedRight.length === 0;
       this.showGraphUpTimeAfterMed = element.data.upTime.dataAfterMedRight.length === 0;
       this.showGraphIntertapIntervalAfterMed = element.data.intertapInterval.dataAfterMedRight.length === 0;
-      console.log("-------------")
-      console.log(this.showGraphTouchTimeAfterMed)
-      console.log(this.showGraphUpTimeAfterMed)
-      console.log(this.showGraphIntertapIntervalAfterMed)
-      console.log('---------------')
 
       this.graphs.push({
         period: element.period,

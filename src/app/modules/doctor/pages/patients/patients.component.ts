@@ -20,14 +20,12 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.doctorService.getSummaryData().pipe(take(1)).subscribe(data => {
-      console.log("summary: ", data)
       this.summaryPatient = data;
       this.showSummaryData = true;
     })
     this.doctorService.getMeanSummaryData().pipe(take(1)).subscribe(data => {
       this.meanPatientData = data;
       this.showMeanSummaryData = true;
-      console.log("mean: ",data)
     })
 
     // this.meanPatientData =

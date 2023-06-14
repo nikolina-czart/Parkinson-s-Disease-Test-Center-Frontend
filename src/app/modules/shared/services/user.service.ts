@@ -79,9 +79,6 @@ export class UserService {
         this.authService.setToken(token)
       }),
       tap(a => {
-        console.log("----")
-        console.log(this._userCredential)
-        console.log("---")
         this.router.navigateByUrl('/browser-patient')
       }),
       catchError((err) => {

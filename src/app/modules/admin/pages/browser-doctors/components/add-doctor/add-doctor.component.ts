@@ -20,6 +20,7 @@ import {Doctor} from "../../../../../../models/user/admin/doctor";
   styleUrls: ['./add-doctor.component.scss']
 })
 export class AddDoctorComponent {
+  @Input() doctors!: Doctor[];
   doctorForm!: FormGroup;
   doctorDataSummary!: Doctor;
   newDoctorFormGroup!: FormGroup;
@@ -56,9 +57,11 @@ export class AddDoctorComponent {
     if(this.newDoctorFormGroup.valid){
       this.userService.addDoctor(mapUserForm(this.newDoctorFormGroup, "", "", Role.DOCTOR, false))
         .pipe(take(1)).subscribe(it => {
-        const uid = getUidFromString(it);
-        this.userService.createSnackBar("New doctor account added correctly");
-        this.closeDialog(uid);
+          if(it.split(" ")[0] !== "Firebase:") {
+            const uid = getUidFromString(it);
+            this.userService.createSnackBar("Doctor account created correctly!")
+            this.closeDialog(uid);
+          }
       })
     }
   }
@@ -67,7 +70,7 @@ export class AddDoctorComponent {
     const userRegisterForm = mapUserForm(this.newDoctorFormGroup, "", this.userID, Role.DOCTOR, false);
 
     if (!!uid || uid?.includes("auth")) {
-      const doctorPatient: Doctor = {
+      const doctor: Doctor = {
         name: userRegisterForm.name,
         surname: userRegisterForm.surname,
         email: userRegisterForm.email,
@@ -76,7 +79,9 @@ export class AddDoctorComponent {
         controlsNumber: 0
       }
 
-      this.dialogRef.close(doctorPatient);
+      this.doctors.push(doctor)
+
+      this.dialogRef.close(this.doctors);
     }
   }
 

@@ -32,4 +32,14 @@ export class TokenService {
 
     return decodedToken;
   }
+
+  isTokenValid(): boolean {
+    const token = this.getTokenFormLocalStorage();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      return decodedToken.exp > currentTime;
+    }
+    return false;
+  }
 }

@@ -7,7 +7,6 @@ import {Result} from "../../../../models/results/result";
 import {take} from "rxjs";
 import {TestInformation} from "../../../../models/tests/test-information";
 import {MatSnackBar} from "@angular/material/snack-bar";
-// import {TestType} from "../../../../models/tests/test-info";
 
 @Component({
   selector: 'app-patient-results',
@@ -131,9 +130,10 @@ export class PatientResultsComponent implements OnInit{
   }
 
   chartUpDown() {
+    const [time, upDown] = this.correctUpDown(this.selectedResult.tappingData.timestamp, this.selectedResult.tappingData.upDown)
     this.setChart(
-      this.selectedResult.tappingData.timestamp,
-      this.selectedResult.tappingData.upDown,
+      time,
+      upDown,
       "scatter", "" +
       "Position chart X",
       "Time [s]",
@@ -149,7 +149,6 @@ export class PatientResultsComponent implements OnInit{
       layout: { title: title,
         xaxis: {
           title: xaxis,
-
         },
         yaxis: {
           title: yaxix
@@ -159,5 +158,88 @@ export class PatientResultsComponent implements OnInit{
 
   saveAllData() {
     this.doctorService.saveTestsToFile(this.selectedPatient, this.selectedTest.uid, this.testResults)
+  }
+
+  correctUpDown(timestamp: string[], upDown: string[]) {
+    let timestampNew = [];
+    let upDownNew = [];
+
+    for (let i = 0; i < upDown.length-1; i++) {
+      timestampNew.push(timestamp[i])
+      upDownNew.push(upDown[i])
+
+      if(upDown[i] !== upDown[i+1]){
+        timestampNew.push(timestamp[i+1])
+        upDownNew.push(upDown[i])
+      }
+    }
+
+    return [timestampNew, upDownNew]
+  }
+
+  chartXFTT() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.x,
+      "scatter", "" +
+      "Position chart X",
+      "Time [s]",
+      "Acceleration unit [m/s2]"
+    )
+  }
+
+  chartYFTT() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.y,
+      "scatter", "" +
+      "Position chart Y",
+      "Czas [s]",
+      "Acceleration unit [m/s2]"
+    )
+  }
+
+  chartZFTT() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.z,
+      "scatter", "" +
+      "Position chart Z",
+      "Time [s]",
+      "Acceleration unit [m/s2]"
+    )
+  }
+
+  chartXTremor() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.x,
+      "scatter", "" +
+      "Position chart X",
+      "Time [s]",
+      "Angular velocity [*/s]"
+    )
+  }
+
+  chartYTremor() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.y,
+      "scatter", "" +
+      "Position chart Y",
+      "Czas [s]",
+      "Angular velocity [*/s]"
+    )
+  }
+
+  chartZTremor() {
+    this.setChart(
+      this.selectedResult.accelData.timestamp,
+      this.selectedResult.accelData.z,
+      "scatter", "" +
+      "Position chart Z",
+      "Time [s]",
+      "Angular velocity [*/s]"
+    )
   }
 }
